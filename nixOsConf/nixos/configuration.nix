@@ -12,7 +12,26 @@
   imports = [
     # If you want to use modules your own flake exports (from modules/nixos):
     # outputs.nixosModules.example
-    # ./gpuPassthrough.nix
+
+
+    # modules
+    ../modules/batterysavers.nix
+    ../modules/dockerRootless.nix
+    ../modules/gnome.nix
+    ../modules/gpuPassthrough.nix
+    ../modules/kvm.nix
+    ../modules/locale.nix
+    ../modules/nvidia.nix
+    ../modules/openssh.nix
+    ../modules/pipewire.nix
+    # ../modules/services.nix
+    ../modules/tailscale.nix
+    ../modules/zsh.nix
+    ../modules/grub.nix
+    # ../modules/systemd.nix
+    ../modules/flatpak.nix
+
+
 
     # Or modules from other flakes (such as nixos-hardware):
     # inputs.hardware.nixosModules.common-cpu-amd
@@ -65,29 +84,14 @@
   #     value.source = value.flake;
   #   })
   #   config.nix.registry;
-
-  # boot.loader.grub.enable = true;
-  # boot.loader.grub.device = "/dev/vda";
-  # boot.loader.grub.useOSProber = true;
-  # boot.kernelModules = [
-  #  "kvm-amd"
-  # ];
-  # boot.loader.systemd-boot.enable = true;
-  # boot.loader.efi.canTouchEfiVariables = true;
-  boot.loader = {
-  efi = {
-    canTouchEfiVariables = true;
-  };
-  grub = {
-     enable = true;
-     efiSupport = true;
-     device = "nodev";
-  };
-};
   
-
-  networking.hostName = "nixos";
-  networking.networkmanager.enable = true;
+  
+  networking = {
+    hostName = "nixos";
+    networkmanager.enable = true;
+    firewall.allowedTCPPorts = [ 22 80 443];
+    # firewall.enable = true;
+  };
 
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
@@ -105,22 +109,6 @@
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
-  time.timeZone = "Asia/Kolkata";
-
-  i18n.defaultLocale = "en_IN";
-  
-  i18n.extraLocaleSettings = {
-  LC_ADDRESS = "en_IN";
-  LC_IDENTIFICATION = "en_IN";
-  LC_MEASUREMENT = "en_IN";
-  LC_MONETARY = "en_IN";
-  LC_NAME = "en_IN";
-  LC_NUMERIC = "en_IN";
-  LC_PAPER = "en_IN";
-  LC_TELEPHONE = "en_IN";
-  LC_TIME = "en_IN";
-  };
-
   services.xserver = {
     enable = true;
     displayManager.gdm.enable = true;
@@ -133,44 +121,11 @@
   # Enable CUPS to print document.
   # services.printing.enable = true;
 
-  # Enable sound with pipewire.
-  sound.enable = true;
-  hardware.pulseaudio.enable = false;
-  security.rtkit.enable = true;
-  services.pipewire = {
-    enable = true;
-    alsa.enable = true;
-    alsa.support32Bit = true;
-    pulse.enable = true;
-    # If you want to use JACK applications, uncomment this
-    #jack.enable = true;
-
-    # use the example session manager (no others are packaged yet so this is enabled by default,
-    # no need to redefine it in your config for now)
-    #media-session.enable = true;
-  };
 
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
 
-  programs = {
-    zsh = {
-      enable = true;
-      autosuggestions.enable = true;
-      syntaxHighlighting.enable = true;
-      ohMyZsh = {
-        enable = true;
-        theme = "robbyrussell";
-        plugins = [
-	        "git"
-          "kubectl"
-          "helm"
-          "docker"
-        ];
-      };
-    };
-  };
-  users.defaultUserShell = pkgs.zsh;
+  
   
   users.users = {
     lux = {
@@ -191,11 +146,12 @@
 
   environment.systemPackages = with pkgs; [
     neovim
-    # qdirstat
+    qdirstat
 
     # apps
     discord
     discord-ptb
+    webcord
     vlc
     vscode
     ungoogled-chromium
@@ -205,56 +161,64 @@
     snapper
     postman
     #warp-terminal
-    #obsidian
-    #notion-app-enhanced
+    # obsidian
+    notion-app-enhanced
     mongodb-compass
-   	brave
- #	authy
+    brave
+    #authy
     easyeffects
     telegram-desktop
 
     # virtualisation shi
     docker
-  	virt-manager
-    iptables
+    virt-manager
+    looking-glass-client
 
-   	home-manager
-  	libreoffice-fresh
- 	  auto-cpufreq
+
+    home-manager
+    libreoffice-fresh
+    auto-cpufreq
     syncthing
 
 
     # langchains
-   	python3
+    python3
     nodejs_21	
     nodePackages.pnpm
- 	  rustup
-   	cargo
+    rustup
+    cargo
 
-  	
+
     # electron_28
 
     # terminal utils
-    power-profiles-daemon
-    powertop
-   	wget
+    wezterm
+    wget
     zoxide
     htop
     ffmpeg
- 	# devbox
-    iftop
+    #devbox
     fwupd
-   	fastfetch
-   	starship
+    fastfetch
+    starship
     ugrep
     ripgrep
- 	  atuin
+    atuin
     fd
     pciutils
     usbutils
     yadm
     fzf
     eza
+    bat
+    lshw
+    mpv
+
+    # cyber shi
+    iftop
+    nmap
+    iptables
+    netcat-openbsd
 
     # for zsh 
     oh-my-zsh
@@ -270,49 +234,15 @@
 
     # gnome shi
     # gnomeExtensions
+    
+    obs-studio
+    # power-profiles-daemon
   ];
 
 
   # services.qemuGuest.enable=true;
-  services.supergfxd.enable=true;
 
-  services.openssh = {
-    enable = true;
-    settings = {
-      X11Forwarding = true;
-      PermitRootLogin = "no"; # disable root login
-      PasswordAuthentication = false; # disable password login
-    };
-    openFirewall = true;
-  };
-
-  services.tailscale = {
-      enable = true;
-    };
-
-  # use docker without Root access (Rootless docker)
-  virtualisation.docker.rootless = {
-    enable = true;
-    setSocketVariable = true;
-  };
   
-  virtualisation.libvirtd = {
-  enable = true;
-  qemu = {
-    package = pkgs.qemu_kvm;
-    runAsRoot = true;
-    swtpm.enable = true;
-    #ovmf = {
-    #  enable = true;
-    #  packages = [(pkgs.unstable.OVMF.override {
-    #    secureBoot = true;
-    #    tpmSupport = true;
-    #  }).fd];
-    
-  };
-};
-
-
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
   system.stateVersion = "23.11";
 

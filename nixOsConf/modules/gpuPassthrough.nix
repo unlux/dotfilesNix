@@ -45,5 +45,11 @@ in { pkgs, lib, config, ... }: {
 
     hardware.opengl.enable = true;
     virtualisation.spiceUSBRedirection.enable = true;
+
+    specialisation."VFIO".configuration = {
+      system.nixos.tags = [ "with-vfio" ];
+      vfio.enable = true;
+    };
+
   };
 }
