@@ -48,6 +48,7 @@ alias jctl="journalctl -p 3 -xb"
 
 
 # nixos shi
-alias rebuildpls="sudo nixos-rebuild switch --flake ~/nixOsConf/"
-alias testpls="sudo nixos-rebuild test --flake ~/nixOsConf/"
+alias rebuildpls="sudo nixos-rebuild switch --flake ~/nixos-config/"
+alias testpls="sudo nixos-rebuild test --flake ~/nixos-config/"
 alias updatepls="sudo nix-channel --update"
+alias joorserebuildpls="sudo nixos-rebuild switch --flake ~/nixos-config/  --show-trace --print-build-logs --verbose"
