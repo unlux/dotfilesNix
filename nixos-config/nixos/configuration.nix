@@ -23,12 +23,15 @@
     # ../modules/services.nix
     ../modules/zsh.nix
     ../modules/grub.nix
-
     ../modules/gpuPassthrough.nix
     ../modules/nvidia.nix 
     ../modules/dockerRootless.nix
     ../modules/kvm.nix
+    # ../modules/nixHelper.nix
+    ../modules/cloudflare-warp.nix
 
+
+    
     # ../modules/systemd.nix
     
 
@@ -76,7 +79,7 @@
   networking = {
     hostName = "nixos";
     networkmanager.enable = true;
-    firewall.allowedTCPPorts = [ 22 80 443];
+    firewall.allowedTCPPorts = [ 22 80 443 ];
     # firewall.enable = true;
   };
 
@@ -90,8 +93,8 @@
   };
 
   
-  system.autoUpgrade.enable = true;
-  system.autoUpgrade.allowReboot = false;
+  # system.autoUpgrade.enable = true;
+  # system.autoUpgrade.allowReboot = false;
 
   nixpkgs = {
     #Configure your nixpkgs instance
@@ -147,6 +150,7 @@
     qdirstat
     floorp
     vscode
+    # zed-editor
 
     # virtualisation shi
     virt-manager
@@ -175,7 +179,7 @@
     fastfetch
     starship
     ugrep
-    ripgrep
+    gnumake
     atuin
     fd
     pciutils
@@ -211,7 +215,6 @@
     #
     # it provides the command `nom` works just like `nix`
     # with more details log output
-    nix-output-monitor
 
     # productivity
     hugo # static site generator
@@ -263,6 +266,9 @@
 
     nnn # terminal file manager
 
+    nh
+    nix-output-monitor
+    nvd
   ];
 
   home-manager = {
@@ -271,8 +277,7 @@
       lux = import ../home-manager/home.nix;
     };
   };
-
-
+  
   # services.qemuGuest.enable=true;
 
   

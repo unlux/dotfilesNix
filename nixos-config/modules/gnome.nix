@@ -31,6 +31,7 @@ environment.gnome.excludePackages = with pkgs.gnome; [
 environment.systemPackages = with pkgs; [
 	gnomeExtensions.appindicator
 	gnomeExtensions.blur-my-shell
+	gnomeExtensions.gsconnect
 	#gnomeExtensions.burn-my-windows
 	# gnomeExtensions.compact-top-bar
 	# gnomeExtensions.custom-accent-colors
@@ -38,14 +39,16 @@ environment.systemPackages = with pkgs; [
 	gnomeExtensions.gtile
 	gnomeExtensions.dash-to-panel
 	gnomeExtensions.tray-icons-reloaded
-	gnome.gnome-tweaks
 	#gnomeExtensions.arcmenu
 	gnomeExtensions.gesture-improvements
 	#gnomeExtensions.paperwm
 	gnomeExtensions.just-perfection
 	gnomeExtensions.rounded-window-corners
 	gnomeExtensions.vitals
-  gnomeExtensions.alphabetical-app-grid
+  	gnomeExtensions.alphabetical-app-grid
+	gnome.gnome-tweaks
+	gnome.dconf-editor
+  kdeconnect
 ];
 
 services.gnome.gnome-remote-desktop.enable = false;

@@ -19,15 +19,15 @@ alias l.='exa -ald --color=always --group-directories-first --icons .*' # show o
 
 
 # Common use
-alias grubup="sudo update-grub"
-alias fixpacman="sudo rm /var/lib/pacman/db.lck"
+# alias grubup="sudo update-grub"
+# alias fixpacman="sudo rm /var/lib/pacman/db.lck"
 alias tarnow='tar -acf '
 alias untar='tar -zxvf '
 alias wget='wget -c '
-alias rmpkg="sudo pacman -Rdd"
+# alias rmpkg="sudo pacman -Rdd"
 alias psmem='ps auxf | sort -nr -k 4'
 alias psmem10='ps auxf | sort -nr -k 4 | head -10'
-alias upd='/usr/bin/garuda-update'
+# alias upd='/usr/bin/garuda-update'
 alias ..='cd ..'
 alias ...='cd ../..'
 alias ....='cd ../../..'
@@ -52,3 +52,16 @@ alias rebuildpls="sudo nixos-rebuild switch --flake ~/nixos-config/"
 alias testpls="sudo nixos-rebuild test --flake ~/nixos-config/"
 alias updatepls="sudo nix-channel --update"
 alias joorserebuildpls="sudo nixos-rebuild switch --flake ~/nixos-config/  --show-trace --print-build-logs --verbose"
+
+# nixos config shi
+alias editconfig="lvim ~/nixos-config/nixos/configuration.nix"
+alias edithome="lvim ~/nixos-config/home-manager/home.nix"
+alias updatepls="nix-channel --update && sudo nix-channel --update"
+
+FLAKEREF="~/nixos-config"
+# nh (nix-helper) shi
+alias nhrebuild="nh os switch $FLAKEREF"
+alias nhtest="nh os test $FLAKEREF"
+
+alias llogin="bash ~/Documents/LPU-Wireless-Autologin/main.sh"
+

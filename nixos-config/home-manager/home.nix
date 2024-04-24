@@ -18,6 +18,7 @@
     # ../modules/gpuPassthrough.nix -> needs root access which home-manager doesnt have
     # ../modules/dockerRootless.nix -> needs root access which home-manager doesnt have
     ../modules/tailscale.nix
+    # ../modules/nixHelper.nix
 
 
   ];
@@ -57,10 +58,18 @@
     obs-studio
     syncthing
 
-    # for lazyvim
-    wl-clipboard-rs
+    # for lunarvim
+    lunarvim
+    wl-clipboard
+    ripgrep
+
+    cloudflare-warp
+    gnomeExtensions.cloudflare-warp-toggle
+
+    turso-cli
+    sqlite
     
-  ];
+];
 
   programs = {
     git = {
@@ -79,6 +88,13 @@
         line_break.disabled = true;
       };  
     };
+    
+    # nh = {
+    #   enable = true;
+    #   # clean.enable = true;
+    #   # clean.extraArgs = "--keep-since 4d --keep 3";
+    #   # flake = "/home/lux/nixos-config";
+    # };
 
     home-manager.enable = true;
   };
