@@ -16,11 +16,11 @@
 
     # modules
     ../modules/batterysavers.nix
-    ../modules/gnome.nix
+    # ../modules/gnome/gnome.nix
+    ../modules/gnome/gnome2.nix
     ../modules/locale.nix
     ../modules/openssh.nix
     ../modules/pipewire.nix
-    # ../modules/services.nix
     ../modules/zsh.nix
     ../modules/grub.nix
     ../modules/gpuPassthrough.nix
@@ -129,7 +129,7 @@
       # initialPassword = "  ";
       isNormalUser = true;
       openssh.authorizedKeys.keys = [
-        # TODO: Add your SSH public key(s) here, if you plan on using SSH to connect
+        # Add your SSH public key(s) here, if you plan on using SSH to connect
         "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKiEzG/bxLrAXpvjt5hU4mj6bfcYC/OifFyjW9pI2fV4 lakshaychoudhary77712@google.com"
       ];
       
@@ -196,6 +196,8 @@
     tmux
     tree
     xdg-utils
+    ripgrep
+    lua
 
     # cyber shi
     nmap

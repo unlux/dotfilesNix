@@ -38,6 +38,7 @@
     discord
     # discord-ptb
     webcord
+    zoom
     vlc
     vscode
     ungoogled-chromium
