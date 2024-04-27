@@ -65,7 +65,6 @@
     ripgrep
 
     cloudflare-warp
-    gnomeExtensions.cloudflare-warp-toggle
 
     turso-cli
     sqlite
