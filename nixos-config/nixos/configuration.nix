@@ -1,4 +1,3 @@
-# This is your system's configuration file.
 # Use this to configure your system environment (it replaces /etc/nixos/configuration.nix)
 {
   inputs,
@@ -8,33 +7,27 @@
   pkgs,
   ...
 }: {
-  # You can import other NixOS modules here
   imports = [
-    # If you want to use modules your own flake exports (from modules/nixos):
-    # outputs.nixosModules.example
-
-
     # modules
-    ../modules/batterysavers.nix
-    # ../modules/gnome/gnome.nix
+    ../modules/power.nix
+    ../modules/cloudflare-warp.nix
+    ../modules/dockerRootless.nix
+    ../modules/gpuPassthrough.nix
+    ../modules/grub.nix
     ../modules/gnome/gnome2.nix
+    # ../modules/gnome/gnome.nix
+    ../modules/kvm.nix
     ../modules/locale.nix
+    ../modules/nvidia.nix 
+    # ../modules/nixHelper.nix
     ../modules/openssh.nix
     ../modules/pipewire.nix
+    ../modules/xserver.nix
     ../modules/zsh.nix
-    ../modules/grub.nix
-    ../modules/gpuPassthrough.nix
-    ../modules/nvidia.nix 
-    ../modules/dockerRootless.nix
-    ../modules/kvm.nix
-    # ../modules/nixHelper.nix
-    ../modules/cloudflare-warp.nix
-
-
-    
     # ../modules/systemd.nix
+    ../modules/networking/tailscale.nix
+    ../modules/networking/default.nix
     
-
 
 
     # Or modules from other flakes (such as nixos-hardware):
@@ -44,21 +37,8 @@
     # home-manager
     inputs.home-manager.nixosModules.default
 
-    # You can also split up your configuration and import pieces of it here:
-    # ./users.nix
-
-    # Import your generated (nixos-generate-config) hardware configuration
     ./hardware-configuration.nix
   ];
-
-
-  # nixpkgs = {
-  #   # Configure your nixpkgs instance
-  #   config = {
-  #     # Disable if you don't want unfree packages
-  #     allowUnfree = true;
-  #   };
-  # };
 
   # # This will add each flake input as a registry
   # # To make nix3 commands consistent with your flake
@@ -75,21 +55,12 @@
   #   })
   #   config.nix.registry;
   
-  
-  networking = {
-    hostName = "nixos";
-    networkmanager.enable = true;
-    firewall.allowedTCPPorts = [ 22 80 443 ];
-    # firewall.enable = true;
-  };
 
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   nix.settings = {
-    # Enable flakes and new 'nix' command
     experimental-features = ["nix-command" "flakes"];
-    # Deduplicate and optimize nix store
-    auto-optimise-store = true;
+    # auto-optimise-store = true;
   };
 
   
@@ -97,33 +68,13 @@
   # system.autoUpgrade.allowReboot = false;
 
   nixpkgs = {
-    #Configure your nixpkgs instance
     config = {
-      # Disable if you don't want unfree packages
       allowUnfree = true;
       # Workaround for https://github.com/nix-community/home-manager/issues/2942
       allowUnfreePredicate = _: true;
     };
   };
 
-  services.xserver = {
-    enable = true;
-    displayManager.gdm.enable = true;
-    desktopManager.gnome.enable = true;
-    xkb.layout = "us";
-    libinput.enable = true;
-    #xkbVariant = "";
-  };
-
-  # Enable CUPS to print document.
-  # services.printing.enable = true;
-
-
-  # Enable touchpad support (enabled default in most desktopManager).
-  # services.xserver.libinput.enable = true;
-
-  
-  
   users.users = {
     lux = {
       # initialPassword = "  ";
@@ -132,13 +83,11 @@
         # Add your SSH public key(s) here, if you plan on using SSH to connect
         "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKiEzG/bxLrAXpvjt5hU4mj6bfcYC/OifFyjW9pI2fV4 lakshaychoudhary77712@google.com"
       ];
-      
       extraGroups = 
         [ "wheel" "networkmanager" "docker" 
           "qemu-libvirtd" "libvirtd" "adbusers" ];
-      
       packages = with pkgs; [
-
+        # user specific pkgs
       ];
     };
   };
@@ -146,142 +95,145 @@
   # xdg.portal.wlr.enable = true;
 
   environment.systemPackages = with pkgs; [
+    # Editors
     neovim
-    qdirstat
-    floorp
     vscode
     # zed-editor
 
-    # virtualisation shi
-    virt-manager
-    looking-glass-client
+    # browesers
+    floorp
 
+    # Virtualisation tools
+    looking-glass-client
+    virt-manager
+
+    # Home manager and office tools
     home-manager
     libreoffice-fresh
-    auto-cpufreq
+    qdirstat
 
-    # langchains and shi
-    python3
+    # Language chains
+    cargo
+    lua
     nodejs_21	
     nodePackages.pnpm
+    python3
     rustup
-    cargo
-
     # electron_28
 
-    # terminal utils
-    wezterm
-    wget
-    zoxide
+    # Terminal utilities
+    atuin
+    auto-cpufreq
+    bat
+    eza
+    fd
+    fastfetch
     ffmpeg
     #devbox
-    fwupd
-    fastfetch
-    starship
-    ugrep
-    gnumake
-    atuin
-    fd
-    pciutils
-    usbutils
-    inetutils
-    yadm
     fzf
-    eza
-    bat
+    gnumake
+    inetutils
     lshw
     mpv
-    tldr
+    pciutils
     rsync
+    starship
+    tldr
     tmux
     tree
+    usbutils
+    wezterm
+    wget
     xdg-utils
-    ripgrep
-    lua
+    yadm
+    zoxide
 
-    # cyber shi
-    nmap
+    # Cybersecurity tools
     iptables
+    nmap
     netcat-openbsd
+    ethtool
+    iftop # network monitoring
+    ltrace # library call monitoring
 
+    # Shell
     oh-my-zsh
 
-    # needed shi
+    # Development tools
     gcc
     git
-    piper
-    openrgb
     ntfs3g
+    openrgb
+    piper
 
-    # nix related
-    #
+    # Nix related
+    nix-output-monitor
+    nh
+    nvd
     # it provides the command `nom` works just like `nix`
     # with more details log output
 
-    # productivity
-    hugo # static site generator
+    # Productivity tools
     glow # markdown previewer in terminal
+    hugo # static site generator
 
+    # System monitoring tools
     btop  # replacement of htop/nmon
     iotop # io monitoring
-    iftop # network monitoring
-
-    # system call monitoring
-    strace # system call monitoring
-    ltrace # library call monitoring
-    lsof # list open files
-
-    # system tools
-    sysstat
     lm_sensors # for `sensors` command
-    ethtool
+    lsof # list open files
+    strace # system call monitoring
+    sysstat
 
-    # archives
-    zip
-    unzip
+    # Archive tools
     p7zip
+    unzip
+    zip
 
-    # utils
-    ripgrep # recursively searches directories for a regex pattern
+    # Utility tools
     jq # A lightweight and flexible command-line JSON processor
+    ripgrep # recursively searches directories for a regex pattern
     yq-go # yaml processor https://github.com/mikefarah/yq
 
-    # networking tools
-    mtr # A network diagnostic tool
-    iperf3
-    dnsutils  # `dig` + `nslookup`
-    ldns # replacement of `dig`, it provide the command `drill`
+    # Networking tools
     aria2 # A lightweight multi-protocol & multi-source command-line download utility
-    socat # replacement of openbsd-netcat
-    nmap # A utility for network discovery and security auditing
+    dnsutils  # `dig` + `nslookup`
+    iperf3
     ipcalc  # it is a calculator for the IPv4/v6 addresses
+    ldns # replacement of `dig`, it provide the command `drill`
+    mtr # A network diagnostic tool
+    nmap # A utility for network discovery and security auditing
+    socat # replacement of openbsd-netcat
 
-    # misc
+    # Miscellaneous tools
     cowsay
     file
-    tree
+    gawk
+    gnupg
     gnused
     gnutar
-    gawk
-    zstd
-    gnupg
-
     nnn # terminal file manager
+    tree
+    zstd
 
-    nh
-    nix-output-monitor
-    nvd
+    wl-clipboard  
+
+    
   ];
 
   home-manager = {
     extraSpecialArgs = { inherit inputs; };
     users = {
-      lux = import ../home-manager/home.nix;
+      lux = import ./home.nix;
     };
   };
   
-  # services.qemuGuest.enable=true;
+  services.teamviewer.enable = true;
+  # for ozone
+  environment.sessionVariables.NIXOS_OZONE_WL = "1";
 
+
+  # services.qemuGuest.enable=true;
   
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
   system.stateVersion = "23.11";

@@ -11,16 +11,14 @@
 
     # You can also split up your configuration and import pieces of it here:
     # ./nvim.nix
-    ../modules/flatpak.nix
     ../modules/adb.nix
-    # ../modules/nvidia.nix -> needs root access which home-manager doesnt have
-    # ../modules/kvm.nix -> needs root access which home-manager doesnt have
-    # ../modules/gpuPassthrough.nix -> needs root access which home-manager doesnt have
     # ../modules/dockerRootless.nix -> needs root access which home-manager doesnt have
-    ../modules/tailscale.nix
+    ../modules/flatpak.nix
+    # ../modules/gpuPassthrough.nix -> needs root access which home-manager doesnt have
+    # ../modules/kvm.nix -> needs root access which home-manager doesnt have
     # ../modules/nixHelper.nix
-
-
+    # ../modules/nvidia.nix -> needs root access which home-manager doesnt have
+    # ../modules/tailscale.nix
   ];
 
   home = {
@@ -33,43 +31,37 @@
   # targets.genericLinux.enable = true; # enable this on non-nixos
   nixpkgs.config.allowUnfree = true;  
 
-
   home.packages = with pkgs; [
+    brave
+    cloudflare-warp
     discord
     # discord-ptb
-    webcord
-    zoom
-    vlc
-    vscode
-    ungoogled-chromium
-    spotify
-    snapper-gui
-    snapper
-    postman
-    # warp-terminal
-    # obsidian
-    notion-app-enhanced
-    mongodb-compass
-    brave
-    # authy
     easyeffects
+    # lunarvim
+    mongodb-compass
+    notion-app-enhanced
+    obs-studio
+    # obsidian
+    postman
+    ripgrep
+    snapper
+    snapper-gui
+    # spotify
+    sqlite
+    syncthing
+    teamviewer
     telegram-desktop
     termius
-    zoom
-    obs-studio
-    syncthing
-
-    # for lunarvim
-    lunarvim
-    wl-clipboard
-    ripgrep
-
-    cloudflare-warp
-
     turso-cli
-    sqlite
-    
-];
+    ungoogled-chromium
+    vlc
+    # vscode
+    webcord
+    # zoom
+    # warp-terminal
+    # authy
+    spotifywm
+  ];
 
   programs = {
     git = {
@@ -77,6 +69,15 @@
       userName = "lakshay choudhary";
       userEmail = "lakshaychoudhary77712@gmail.com";
     };
+
+    home-manager.enable = true;
+
+    # nh = {
+    #   enable = true;
+    #   # clean.enable = true;
+    #   # clean.extraArgs = "--keep-since 4d --keep 3";
+    #   # flake = "/home/lux/nixos-config";
+    # };
 
     starship = {
       enable = true;
@@ -88,19 +89,8 @@
         line_break.disabled = true;
       };  
     };
-    
-    # nh = {
-    #   enable = true;
-    #   # clean.enable = true;
-    #   # clean.extraArgs = "--keep-since 4d --keep 3";
-    #   # flake = "/home/lux/nixos-config";
-    # };
-
-    home-manager.enable = true;
   };
 
   # Nicely reload system units when changing configs
   systemd.user.startServices = "sd-switch";
-
-
 }

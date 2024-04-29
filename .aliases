@@ -54,8 +54,8 @@ alias updatepls="sudo nix-channel --update"
 alias joorserebuildpls="sudo nixos-rebuild switch --flake ~/nixos-config/  --show-trace --print-build-logs --verbose"
 
 # nixos config shi
-alias editconfig="lvim ~/nixos-config/nixos/configuration.nix"
-alias edithome="lvim ~/nixos-config/home-manager/home.nix"
+alias editconfig="nvim ~/nixos-config/nixos/configuration.nix"
+alias edithome="nvim ~/nixos-config/nixos/home.nix"
 alias updatepls="nix-channel --update && sudo nix-channel --update"
 
 FLAKEREF="~/nixos-config"

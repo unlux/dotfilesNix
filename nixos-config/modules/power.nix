@@ -46,6 +46,10 @@
                 CPU_MAX_PERF_ON_BAT = 20;
 
                 STOP_CHARGE_THRESH_BAT1 = 80; # 80 and above it stops charging
+                USB_AUTOSUSPEND=0;
+                USB_BLACKLIST_WWAN=1;
+                # USB_BLACKLIST_PHONES=1;
+
             };
         };
     };
