@@ -11,6 +11,7 @@
     services = {
 
         power-profiles-daemon.enable = false;
+        upower.enable = true;
 
         auto-cpufreq = {
             enable = true;

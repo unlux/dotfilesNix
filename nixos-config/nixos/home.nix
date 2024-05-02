@@ -19,6 +19,9 @@
     # ../modules/nixHelper.nix
     # ../modules/nvidia.nix -> needs root access which home-manager doesnt have
     # ../modules/tailscale.nix
+    ../modules/homePkgs.nix
+    ../modules/git.nix
+    ../modules/starship.nix
   ];
 
   home = {
@@ -31,45 +34,7 @@
   # targets.genericLinux.enable = true; # enable this on non-nixos
   nixpkgs.config.allowUnfree = true;  
 
-  home.packages = with pkgs; [
-    brave
-    cloudflare-warp
-    discord
-    # discord-ptb
-    easyeffects
-    # lunarvim
-    mongodb-compass
-    notion-app-enhanced
-    obs-studio
-    # obsidian
-    postman
-    ripgrep
-    snapper
-    snapper-gui
-    # spotify
-    sqlite
-    syncthing
-    teamviewer
-    telegram-desktop
-    termius
-    turso-cli
-    ungoogled-chromium
-    vlc
-    # vscode
-    webcord
-    # zoom
-    # warp-terminal
-    # authy
-    spotifywm
-  ];
-
   programs = {
-    git = {
-      enable = true;
-      userName = "lakshay choudhary";
-      userEmail = "lakshaychoudhary77712@gmail.com";
-    };
-
     home-manager.enable = true;
 
     # nh = {
@@ -78,17 +43,6 @@
     #   # clean.extraArgs = "--keep-since 4d --keep 3";
     #   # flake = "/home/lux/nixos-config";
     # };
-
-    starship = {
-      enable = true;
-      # custom settings
-      settings = {
-        add_newline = false;
-        aws.disabled = true;
-        gcloud.disabled = true;
-        line_break.disabled = true;
-      };  
-    };
   };
 
   # Nicely reload system units when changing configs
