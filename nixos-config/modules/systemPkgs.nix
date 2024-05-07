@@ -232,6 +232,7 @@
 
 
     
-      
+    qbittorrent 
+    zoom-us
   ];
 }
