@@ -18,7 +18,7 @@
     # ../modules/gnome/gnome.nix
     ../modules/kvm.nix
     ../modules/locale.nix
-    ../modules/nvidia.nix 
+    ../modules/nvidia.nix
     # ../modules/nixHelper.nix
     ../modules/openssh.nix
     ../modules/pipewire.nix
@@ -56,7 +56,6 @@
   #   })
   #   config.nix.registry;
   
-
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   nix.settings = {
@@ -64,7 +63,6 @@
     # auto-optimise-store = true;
   };
 
-  
   # system.autoUpgrade.enable = true;
   # system.autoUpgrade.allowReboot = false;
 
@@ -102,14 +100,13 @@
     };
   };
   
-  services.teamviewer.enable = true;
+  # services.teamviewer.enable = true;
   # for ozone
-  environment.sessionVariables = {
-    NIXOS_OZONE_WL = "1";
-    MOZ_ENABLE_WAYLAND= "1";
-  };
+  # environment.sessionVarialookingbles = {
+  #   NIXOS_OZONE_WL = "1";
+  #   MOZ_ENABLE_WAYLAND= "1";
+  # };
   
-
   # services.qemuGuest.enable=true;
   
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
