@@ -48,3 +48,24 @@ setopt hist_ignore_all_dups
 setopt hist_save_no_dups
 setopt hist_ignore_dups
 setopt hist_find_no_dups
+
+# pnpm
+export PNPM_HOME="/home/lux/.local/share/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end
+
+# Turso
+export PATH="/home/lux/.turso:$PATH"
+
+# adding file for lux aliases
+source $HOME/.aliases
+
+# zoxide stuff
+eval "$(zoxide init --cmd cd zsh)"
+
+# atuin stuff
+eval "$(atuin init zsh)"
+
