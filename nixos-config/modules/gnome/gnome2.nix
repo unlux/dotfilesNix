@@ -21,6 +21,23 @@ in
   # ---- Home Configuration ----
   home-manager.users.${username} = {
 
+    gtk = {
+      enable = true;
+      theme = {
+        name = "Dracula";
+        package = pkgs.dracula-theme;
+        };
+      cursorTheme = {
+        name = "Dracula-cursors";
+        package = pkgs.dracula-theme;
+      };
+
+      iconTheme = {
+        name = "Dracula";
+        package = pkgs.dracula-icon-theme;
+      };
+    };
+
     dconf.settings = {
       
       "org/gnome/shell".favorite-apps = [
@@ -31,28 +48,24 @@ in
 
       "org/gnome/desktop/interface" = {
         enable-hot-corners = true;
-
-        #  gtk-theme = {
-        #   name = "palenight";
-        #   package = pkgs.palenight-theme;
-        # };
-
         ## Clock
         clock-show-weekday = true;
         clock-show-date = true;
-
         ## Font stuff
-        # monospace-font-name = "RobotoMono Nerd Font 10";
+        monospace-font-name = "CommitMono 700 Regular";
         font-antialiasing = "rgba";
       };
 
       "org/gnome/shell/extensions/user-theme" = {
-        # name = "nordic";
+        name = "Dracula";
       };
 
       "org/gnome/desktop/interface" = {
           color-scheme = "prefer-dark";
           show-battery-percentage = true;
+          gtk-theme = "Dracula";
+          cursor-theme = "Dracula-cursors";
+          icon-theme = "Dracula";
         };
 
       "org/gnome/desktop/peripherals/mouse".accel-profile = "flat";
@@ -84,7 +97,9 @@ in
   programs.dconf.enable = true;
 
   environment.systemPackages = with pkgs; [ 
-    nordic
+    dracula-theme
+    dracula-icon-theme
+    commit-mono
     gnome.gnome-tweaks
     gnome.dconf-editor
     kdeconnect

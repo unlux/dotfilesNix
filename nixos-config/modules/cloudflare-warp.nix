@@ -1,4 +1,6 @@
-{ pkgs, config, ... }: {
+{ pkgs, config, ... }: 
+
+{
   systemd.packages = [
     pkgs.cloudflare-warp
   ];

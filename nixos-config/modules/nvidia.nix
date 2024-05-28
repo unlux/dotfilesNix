@@ -1,6 +1,5 @@
 { config, ... }:
 
-
 {
     # Enable OpenGL
     hardware.opengl = {

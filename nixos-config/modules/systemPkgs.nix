@@ -1,9 +1,5 @@
 { config, pkgs, ... }:
 
-let
-  unstable = import <nixos-unstable> { config = { allowUnfree = true; }; };
-in
-
 {
   environment.systemPackages = (with pkgs; [
     # Editors
@@ -25,7 +21,7 @@ in
     # Language chains
     cargo
     lua
-    nodejs_21	
+    nodejs_22	
     nodePackages.pnpm
     python3
     rustup
@@ -126,13 +122,8 @@ in
     tree
     zstd
     wl-clipboard  
-    
-  ])
-  
-  ++
-  
-  (with unstable; [
       looking-glass-client
       vscode
-    ]);
+    
+  ]);
 }

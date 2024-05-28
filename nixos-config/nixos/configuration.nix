@@ -1,12 +1,7 @@
 # Use this to configure your system environment (it replaces /etc/nixos/configuration.nix)
+{ inputs, config, pkgs, ... }:
+
 {
-  inputs,
-  # outputs,
-  # lib,
-  config,
-  pkgs,
-  ...
-}: {
   imports = [
     # modules
     ../modules/power.nix
@@ -29,7 +24,6 @@
     ../modules/networking/default.nix
     ../modules/bluetooth.nix
     ../modules/systemPkgs.nix
-
 
     # Or modules from other flakes (such as nixos-hardware):
     # inputs.hardware.nixosModules.common-cpu-amd
@@ -84,7 +78,8 @@
       ];
       extraGroups = 
         [ "wheel" "networkmanager" "docker" 
-          "qemu-libvirtd" "libvirtd" "adbusers" ];
+          "qemu-libvirtd" "libvirtd" "adbusers"
+          "kvm" ];
       packages = with pkgs; [
         # user specific pkgs
       ];
@@ -99,14 +94,7 @@
       lux = import ./home.nix;
     };
   };
-  
-  # services.teamviewer.enable = true;
-  # for ozone
-  # environment.sessionVarialookingbles = {
-  #   NIXOS_OZONE_WL = "1";
-  #   MOZ_ENABLE_WAYLAND= "1";
-  # };
-  
+
   # services.qemuGuest.enable=true;
   
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
