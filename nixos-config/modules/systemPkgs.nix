@@ -125,5 +125,6 @@
       looking-glass-client
       vscode
     
+    appimage-run
   ]);
 }

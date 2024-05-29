@@ -7,6 +7,7 @@
     ../modules/power.nix
     ../modules/cloudflare-warp.nix
     ../modules/dockerRootless.nix
+    ../modules/flatpak.nix
     ../modules/gpuPassthrough.nix
     ../modules/grub.nix
     ../modules/gnome/gnome2.nix

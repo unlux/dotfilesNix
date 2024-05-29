@@ -13,7 +13,7 @@
     # ./nvim.nix
     ../modules/adb.nix
     # ../modules/dockerRootless.nix -> needs root access which home-manager doesnt have
-    ../modules/flatpak.nix
+    # ../modules/flatpak.nix
     # ../modules/gpuPassthrough.nix -> needs root access which home-manager doesnt have
     # ../modules/kvm.nix -> needs root access which home-manager doesnt have
     # ../modules/nixHelper.nix
