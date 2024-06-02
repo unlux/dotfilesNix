@@ -25,6 +25,7 @@
     ../modules/networking/default.nix
     ../modules/bluetooth.nix
     ../modules/systemPkgs.nix
+    ../modules/cyber.nix
 
     # Or modules from other flakes (such as nixos-hardware):
     # inputs.hardware.nixosModules.common-cpu-amd

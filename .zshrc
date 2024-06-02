@@ -33,6 +33,9 @@ zinit ice depth=1; zinit light romkatv/powerlevel10k
 zinit light zsh-users/zsh-syntax-highlighting 
 zinit light zsh-users/zsh-completions
 zinit light zsh-users/zsh-autosuggestions
+zinit snippet OMZ::plugins/git/git.plugin.zsh
+# zinit snippet OMZ::plugins/adb/_adb
+zinit snippet OMZ::plugins/sudo/sudo.plugin.zsh
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh

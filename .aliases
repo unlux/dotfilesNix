@@ -35,9 +35,9 @@ alias .....='cd ../../../..'
 alias ......='cd ../../../../..'
 alias dir='dir --color=auto'
 alias vdir='vdir --color=auto'
-alias grep='ugrep --color=auto'
-alias fgrep='ugrep -F --color=auto'
-alias egrep='ugrep -E --color=auto'
+# alias grep='ugrep --color=auto'
+# alias fgrep='ugrep -F --color=auto'
+# alias egrep='ugrep -E --color=auto'
 alias hw='hwinfo --short'                          # Hardware Info
 alias big="expac -H M '%m\t%n' | sort -h | nl"     # Sort installed packages according to size in MB (expac must be installed)
 alias gitpkg='pacman -Q | grep -i "\-git" | wc -l' # List amount of -git packages
@@ -58,10 +58,10 @@ alias editconfig="nvim ~/nixos-config/nixos/configuration.nix"
 alias edithome="nvim ~/nixos-config/nixos/home.nix"
 alias updatepls="nix-channel --update && sudo nix-channel --update"
 
-FLAKEREF="~/nixos-config"
 # nh (nix-helper) shi
+FLAKEREF="~/nixos-config"
 alias nhrebuild="nh os switch $FLAKEREF"
 alias nhtest="nh os test $FLAKEREF"
 
 alias llogin="bash ~/Documents/LPU-Wireless-Autologin/main.sh"
-
+# alias zoho-meeting="appimage-run ~/Documents/Appimages/ZohoMeeting-x64.AppImage"

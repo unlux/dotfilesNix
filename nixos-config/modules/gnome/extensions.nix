@@ -11,7 +11,7 @@ let
         gnomeExtensions.alphabetical-app-grid
         gnomeExtensions.appindicator
         gnomeExtensions.blur-my-shell
-        gnomeExtensions.clipboard-indicator-2
+        gnomeExtensions.clipboard-indicator
         gnomeExtensions.dash-to-panel
         gnomeExtensions.gesture-improvements
         gnomeExtensions.gsconnect

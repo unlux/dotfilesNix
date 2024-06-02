@@ -126,5 +126,6 @@
       vscode
     
     appimage-run
+    distrobox
   ]);
 }

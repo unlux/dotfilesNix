@@ -32,8 +32,11 @@
     # warp-terminal
     # authy
     spotifywm
-    qbittorrent 
+    qbittorrent
     zoom-us
     lazygit
+    lunarvim
+    noisetorch
   ];
+
 }

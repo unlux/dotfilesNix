@@ -40,4 +40,6 @@
   hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
   hardware.enableAllFirmware = true;
 
+
+  # hardware.fancontrol.enable = true; #needs hardware.fancontrol.config to work
 }
