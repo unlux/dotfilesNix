@@ -26,10 +26,12 @@
     ../modules/bluetooth.nix
     ../modules/systemPkgs.nix
     ../modules/cyber.nix
+    # ../modules/git.nix
+
 
     # Or modules from other flakes (such as nixos-hardware):
     # inputs.hardware.nixosModules.common-cpu-amd
-    # inputs.hardware.nixosModules.common-ssd
+    # inputs.hardware.nixosModules.common-pc-ssd
 
     # home-manager
     inputs.home-manager.nixosModules.default

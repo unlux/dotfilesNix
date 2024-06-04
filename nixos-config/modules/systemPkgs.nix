@@ -5,7 +5,7 @@
     # Editors
     neovim
     # zed-editor
-
+    
     # browesers
     floorp
 

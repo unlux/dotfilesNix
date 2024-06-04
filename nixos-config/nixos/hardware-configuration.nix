@@ -12,15 +12,16 @@
   boot.initrd.kernelModules = [ ];
   boot.kernelModules = [ "kvm-amd" ];
   boot.extraModulePackages = [ ];
-
+  #boot.kernelPackages = pkgs.linuxPackages_latest;
+  
   fileSystems."/" =
-    { device = "/dev/disk/by-uuid/4b82402c-1bd4-4304-ba1f-c168cac9b66c";
+    { device = "/dev/disk/by-uuid/5a125195-ba48-4bd1-8587-b7ffc32ffbec";
       fsType = "btrfs";
       options = [ "subvol=@" ];
     };
 
   fileSystems."/boot" =
-    { device = "/dev/disk/by-uuid/8434-E8ED";
+    { device = "/dev/disk/by-uuid/5EDD-2AEA";
       fsType = "vfat";
       options = [ "fmask=0022" "dmask=0022" ];
     };

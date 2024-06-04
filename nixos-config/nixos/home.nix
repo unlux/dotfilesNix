@@ -21,7 +21,7 @@
     # ../modules/tailscale.nix
     ../modules/homePkgs.nix
     ../modules/git.nix
-    ../modules/starship.nix
+    # ../modules/starship.nix
   ];
 
   home = {
