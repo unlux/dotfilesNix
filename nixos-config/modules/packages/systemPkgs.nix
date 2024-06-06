@@ -1,7 +1,8 @@
-{ config, pkgs, ... }:
+{ config, lib, pkgs, pkgs-stable, ... }:
 
 {
   environment.systemPackages = (with pkgs; [
+
     # Editors
     neovim
     # zed-editor

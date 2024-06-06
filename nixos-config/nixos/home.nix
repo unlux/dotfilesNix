@@ -19,7 +19,7 @@
     # ../modules/nixHelper.nix
     # ../modules/nvidia.nix -> needs root access which home-manager doesnt have
     # ../modules/tailscale.nix
-    ../modules/homePkgs.nix
+    ../modules/packages/homePkgs.nix
     ../modules/git.nix
     # ../modules/starship.nix
   ];

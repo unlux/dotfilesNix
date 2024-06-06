@@ -1,5 +1,5 @@
 # Use this to configure your system environment (it replaces /etc/nixos/configuration.nix)
-{ inputs, config, pkgs, ... }:
+{ inputs, lib, config, pkgs, ... }:
 
 {
   imports = [
@@ -24,7 +24,7 @@
     ../modules/networking/tailscale.nix
     ../modules/networking/default.nix
     ../modules/bluetooth.nix
-    ../modules/systemPkgs.nix
+    ../modules/packages/systemPkgs.nix
     ../modules/cyber.nix
     # ../modules/git.nix
 
