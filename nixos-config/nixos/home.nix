@@ -11,16 +11,15 @@
 
     # You can also split up your configuration and import pieces of it here:
     # ./nvim.nix
-    ../modules/adb.nix
+    ../modules/home-manager/adb.nix
     # ../modules/dockerRootless.nix -> needs root access which home-manager doesnt have
     # ../modules/flatpak.nix
     # ../modules/gpuPassthrough.nix -> needs root access which home-manager doesnt have
     # ../modules/kvm.nix -> needs root access which home-manager doesnt have
-    # ../modules/nixHelper.nix
     # ../modules/nvidia.nix -> needs root access which home-manager doesnt have
     # ../modules/tailscale.nix
-    ../modules/packages/homePkgs.nix
-    ../modules/git.nix
+    ../modules/home-manager/home-packages.nix
+    ../modules/home-manager/git.nix
     # ../modules/starship.nix
   ];
 

@@ -4,29 +4,27 @@
 {
   imports = [
     # modules
-    ../modules/power.nix
-    ../modules/cloudflare-warp.nix
-    ../modules/dockerRootless.nix
-    ../modules/flatpak.nix
-    ../modules/gpuPassthrough.nix
-    ../modules/grub.nix
+    ../modules/system/power.nix
+    ../modules/system/gpuPassthrough.nix
+    ../modules/system/grub.nix
+    ../modules/system/kvm.nix
+    ../modules/system/locale.nix
+    ../modules/system/nvidia.nix
+    ../modules/system/openssh.nix
+    ../modules/system/pipewire.nix
+    ../modules/system/xserver.nix
+    ../modules/system/zsh.nix
+    ../modules/system/bluetooth.nix
+    # ../modules/system/systemd.nix
     ../modules/gnome/gnome2.nix
     # ../modules/gnome/gnome.nix
-    ../modules/kvm.nix
-    ../modules/locale.nix
-    ../modules/nvidia.nix
-    # ../modules/nixHelper.nix
-    ../modules/openssh.nix
-    ../modules/pipewire.nix
-    ../modules/xserver.nix
-    ../modules/zsh.nix
-    # ../modules/systemd.nix
     ../modules/networking/tailscale.nix
     ../modules/networking/default.nix
-    ../modules/bluetooth.nix
-    ../modules/packages/systemPkgs.nix
-    ../modules/cyber.nix
-    # ../modules/git.nix
+    ../modules/system/system-packages.nix
+    ../modules/system/cyber.nix
+    ../modules/cloudflare-warp/warp.nix
+    ../modules/docker/dockerRootless.nix
+    ../modules/flatpak/flatpak.nix
 
 
     # Or modules from other flakes (such as nixos-hardware):

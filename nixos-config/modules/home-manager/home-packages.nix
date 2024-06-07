@@ -27,7 +27,7 @@
     ungoogled-chromium
     vlc
     # vscode
-    webcord
+    # webcord
     # zoom
     # warp-terminal
     # authy
@@ -36,6 +36,8 @@
     zoom-us
     lazygit
     lunarvim
+    flameshot
+    ulauncher
     noisetorch
   ];
 
