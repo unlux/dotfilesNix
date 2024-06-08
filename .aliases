@@ -60,7 +60,8 @@ alias updatepls="nix-channel --update && sudo nix-channel --update"
 
 # nh (nix-helper) shi
 FLAKEREF="~/nixos-config"
-alias nhrebuild="nh os switch $FLAKEREF"
+alias nhrebuild="nh os boot $FLAKEREF"
+alias nhrebuildnow="nh os switch $FLAKEREF"
 alias nhtest="nh os test $FLAKEREF"
 
 alias llogin="bash ~/Documents/LPU-Wireless-Autologin/main.sh"

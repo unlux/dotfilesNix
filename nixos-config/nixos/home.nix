@@ -9,18 +9,11 @@
     # Or modules exported from other flakes (such as nix-colors):
     # inputs.nix-colors.homeManagerModules.default
 
-    # You can also split up your configuration and import pieces of it here:
-    # ./nvim.nix
     ../modules/home-manager/adb.nix
-    # ../modules/dockerRootless.nix -> needs root access which home-manager doesnt have
     # ../modules/flatpak.nix
-    # ../modules/gpuPassthrough.nix -> needs root access which home-manager doesnt have
-    # ../modules/kvm.nix -> needs root access which home-manager doesnt have
-    # ../modules/nvidia.nix -> needs root access which home-manager doesnt have
     # ../modules/tailscale.nix
     ../modules/home-manager/home-packages.nix
     ../modules/home-manager/git.nix
-    # ../modules/starship.nix
   ];
 
   home = {
@@ -36,12 +29,6 @@
   programs = {
     home-manager.enable = true;
 
-    # nh = {
-    #   enable = true;
-    #   # clean.enable = true;
-    #   # clean.extraArgs = "--keep-since 4d --keep 3";
-    #   # flake = "/home/lux/nixos-config";
-    # };
   };
 
   # Nicely reload system units when changing configs

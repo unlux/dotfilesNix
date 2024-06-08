@@ -8,13 +8,14 @@
     # discord-ptb
     easyeffects
     # lunarvim
+    nodejs_22	
+    nodePackages.pnpm
     jdk
     mongodb-compass
     notion-app-enhanced
     obs-studio
     # obsidian
     postman
-    ripgrep
     snapper
     snapper-gui
     # spotify
@@ -39,6 +40,14 @@
     flameshot
     ulauncher
     noisetorch
+    qdirstat
+    atuin
+    looking-glass-client
+    vscode
+    openrgb
+    piper
+    libreoffice-fresh
+
   ];
 
 }

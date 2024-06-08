@@ -3,7 +3,6 @@
 
 {
   imports = [
-    # modules
     ../modules/system/power.nix
     ../modules/system/gpuPassthrough.nix
     ../modules/system/grub.nix
@@ -18,13 +17,9 @@
     # ../modules/system/systemd.nix
     ../modules/gnome/gnome2.nix
     # ../modules/gnome/gnome.nix
-    ../modules/networking/tailscale.nix
     ../modules/networking/default.nix
     ../modules/system/system-packages.nix
-    ../modules/system/cyber.nix
-    ../modules/cloudflare-warp/warp.nix
-    ../modules/docker/dockerRootless.nix
-    ../modules/flatpak/flatpak.nix
+
 
 
     # Or modules from other flakes (such as nixos-hardware):
