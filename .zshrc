@@ -63,8 +63,10 @@ esac
 # Turso
 export PATH="/home/lux/.turso:$PATH"
 
-# adding file for lux aliases
+# adding file for lux's aliases
 source $HOME/.aliases
+# adding file for 's keybinds
+source $HOME/.keybinds
 
 # zoxide stuff
 eval "$(zoxide init --cmd cd zsh)"

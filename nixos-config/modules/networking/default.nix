@@ -1,4 +1,4 @@
-{ config, ...}:
+{ config, pkgs, ...}:
 {
     networking = {
     hostName = "nixos";
@@ -18,4 +18,7 @@
     ];
     firewall.enable = true;
   };
+  environment.systemPackages = (with pkgs;[
+    tcpdump
+   ]);
 }

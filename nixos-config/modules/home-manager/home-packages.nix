@@ -25,14 +25,14 @@
     telegram-desktop
     termius
     turso-cli
-    ungoogled-chromium
+    # ungoogled-chromium
     vlc
     # vscode
     # webcord
     # zoom
     # warp-terminal
     # authy
-    spotifywm
+    spotify
     qbittorrent
     zoom-us
     lazygit

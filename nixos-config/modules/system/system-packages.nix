@@ -18,7 +18,7 @@
     # zed-editor
     
     # browsers
-      floorp
+      # floorp
 
     # Virtualisation tools
       virt-manager
@@ -96,5 +96,7 @@
       # hugo # static site generator
 
 
-  ]);
+  ]) ++ (with pkgs-stable; [
+    floorp
+  ]) ;
 }
