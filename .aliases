@@ -11,7 +11,7 @@ alias codehere="code . && exit"
 alias copilot="gh copilot"
 
 # Replace ls with exa
-alias ls='exa -al --color=always --group-directories-first --icons' # preferred listing
+alias ls='exa --color=always --group-directories-first --icons' # preferred listing
 alias la='exa -a --color=always --group-directories-first --icons'  # all files and dirs
 alias ll='exa -l --color=always --group-directories-first --icons'  # long format
 alias lt='exa -aT --color=always --group-directories-first --icons' # tree listing
@@ -54,15 +54,21 @@ alias updatepls="sudo nix-channel --update"
 alias joorserebuildpls="sudo nixos-rebuild switch --flake ~/nixos-config/  --show-trace --print-build-logs --verbose"
 
 # nixos config shi
-alias editconfig="nvim ~/nixos-config/nixos/configuration.nix"
-alias edithome="nvim ~/nixos-config/nixos/home.nix"
-alias updatepls="nix-channel --update && sudo nix-channel --update"
+# alias editconfig="nvim ~/nixos-config/nixos/configuration.nix"
+# alias edithome="nvim ~/nixos-config/nixos/home.nix"
+# alias updatepls="nix-channel --update && sudo nix-channel --update"
 
 # nh (nix-helper) shi
 FLAKEREF="~/nixos-config"
 alias nhrebuild="nh os boot $FLAKEREF"
 alias nhrebuildnow="nh os switch $FLAKEREF"
 alias nhtest="nh os test $FLAKEREF"
+alias nhleptup="nh os boot $FLAKEREF -H leptup"
+alias nhleptupnow="nh os switch $FLAKEREF -H leptup"
+alias nhleptuptest="nh os test $FLAKEREF -H leptup"
+alias nhpc="nh os boot $FLAKEREF -H pc"
+alias nhpcnow="nh os switch $FLAKEREF -H pc"
+alias nhpctest="nh os test $FLAKEREF -H pc"
 
-alias llogin="bash ~/Documents/LPU-Wireless-Autologin/main.sh"
+# alias llogin="bash ~/Documents/LPU-Wireless-Autologin/main.sh"
 # alias zoho-meeting="appimage-run ~/Documents/Appimages/ZohoMeeting-x64.AppImage"

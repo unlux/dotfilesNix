@@ -1,5 +1,5 @@
 # Use this to configure your system environment (it replaces /etc/nixos/configuration.nix)
-{ inputs, lib, config, pkgs, ... }:
+{ inputs, lib, config, pkgs, hostname, ... }:
 
 {
   imports = [
@@ -18,7 +18,7 @@
     ../modules/gnome/gnome2.nix
     # ../modules/gnome/gnome.nix
     ../modules/networking/default.nix
-    ../modules/system/system-packages.nix
+    ../modules/system/system-packages-leptup.nix
 
 
 
@@ -69,14 +69,10 @@
     lux = {
       # initialPassword = "  ";
       isNormalUser = true;
-      openssh.authorizedKeys.keys = [
-        # Add your SSH public key(s) here, if you plan on using SSH to connect
-        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKiEzG/bxLrAXpvjt5hU4mj6bfcYC/OifFyjW9pI2fV4 lakshaychoudhary77712@google.com"
-      ];
       extraGroups = 
         [ "wheel" "networkmanager" "docker" 
-          "qemu-libvirtd" "libvirtd" "adbusers"
-          "kvm" ];
+          "qemu-libvirtd" "libvirtd" "kvm" 
+          "adbusers" ];
       packages = with pkgs; [
         # user specific pkgs
       ];

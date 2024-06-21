@@ -1,5 +1,5 @@
 {
-  description = "Your new nix config";
+  description = "i've spent way too much time on nix";
 
   inputs = {
     # Nixpkgs
@@ -17,7 +17,7 @@
   let
     inherit (self) outputs;
     system = "x86_64-linux";
-    lib = inputs.nixpkgs-stable.lib;
+    # lib = inputs.nixpkgs-stable.lib;
     pkgs = inputs.nixpkgs.legacyPackages.${system};
     # pkgs-unstable = import inputs.nixpkgs-unstable.legacyPackages.${system};
     # pkgs-unstable = nixpkgs-unstable.legacyPackages.${system};
@@ -27,7 +27,6 @@
         config = {
           allowUnfree = true;
           allowUnfreePredicate = (_: true);
-
         };
       };
     # This is a function that generates an attribute by calling a function you
@@ -43,27 +42,41 @@
 
 
     nixosConfigurations = {
-      nixos = nixpkgs.lib.nixosSystem {
+      leptup = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
-        specialArgs = {inherit inputs outputs pkgs-stable;};
+        specialArgs = {
+          hostname = "leptup";
+          inherit inputs outputs pkgs-stable;};
         modules = [
           # > Our main nixos configuration file <
-          ./nixos/configuration.nix
+          ./hosts/leptup.nix
           inputs.home-manager.nixosModules.default
         ];
       };
+      pc= nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        specialArgs = {
+          hostname = "pc";
+          inherit inputs outputs pkgs-stable;};
+        modules = [
+          # > Our main nixos configuration file <
+          ./hosts/configuration.nix
+          # inputs.home-manager.nixosModules.default
+        ];
+      };
+ 
     };
 
     # Standalone home-manager configuration entrypoint
     # Available through 'home-manager --flake .#your-username@your-hostname'
     homeConfigurations = {
-      "lux@nixos" = home-manager.lib.homeManagerConfiguration {
+      "lux@leptup" = home-manager.lib.homeManagerConfiguration {
         pkgs = nixpkgs.legacyPackages.x86_64-linux; # Home-manager requires 'pkgs' instance
         pkgs-stable = nixpkgs-stable.legacyPackages.x86_64-linux;
         extraSpecialArgs = {inherit inputs outputs pkgs-stable;};
         modules = [
           # > Our main home-manager configuration file <
-          ./nixos/home.nix
+          ./hosts/home.nix
         ];
       };
     };

@@ -22,6 +22,7 @@ config.font = wezterm.font("CommitMono")
 config.font_size = 12
 config.hide_tab_bar_if_only_one_tab = true
 config.scrollback_lines = 5000
+config.hide_mouse_cursor_when_typing = false
 
 
 

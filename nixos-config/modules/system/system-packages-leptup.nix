@@ -33,6 +33,7 @@
       gcc
 
     # Terminal utilities
+      oh-my-posh
       auto-cpufreq
       bat
       eza

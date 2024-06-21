@@ -1,7 +1,7 @@
-{ config, pkgs, ...}:
+{ config, pkgs, hostname, ...}:
 {
     networking = {
-    hostName = "nixos";
+    hostName = hostname;
     networkmanager.enable = true;
     firewall.allowedTCPPorts = [ 22 80 443 ];
     firewall.allowedUDPPortRanges = [
