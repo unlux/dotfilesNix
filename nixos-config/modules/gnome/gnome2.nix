@@ -16,7 +16,7 @@ in
   ];
 
   # Prefer iwd to wpa_supplicant.
-  networking.networkmanager.wifi.backend = lib.mkDefault "iwd";
+  # networking.networkmanager.wifi.backend = lib.mkDefault "iwd";
 
   # ---- Home Configuration ----
   home-manager.users.${username} = {
@@ -43,7 +43,7 @@ in
       "org/gnome/shell".favorite-apps = [
         "floorp.desktop"
         "virt-manager.desktop"
-        "discord.desktop"
+        "vesktop.desktop"
       ];
 
       "org/gnome/desktop/interface" = {

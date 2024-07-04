@@ -1,4 +1,4 @@
-{ config, ... }:
+{ config, pkgs, ... }:
 
 {
   hardware.bluetooth = {
@@ -8,9 +8,11 @@
       General = {
         ControllerMode = "dual";
         Experimental = true;
-        IdleTimeout = 30;
+        # IdleTimeout = 30;
       };
     };
+    # package = pkgs.bluez;
     # hsphfpd.enable = true;
   };
+  # services.blueman.enable=true;
 }

@@ -9,11 +9,16 @@
     # Home manager
     home-manager.url = "github:nix-community/home-manager/release-23.11";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
-
+    # spicetify-nix.url = "github:the-argus/spicetify-nix";
     # hardware.url = "github:nixos/nixos-hardware";
   };
 
-  outputs = inputs@{ self, nixpkgs, nixpkgs-stable, home-manager, ... }:
+  outputs = inputs@{ self,
+  nixpkgs,
+  nixpkgs-stable,
+  home-manager,
+  # spicetify-nix,
+  ... }:
   let
     inherit (self) outputs;
     system = "x86_64-linux";
@@ -73,10 +78,11 @@
       "lux@leptup" = home-manager.lib.homeManagerConfiguration {
         pkgs = nixpkgs.legacyPackages.x86_64-linux; # Home-manager requires 'pkgs' instance
         pkgs-stable = nixpkgs-stable.legacyPackages.x86_64-linux;
-        extraSpecialArgs = {inherit inputs outputs pkgs-stable;};
+        extraSpecialArgs = {inherit inputs outputs pkgs-stable ;}; # add spicetify-nix to the inherit
         modules = [
           # > Our main home-manager configuration file <
           ./hosts/home.nix
+          # ./modules/spicetify/default.nix
         ];
       };
     };

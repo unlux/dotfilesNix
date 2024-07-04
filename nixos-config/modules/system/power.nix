@@ -20,10 +20,10 @@
           };
       };
 
-      system76-scheduler = {
-          enable = true;
-          useStockConfig = true;
-      };
+      # system76-scheduler = {
+      #     enable = true;
+      #     useStockConfig = true;
+      # };
 
       tlp = {
       enable = true;

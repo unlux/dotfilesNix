@@ -5,6 +5,7 @@
     brave
     cloudflare-warp
     discord
+    vesktop
     # discord-ptb
     easyeffects
     # lunarvim

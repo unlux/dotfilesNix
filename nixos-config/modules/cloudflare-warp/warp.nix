@@ -10,5 +10,7 @@
 
   environment.systemPackages = [
     pkgs.cloudflare-warp
+    pkgs.cloudflared
+
   ];
 }
