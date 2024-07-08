@@ -1,3 +1,5 @@
+declare -A key
+
 # [Home] - Go to beginning of line
 if [[ -n "${terminfo[khome]}" ]]; then
   bindkey -M emacs "${terminfo[khome]}" beginning-of-line
