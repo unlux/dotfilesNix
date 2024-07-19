@@ -42,25 +42,25 @@
             # tali
             # totem
             yelp
-        ])
-        ++ (with pkgs.gnome; [
-            atomix
             baobab
             eog
             epiphany
             evince
             geary
+            gnome-font-viewer
+            simple-scan
+            totem
+            yelp
+        ])
+        ++ (with pkgs.gnome; [
+            atomix
             gnome-characters
             gnome-contacts
-            gnome-font-viewer
             gnome-logs
             gnome-maps
             gnome-music
             hitori
             iagno
-            simple-scan
             tali
-            totem
-            yelp
         ]);
 }

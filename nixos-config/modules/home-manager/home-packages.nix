@@ -2,13 +2,13 @@
 
 {
   home.packages = with pkgs; [
-    brave
+    # brave
     cloudflare-warp
-    discord
-    vesktop
+    # discord
     # discord-ptb
+    vesktop
     easyeffects
-    # lunarvim
+    lunarvim
     nodejs_22	
     nodePackages.pnpm
     jdk
@@ -17,8 +17,7 @@
     obs-studio
     # obsidian
     postman
-    snapper
-    snapper-gui
+    timeshift 
     # spotify
     sqlite
     syncthing
@@ -37,7 +36,6 @@
     qbittorrent
     zoom-us
     lazygit
-    lunarvim
     flameshot
     ulauncher
     noisetorch
@@ -45,10 +43,9 @@
     atuin
     looking-glass-client
     vscode
-    openrgb
     piper
     libreoffice-fresh
-
+    youtube-music
   ];
 
 }

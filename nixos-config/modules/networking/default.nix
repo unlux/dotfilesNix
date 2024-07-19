@@ -1,6 +1,6 @@
-{ config, pkgs, hostname, ...}:
+{ config, pkgs, hostname, lib, ...}:
 {
-    networking = {
+  networking = {
     hostName = hostname;
     networkmanager.enable = true;
     firewall.allowedTCPPorts = [ 22 80 443 ];
@@ -20,5 +20,9 @@
   };
   environment.systemPackages = (with pkgs;[
     tcpdump
-   ]);
+    inetutils
+  ]);
+
+  # Prefer iwd to wpa_supplicant.
+  networking.networkmanager.wifi.backend = lib.mkDefault "iwd";
 }

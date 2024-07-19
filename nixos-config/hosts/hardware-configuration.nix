@@ -12,19 +12,19 @@
   boot.initrd.kernelModules = [ ];
   boot.kernelModules = [ "kvm-amd" ];
   boot.extraModulePackages = [ ];
-  boot.kernelPackages = pkgs.linuxPackages_latest;
   
   fileSystems."/" =
-    { device = "/dev/disk/by-uuid/5a125195-ba48-4bd1-8587-b7ffc32ffbec";
+    { device = "/dev/disk/by-uuid/6f616fe0-2fc3-4e3f-9c0e-81dcf504a156";
       fsType = "btrfs";
       options = [ "subvol=@" ];
     };
 
   fileSystems."/boot" =
-    { device = "/dev/disk/by-uuid/5EDD-2AEA";
+    { device = "/dev/disk/by-uuid/04A8-C81D";
       fsType = "vfat";
       options = [ "fmask=0022" "dmask=0022" ];
     };
+
 
   swapDevices = [ ];
 
@@ -39,7 +39,6 @@
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
-  hardware.enableAllFirmware = true;
 
 
   # hardware.fancontrol.enable = true; #needs hardware.fancontrol.config to work

@@ -4,23 +4,22 @@
 {
   imports = [
     ../modules/system/power.nix
-    ../modules/system/gpuPassthrough.nix
-    ../modules/system/grub.nix
     ../modules/system/kvm.nix
     ../modules/system/locale.nix
-    ../modules/system/nvidia.nix
     ../modules/system/openssh.nix
     ../modules/system/pipewire.nix
     ../modules/system/xserver.nix
     ../modules/system/zsh.nix
     ../modules/system/bluetooth.nix
-    # ../modules/system/systemd.nix
-    ../modules/gnome/gnome2.nix
-    # ../modules/gnome/gnome.nix
-    ../modules/networking/default.nix
     ../modules/system/system-packages-leptup.nix
-
-
+    ../modules/system/zram.nix
+    ../modules/networking/default.nix
+    # ../modules/bootloader/systemd.nix
+    ../modules/bootloader/grub.nix
+    ../modules/gnome/default.nix
+    ../modules/nix-ld/default.nix
+    # ../modules/nvidia/gpuPassthrough.nix
+    ../modules/nvidia/default.nix
 
     # Or modules from other flakes (such as nixos-hardware):
     # inputs.hardware.nixosModules.common-cpu-amd
@@ -86,11 +85,14 @@
     users = {
       lux = import ./home.nix;
     };
+    backupFileExtension = "backup";
   };
+
+  boot.kernelPackages = pkgs.linuxPackages_latest;
+  hardware.enableAllFirmware = true;
 
   # services.qemuGuest.enable=true;
   
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
   system.stateVersion = "23.11";
-
 }

@@ -58,7 +58,6 @@
       gnused
       gnutar
       tree
-      wl-clipboard  
       appimage-run
       distrobox
 

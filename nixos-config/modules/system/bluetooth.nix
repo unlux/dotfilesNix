@@ -6,7 +6,7 @@
     powerOnBoot = false;
     settings = {
       General = {
-        ControllerMode = "dual";
+        ControllerMode = "bredr";
         Experimental = true;
         # IdleTimeout = 30;
       };

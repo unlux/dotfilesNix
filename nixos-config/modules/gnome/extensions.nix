@@ -24,6 +24,7 @@ let
         gnomeExtensions.cloudflare-warp-toggle
         gnomeExtensions.auto-select-headset
         gnomeExtensions.media-controls
+        gnomeExtensions.system-monitor
         #gnomeExtensions.arcmenu
         #gnomeExtensions.burn-my-windows
         # gnomeExtensions.compact-top-bar

@@ -27,8 +27,10 @@
   nixpkgs.config.allowUnfree = true;  
 
   programs = {
-    home-manager.enable = true;
-
+    home-manager = {
+      enable = true;
+      # backupFileExtension = "backup";
+    };
   };
 
   # Nicely reload system units when changing configs

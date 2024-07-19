@@ -16,13 +16,9 @@
     # Editors
       neovim
     # zed-editor
-    
     # browsers
-      # floorp
-
-    # Virtualisation tools
+      floorp
       virt-manager
-
       home-manager    
 
     # Language chains
@@ -42,7 +38,6 @@
       ffmpeg
       #devbox
       fzf
-      gnumake
       mpv
       rsync
       # starship
@@ -55,7 +50,7 @@
 
     # utils
       lshw
-      inetutils
+      
       pciutils
       usbutils
       xdg-utils
@@ -74,11 +69,11 @@
       gawk
       gnupg
       gnused
+      gnumake
       gnutar
       nnn # terminal file manager
       tree
       # zstd
-      wl-clipboard  
       appimage-run
       distrobox
 
@@ -90,14 +85,22 @@
       # strace # system call monitoring
       # sysstat
 
-      # jq # A lightweight and flexible command-line JSON processor
+      jq # A lightweight and flexible command-line JSON processor
       # yq-go # yaml processor https://github.com/mikefarah/yq
 
       # glow # markdown previewer in terminal
       # hugo # static site generator
 
-
   ]) ++ (with pkgs-stable; [
-    floorp
-  ]) ;
+    # floorp
+  ]);
+
+  environment.variables = {
+    # vscode
+    NIXOS_OZONE_WL=1;
+    # MOZ_ENABLE_WAYLAND = "1";
+  };
+
+  services.hardware.openrgb.enable = true;
+  services.ratbagd.enable = true;
 }
