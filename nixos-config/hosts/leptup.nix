@@ -91,6 +91,11 @@
   boot.kernelPackages = pkgs.linuxPackages_latest;
   hardware.enableAllFirmware = true;
 
+  specialisation.no-leptup-keyboard.configuration = {
+    boot.kernelParams = lib.mkForce ["i8042.nokbd"];
+    
+  };
+
   # services.qemuGuest.enable=true;
   
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
