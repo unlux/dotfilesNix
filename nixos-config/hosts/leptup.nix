@@ -8,6 +8,7 @@
     ../modules/system/locale.nix
     ../modules/system/openssh.nix
     ../modules/system/pipewire.nix
+    # ../modules/system/noisecancel.nix
     ../modules/system/xserver.nix
     ../modules/system/zsh.nix
     ../modules/system/bluetooth.nix

@@ -101,6 +101,6 @@ in
     gnome-tweaks
     dconf-editor
     # kdeconnect
-    wl-clipboard  
+    wl-clipboard
     ];
 }

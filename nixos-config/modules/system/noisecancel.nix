@@ -1,4 +1,4 @@
-{config, pkgs, ...}:
+{ config, pkgs, ... }:
 let
   json = pkgs.formats.json {};
   pw_rnnoise_config = {
@@ -35,28 +35,17 @@ let
 };
 in
 {
-    # sound.enable = true;
-    hardware.pulseaudio.enable = false;
-    security.rtkit.enable = true;
-    services.pipewire = {
-        enable = true;
-        alsa.enable = true;
-        alsa.support32Bit = true;
-        pulse.enable = true;
-        wireplumber.configPackages = [
-          (pkgs.writeTextDir "share/wireplumber/wireplumber.conf.d/10-bluez.conf" ''
-            monitor.bluez.properties = {
-              bluez5.roles = [ a2dp_sink a2dp_source bap_sink bap_source hsp_hs hsp_ag hfp_hf hfp_ag ]
-              bluez5.codecs = [ sbc sbc_xq aac ]
-              bluez5.enable-sbc-xq = true
-              bluez5.hfphsp-backend = "native"
-            }
-          '')
-        ];
-        # If you want to use JACK applications, uncomment this
-        #jack.enable = true;
-        # }; 
-        extraConfig.pipewire."99-input-denoising" = pw_rnnoise_config;
-    };
-    programs.noisetorch.enable = true;
+  services.pipewire.extraConfig = {
+  "pipewire/source-rnnoise.conf" = {
+      source = json.generate "source-rnnoise.conf" pw_rnnoise_config;
+  };
+  };
+  systemd.user.services."pipewire-source-rnnoise" = {
+    environment = { LADSPA_PATH = "${pkgs.rnnoise-plugin}/lib/ladspa"; };
+    description = "Noise canceling source for pipewire";
+    wantedBy = ["pipewire.service"];
+    script = "${pkgs.pipewire}/bin/pipewire -c source-rnnoise.conf";
+    enable = true;
+    path = with pkgs; [pipewire rnnoise-plugin];
+  };
 }
