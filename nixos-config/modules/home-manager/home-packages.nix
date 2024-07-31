@@ -1,5 +1,4 @@
 { config, lib, pkgs, ... }:
-
 {
   home.packages = with pkgs; [
     # brave
@@ -13,19 +12,19 @@
     nodePackages.pnpm
     jdk
     mongodb-compass
-    notion-app-enhanced
+    # notion-app-enhanced
     obs-studio
     # obsidian
     postman
-    timeshift 
+    # timeshift 
     # spotify
-    sqlite
-    syncthing
-    teamviewer
+    # sqlite
+    syncthingtray
+    # teamviewer
     telegram-desktop
     termius
-    turso-cli
-    # ungoogled-chromium
+    # turso-cli
+    ungoogled-chromium
     vlc
     # vscode
     # webcord
@@ -36,8 +35,8 @@
     qbittorrent
     zoom-us
     lazygit
-    flameshot
-    ulauncher
+    # flameshot
+    # ulauncher
     noisetorch
     qdirstat
     atuin
@@ -45,7 +44,7 @@
     vscode
     piper
     libreoffice-fresh
+    bun
     youtube-music
   ];
-
 }

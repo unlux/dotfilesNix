@@ -13,6 +13,7 @@ in
     ./debloat.nix
     ./extensions.nix
     ./keybindings.nix
+    # ./triple-buffering.nix #TODO: fix the hash
   ];
 
 

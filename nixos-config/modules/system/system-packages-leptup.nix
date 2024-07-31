@@ -5,10 +5,10 @@
     ./nix-helper.nix
     ./cyber.nix
     ../networking/tailscale.nix
-    ../cloudflare-warp/warp.nix
-    ../docker/dockerRootless.nix
-    ../flatpak/flatpak.nix
-    
+    ../cloudflare-warp/default.nix
+    ../docker/default.nix
+    ../flatpak/default.nix
+    ../syncthing/default.nix
 
   ];
 
@@ -30,7 +30,6 @@
 
     # Terminal utilities
       oh-my-posh
-      auto-cpufreq
       bat
       eza
       fd
@@ -50,7 +49,6 @@
 
     # utils
       lshw
-      
       pciutils
       usbutils
       xdg-utils
@@ -96,11 +94,10 @@
   ]);
 
   environment.variables = {
-    # vscode
     NIXOS_OZONE_WL=1;
-    # MOZ_ENABLE_WAYLAND = "1";
+    MOZ_ENABLE_WAYLAND = "0";
   };
 
-  services.hardware.openrgb.enable = true;
-  services.ratbagd.enable = true;
-}
+  services.hardware.openrgb.enable = true; # openrgb udev rules
+  services.ratbagd.enable = true; # piper
+ }

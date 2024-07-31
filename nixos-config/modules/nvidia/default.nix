@@ -4,11 +4,7 @@
   pkgs,
   ...
 }: {
-  # specialisation = {
-  #   need-nvidia-idk-why.configuration = {
-  # system.nixos.tags = ["need-nvidia-idk-why"];
   hardware.graphics.enable = true;
-  # hardware.graphics.enable32bit = true; #disabling temproratily
 
   # Load nvidia driver for Xorg and Wayland
   services.xserver.videoDrivers = ["nvidia"];
@@ -22,7 +18,7 @@
     powerManagement.enable = true;
     # Fine-grained power management. Turns off GPU when not in use.
     # Experimental and only works on modern Nvidia GPUs (Turing or newer).
-    powerManagement.finegrained = false;
+    powerManagement.finegrained = true;
     # - Fine-grained power management requires offload to be enabled.
     # Use the NVidia open source kernel module (not to be confused with the
     # independent third-party "nouveau" open source driver).
@@ -32,7 +28,6 @@
     # Only available from driver 514.43.04+
     # Currently alpha-quality/buggy, so false is currently the recommended setting.
     open = false;
-
     prime = {
       offload.enable = true;
       offload.enableOffloadCmd = true;
@@ -40,54 +35,45 @@
       amdgpuBusId = "PCI:1:0:0";
       nvidiaBusId = "PCI:5:0:0";
     };
-
     # Enable the Nvidia settings menu, accessible via `nvidia-settings`.
     nvidiaSettings = true;
-
     # Optionally, you may need to select the appropriate driver version for your specific GPU.
     package = config.boot.kernelPackages.nvidiaPackages.stable;
   };
+
   environment.variables = {
     __NV_PRIME_RENDER_OFFLOAD=1;
     __NV_PRIME_RENDER_OFFLOAD_PROVIDER="NVIDIA-G0";
-    # __GLX_VENDOR_LIBRARY_NAME="nvidia";
     __VK_LAYER_NV_optimus="NVIDIA_only";
     # Required to run the correct GBM backend for nvidia GPUs on wayland
     # Apparently, without this nouveau may attempt to be used instead
     # (despite it being blacklisted)
     GBM_BACKEND = "nvidia-drm";
     # Hardware cursors are currently broken on nvidia
-    WLR_NO_HARDWARE_CURSORS = "0";
+    # WLR_NO_HARDWARE_CURSORS = "0";
     # In order to automatically launch Steam in offload mode, you need to add the following to your ~/.bashrc: 
     XDG_DATA_HOME="$HOME/.local/share";
-
-  # # from https://github.com/TLATER/dotfiles/blob/e633195dca42d96f42f9aa9016fa8d307959232f/nixos-config/yui/nvidia.nix#L33
-  # environment.variables = {
-  #   # Necessary to correctly enable va-api (video codec hardware
-  #   # acceleration). If this isn't set, the libvdpau backend will be
-  #   # picked, and that one doesn't work with most things, including
-  #   # Firefox.
+    # from https://github.com/TLATER/dotfiles/blob/e633195dca42d96f42f9aa9016fa8d307959232f/nixos-config/yui/nvidia.nix#L33
+    # Necessary to correctly enable va-api (video codec hardware
+    # acceleration). If this isn't set, the libvdpau backend will be
+    # picked, and that one doesn't work with most things, including
+    # Firefox.
     LIBVA_DRIVER_NAME = "nvidia";
     __GLX_VENDOR_LIBRARY_NAME = "nvidia";
-
-  #   # Required to use va-api it in Firefox. See
-  #   # https://github.com/elFarto/nvidia-vaapi-driver/issues/95
+    # Required to use va-api it in Firefox. See
+    # https://github.com/elFarto/nvidia-vaapi-driver/issues/95
     MOZ_DISABLE_RDD_SANDBOX = "0";
-  #   # It appears that the normal rendering mode is broken on recent
-  #   # nvidia drivers:
-  #   # https://github.com/elFarto/nvidia-vaapi-driver/issues/212#issuecomment-1585584038
+    # It appears that the normal rendering mode is broken on recent
+    # nvidia drivers:
+    # https://github.com/elFarto/nvidia-vaapi-driver/issues/212#issuecomment-1585584038
     NVD_BACKEND = "direct";
-  #   # Required for firefox 97+, see:
-  #   # https://github.com/elFarto/nvidia-vaapi-driver#firefox
+    # Required for firefox 97+, see:
+    # https://github.com/elFarto/nvidia-vaapi-driver#firefox
     EGL_PLATFORM = "wayland";
   };
 
-  environment.systemPackages = [
-    pkgs.nvidia-vaapi-driver
-  ];
-  # };
+  environment.systemPackages = [ pkgs.nvidia-vaapi-driver ];
   services.supergfxd.enable = true;
-  # };
 
   # code to turn off dGPU completely
   specialisation = {

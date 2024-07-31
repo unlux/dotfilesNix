@@ -21,7 +21,7 @@
     ../modules/nix-ld/default.nix
     # ../modules/nvidia/gpuPassthrough.nix
     ../modules/nvidia/default.nix
-
+    ../modules/gaming/default.nix
     # Or modules from other flakes (such as nixos-hardware):
     # inputs.hardware.nixosModules.common-cpu-amd
     # inputs.hardware.nixosModules.common-pc-ssd
@@ -72,10 +72,10 @@
       extraGroups = 
         [ "wheel" "networkmanager" "docker" 
           "qemu-libvirtd" "libvirtd" "kvm" 
-          "adbusers" ];
-      packages = with pkgs; [
-        # user specific pkgs
-      ];
+          "adbusers" "syncthing" ];
+      # packages = with pkgs; [
+      #   # user specific pkgs
+      # ];
     };
   };
 
