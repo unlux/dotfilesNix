@@ -89,13 +89,12 @@
     backupFileExtension = "backup";
   };
 
-  boot.kernelPackages = pkgs.linuxPackages_latest;
+  # boot.kernelPackages = pkgs.linuxPackages_latest;
   hardware.enableAllFirmware = true;
 
-  specialisation.no-leptup-keyboard.configuration = {
-    boot.kernelParams = lib.mkForce ["i8042.nokbd"];
-    
-  };
+  # specialisation.no-leptup-keyboard.configuration = {
+  #   boot.kernelParams = lib.mkForce ["i8042.nokbd"];
+  # }; # for use with external keyboard
 
   # services.qemuGuest.enable=true;
   

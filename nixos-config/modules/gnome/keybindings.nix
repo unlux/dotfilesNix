@@ -27,7 +27,7 @@ in
 
       "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0" = {
         binding = "<Super>t";
-        command = "wezterm";
+        command = "alacritty";
         name = "open-terminal";
       };
 

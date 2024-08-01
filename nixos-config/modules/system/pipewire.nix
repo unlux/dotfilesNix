@@ -59,5 +59,9 @@ in
         # }; 
         extraConfig.pipewire."99-input-denoising" = pw_rnnoise_config;
     };
-    programs.noisetorch.enable = true;
+    # programs.noisetorch.enable = true;
+
+    environment.systemPackages = (with pkgs; [
+        pavucontrol
+    ]);
 }
