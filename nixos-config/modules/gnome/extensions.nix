@@ -10,13 +10,13 @@ let
     gnomeExtensionsList = with pkgs; [
         gnomeExtensions.alphabetical-app-grid
         gnomeExtensions.appindicator
-        gnomeExtensions.blur-my-shell
+        # gnomeExtensions.blur-my-shell
         gnomeExtensions.clipboard-indicator
         gnomeExtensions.dash-to-panel
-        gnomeExtensions.gesture-improvements
+        # gnomeExtensions.gesture-improvements
         gnomeExtensions.gsconnect
         # gnomeExtensions.gtile
-        gnomeExtensions.rounded-window-corners
+        # gnomeExtensions.rounded-window-corners
         gnomeExtensions.tailscale-status
         gnomeExtensions.tray-icons-reloaded
         gnomeExtensions.user-themes
@@ -53,13 +53,13 @@ in
             # ];
             
             # Configure blur-my-shell
-            "org/gnome/shell/extensions/blur-my-shell" = {
-              brightness = 0.85;
-              dash-opacity = 0.25;
-              sigma = 15; # Sigma means blur amount
-              static-blur = true;
-            };
-            "org/gnome/shell/extensions/blur-my-shell/panel".blur = true;
+            # "org/gnome/shell/extensions/blur-my-shell" = {
+            #   brightness = 0.85;
+            #   dash-opacity = 0.25;
+            #   sigma = 15; # Sigma means blur amount
+            #   static-blur = true;
+            # };
+            # "org/gnome/shell/extensions/blur-my-shell/panel".blur = true;
             # "org/gnome/shell/extensions/blur-my-shell/appfolder" = {
             #   blur = true;
             #   style-dialogs = 0;
