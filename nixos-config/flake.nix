@@ -65,7 +65,7 @@
           inherit inputs outputs pkgs-stable;};
         modules = [
           # > Our main nixos configuration file <
-          ./hosts/configuration.nix
+          ./hosts/pc.nix
           # inputs.home-manager.nixosModules.default
         ];
       };
