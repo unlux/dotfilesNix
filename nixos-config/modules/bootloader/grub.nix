@@ -1,4 +1,4 @@
-{ config, ... }:
+{ config, lib, ... }:
 
 {
     boot.loader = {
@@ -10,6 +10,8 @@
             efiSupport = true;
             device = "nodev";
             useOSProber = true;
+            # splashImage = ./peakpx.png;
+            # splashmode = "stretch";
         };
     };
 }

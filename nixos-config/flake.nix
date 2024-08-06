@@ -69,7 +69,6 @@
           # inputs.home-manager.nixosModules.default
         ];
       };
- 
     };
 
     # Standalone home-manager configuration entrypoint

@@ -81,16 +81,20 @@
   };
 
   environment.systemPackages = [ pkgs.nvidia-vaapi-driver ];
-  services.supergfxd.enable = true;
+  # services.supergfxd.enable = true;
 
   # code to turn off dGPU completely
   specialisation.fuck-you-nvidia.configuration = {
       system.nixos.tags = ["fuck-you-nvidia"];
-      boot.extraModprobeConfig = lib.mkForce ''
+      boot = {
+        extraModprobeConfig = lib.mkForce ''
         blacklist nouveau
         options nouveau modeset=-1
-      '';
-      boot.blacklistedKernelModules = lib.mkForce ["nouveau" "nvidia" "nvidia_drm" "nvidia_modeset"];
+        '';
+        blacklistedKernelModules = lib.mkForce ["nouveau" "nvidia" "nvidia_drm" "nvidia_modeset"];
+        # loader.grub.splashImage = null ;
+      };
+
       services.udev.extraRules = lib.mkForce ''
         # Remove NVIDIA USB xHCI Host Controller devices, if present
         ACTION=="add", SUBSYSTEM=="pci", ATTR{vendor}=="0x10dd", ATTR{class}=="0x0c0330", ATTR{power/control}="auto", ATTR{remove}="1"
@@ -101,6 +105,6 @@
         # Remove NVIDIA VGA/2D controller devices
         ACTION=="add", SUBSYSTEM=="pci", ATTR{vendor}=="0x10dd", ATTR{class}=="0x03[0-9]*", ATTR{power/control}="auto", ATTR{remove}="1"
       '';
-        services.supergfxd.enable = lib.mkForce false;
+        # services.supergfxd.enable = lib.mkForce false;
   };
 }

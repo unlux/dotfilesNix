@@ -16,6 +16,10 @@
       allowedUDPPortRanges = [ { from = 1714; to = 1764; } ];
       allowedTCPPortRanges = [ { from = 1714; to = 1764; } ]; 
     };
+
+    hosts = {
+      "127.0.0.1:8384" = [ "syncthing" ];
+    };
   };
 
   environment.systemPackages = (with pkgs;[

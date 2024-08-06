@@ -4,15 +4,16 @@
 {
   imports = [
     ../modules/system/grub.nix
-    ../modules/system/kvm.nix
+    # ../modules/system/kvm.nix
     ../modules/system/locale.nix
-    ../modules/system/nvidia.nix
-    ../modules/system/openssh.nix
+    # ../modules/system/nvidia.nix
+    # ../modules/system/openssh.nix
     ../modules/system/pipewire.nix
     ../modules/system/xserver.nix
     ../modules/system/zsh.nix
+    ../modules/xfce/default.nix
     # ../modules/system/systemd.nix
-    ../modules/gnome/gnome2.nix
+    # ../modules/gnome/gnome2.nix
     # ../modules/gnome/gnome.nix
     ../modules/networking/default.nix
     # ../modules/system/system-packages.nix
@@ -26,7 +27,7 @@
     # home-manager
     # inputs.home-manager.nixosModules.default
 
-    /etc/nixos/hardware-configuration.nix.nix
+    ./pc-hardware.nix
   ];
 
   # # This will add each flake input as a registry
@@ -84,7 +85,7 @@
   #   };
   # };
 
-  # services.qemuGuest.enable=true;
+  services.qemuGuest.enable=true;
   
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
   system.stateVersion = "23.11";

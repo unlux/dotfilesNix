@@ -11,7 +11,7 @@
       
       power-profiles-daemon.enable = false;
 
-      upower.enable = true;
+      # upower.enable = true;
 
     #   auto-cpufreq = {
     #       enable = true;
@@ -52,11 +52,11 @@
               USB_ALLOWLIST="46d:c07e"; #Logitech mouse
               USB_EXCLUDE_BTUSB=1;
               USB_EXCLUDE_PHONE=1;
+              RUNTIME_PM_BLACKLIST="46d:c07e";
             };
-            extraConfig = ''
-              USB_AUTOSUSPEND=0
-              RUNTIME_PM_BLACKLIST="46d:c07e"
-            '';
+            # extraConfig = ''
+            #   USB_AUTOSUSPEND=0
+            # '';
         };
   };
 }
