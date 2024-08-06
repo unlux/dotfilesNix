@@ -16,21 +16,18 @@
 
   ]) ++ (with pkgs-stable; [
 
-    floorp
-      virt-manager
+      microsoft-edge
+      chromium
+      # virt-manager
       home-manager    
-      cargo
-      lua
       python3
       gcc
       bat
       fastfetch
-      ffmpeg
       fzf
       gnumake
       mpv
       rsync
-      tmux
       wget
       yadm
       zoxide
@@ -59,7 +56,6 @@
       gnutar
       tree
       appimage-run
-      distrobox
 
     # system monitoring tools
       btop  # replacement of htop/nmon

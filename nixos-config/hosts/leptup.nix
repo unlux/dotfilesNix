@@ -17,7 +17,8 @@
     ../modules/networking/default.nix
     # ../modules/bootloader/systemd.nix
     ../modules/bootloader/grub.nix
-    ../modules/gnome/default.nix
+    # ../modules/gnome/default.nix
+    ../modules/gnome/xserver.nix
     ../modules/nix-ld/default.nix
     # ../modules/nvidia/gpuPassthrough.nix
     ../modules/nvidia/default.nix

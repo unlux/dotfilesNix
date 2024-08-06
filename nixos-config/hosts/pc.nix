@@ -3,7 +3,7 @@
 
 {
   imports = [
-    ../modules/bootloader/grub.nix
+    # ../modules/bootloader/grub.nix
     # ../modules/system/kvm.nix
     ../modules/system/locale.nix
     # ../modules/system/nvidia.nix
@@ -16,7 +16,7 @@
     # ../modules/gnome/gnome2.nix
     # ../modules/gnome/gnome.nix
     ../modules/networking/default.nix
-    # ../modules/system/system-packages.nix
+    ../modules/system/system-packages.nix
 
 
     # Or modules from other flakes (such as nixos-hardware):
