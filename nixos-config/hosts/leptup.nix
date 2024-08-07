@@ -17,8 +17,8 @@
     ../modules/networking/default.nix
     # ../modules/bootloader/systemd.nix
     ../modules/bootloader/grub.nix
-    # ../modules/gnome/default.nix
-    ../modules/gnome/xserver.nix
+    ../modules/gnome/default.nix
+    # ../modules/gnome/xserver.nix
     ../modules/nix-ld/default.nix
     # ../modules/nvidia/gpuPassthrough.nix
     ../modules/nvidia/default.nix
@@ -30,7 +30,7 @@
     # home-manager
     inputs.home-manager.nixosModules.default
 
-    ./hardware-configuration.nix
+    ./leptup-hardware.nix
   ];
 
   # # This will add each flake input as a registry
@@ -98,7 +98,11 @@
   # }; # for use with external keyboard
 
   # services.qemuGuest.enable=true;
-  
+
+  services.printing = {
+    enable = true;
+    drivers = [ pkgs.hplipWithPlugin ];
+  };
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
   system.stateVersion = "23.11";
 }
