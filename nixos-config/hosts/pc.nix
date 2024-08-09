@@ -3,7 +3,7 @@
 
 {
   imports = [
-    # ../modules/bootloader/grub.nix
+    ../modules/bootloader/grub.nix
     # ../modules/system/kvm.nix
     ../modules/system/locale.nix
     # ../modules/system/nvidia.nix
@@ -11,10 +11,10 @@
     ../modules/system/pipewire.nix
     ../modules/system/xserver.nix
     ../modules/system/zsh.nix
-    ../modules/xfce/default.nix
+    # ../modules/xfce/default.nix
     # ../modules/system/systemd.nix
     # ../modules/gnome/gnome2.nix
-    # ../modules/gnome/gnome.nix
+    ../modules/gnome/default.nix
     ../modules/networking/default.nix
     ../modules/system/system-packages.nix
 
@@ -65,6 +65,18 @@
   users.users = {
     someow = {
       isNormalUser = true;
+      initialPassword= "jj";
+      extraGroups = 
+        [ "wheel" "networkmanager" "docker" 
+          "qemu-libvirtd" "libvirtd" "kvm" 
+          "adbusers" ];
+      # packages = with pkgs; [
+      #   # user specific pkgs
+      # ];
+    };
+    lux = {
+      isNormalUser = true;
+      initialPassword= "jj";
       extraGroups = 
         [ "wheel" "networkmanager" "docker" 
           "qemu-libvirtd" "libvirtd" "kvm" 
@@ -84,7 +96,7 @@
   #   };
   # };
 
-  services.qemuGuest.enable=true;
+  # services.qemuGuest.enable=true;
   
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
   system.stateVersion = "23.11";

@@ -100,7 +100,7 @@
   # services.qemuGuest.enable=true;
 
   services.printing = {
-    enable = true;
+    enable = false;
     drivers = [ pkgs.hplipWithPlugin ];
   };
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion

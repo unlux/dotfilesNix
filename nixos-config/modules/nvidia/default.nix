@@ -80,7 +80,15 @@
     EGL_PLATFORM = "wayland";
   };
 
-  environment.systemPackages = [ pkgs.nvidia-vaapi-driver ];
+  environment.systemPackages = (with pkgs; [ 
+    nvidia-vaapi-driver 
+    libva
+    libva-utils
+    libvdpau-va-gl 
+    vaapiVdpau
+    libva-vdpau-driver
+    nvtop
+    ]);
   # services.supergfxd.enable = true;
 
   # code to turn off dGPU completely
