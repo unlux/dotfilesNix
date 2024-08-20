@@ -47,17 +47,22 @@ in
             (pkgs.writeTextDir "share/wireplumber/wireplumber.conf.d/10-bluez.conf" ''
                 monitor.bluez.properties = {
                     bluez5.roles = [ a2dp_sink a2dp_source bap_sink bap_source hsp_hs hsp_ag hfp_hf hfp_ag ]
-                    bluez5.codecs = [ sbc sbc_xq aac ]
+                    bluez5.codecs = [ sbc sbc_xq aac 
+                                        "ldac" "aptx" "aptx_ll_duplex"
+                                        "aptx_ll" "aptx_hd" "opus_05_pro"
+                                        "opus_05_71" "opus_05_51" "opus_05"
+                                        "opus_05_duplex" "aac" "sbc_xq" ]
                     bluez5.enable-sbc-xq = true
                     bluez5.enable-msbc = true
                     bluez5.enable-hw-volume = true
-                    bluez5.hfphsp-backend = "native"
+                    bluez5.hfphsp-backend = "none"
             } '')
         ];
         # If you want to use JACK applications, uncomment this
         #jack.enable = true;
         # }; 
         extraConfig.pipewire."99-input-denoising" = pw_rnnoise_config;
+        # package = pkgs.pulseaudioFull;
     };
     # programs.noisetorch.enable = true;
 
