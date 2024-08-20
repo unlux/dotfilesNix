@@ -3,26 +3,21 @@
 
 {
   imports = [
-    ../modules/system/power.nix
+    ./base.nix
     ../modules/system/kvm.nix
-    ../modules/system/locale.nix
-    ../modules/system/openssh.nix
-    ../modules/system/pipewire.nix
+    ../modules/system/power.nix
     # ../modules/system/noisecancel.nix
-    ../modules/system/xserver.nix
-    ../modules/system/zsh.nix
     ../modules/system/bluetooth.nix
     ../modules/system/system-packages-leptup.nix
     ../modules/system/zram.nix
-    ../modules/networking/default.nix
-    # ../modules/bootloader/systemd.nix
     ../modules/bootloader/grub.nix
     ../modules/gnome/default.nix
-    # ../modules/gnome/xserver.nix
     ../modules/nix-ld/default.nix
     # ../modules/nvidia/gpuPassthrough.nix
     ../modules/nvidia/default.nix
     ../modules/gaming/default.nix
+
+
     # Or modules from other flakes (such as nixos-hardware):
     # inputs.hardware.nixosModules.common-cpu-amd
     # inputs.hardware.nixosModules.common-pc-ssd

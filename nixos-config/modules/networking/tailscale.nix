@@ -6,7 +6,7 @@
     ];
     
     services.tailscale = {
-        enable = false;
+        enable = true;
         extraUpFlags = [
         "--shields-up"
         "--operator=${username}"

@@ -5,7 +5,7 @@
 # ---- Misc ----
 alias zshconf="nvim ~/.zshrc"
 alias aliases="nvim ~/.aliases"
-alias cat="bat"
+# alias cat="bat"
 alias codehere="code . && exit"
 
 alias copilot="gh copilot"
@@ -74,3 +74,4 @@ alias nhpctest="nh os test $FLAKEREF -H pc"
 # alias zoho-meeting="appimage-run ~/Documents/Appimages/ZohoMeeting-x64.AppImage"
 alias nv-smi="watch -n 1 nvidia-smi"
 alias editnix="cd ~/nixos-config && codehere"
+

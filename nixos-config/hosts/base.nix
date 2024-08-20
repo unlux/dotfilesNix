@@ -1,10 +1,19 @@
-# Use this to configure your system environment (it replaces /etc/nixos/configuration.nix)
 { inputs, lib, config, pkgs, ... }:
 
 {
   imports = [
-    ./base.nix
-    ../modules/system/system-packages-pc.nix
+    ../modules/bootloader/grub.nix
+    # ../modules/system/kvm.nix
+    ../modules/system/locale.nix
+    # ../modules/system/nvidia.nix
+    ../modules/system/openssh.nix
+    ../modules/system/pipewire.nix
+    ../modules/system/xserver.nix
+    ../modules/system/zsh.nix
+    # ../modules/xfce/default.nix
+    # ../modules/system/systemd.nix
+    # ../modules/gnome/gnome2.nix
+    ../modules/networking/default.nix
 
 
     # Or modules from other flakes (such as nixos-hardware):
@@ -14,7 +23,6 @@
     # home-manager
     # inputs.home-manager.nixosModules.default
 
-    # ./pc-hardware.nix
   ];
 
   # # This will add each flake input as a registry
@@ -51,17 +59,6 @@
   };
 
   users.users = {
-    someow = {
-      isNormalUser = true;
-      initialPassword= "jj";
-      extraGroups = 
-        [ "wheel" "networkmanager" "docker" 
-          "qemu-libvirtd" "libvirtd" "kvm" 
-          "adbusers" ];
-      # packages = with pkgs; [
-      #   # user specific pkgs
-      # ];
-    };
     lux = {
       isNormalUser = true;
       initialPassword= "jj";

@@ -59,10 +59,11 @@ in
         ];
       };
 
-      "org/gnome/shell/keybindings" = {
-        # disable any default keybind for the action before a custom keybind is set
-        show-screenshot-ui = [ "<Shift><Super>s" ];
-      };
+      # "org/gnome/shell/keybindings" = {
+      #   # disable any default keybind for the action before a custom keybind is set
+      #   show-screenshot-ui = [ "<Shift><Super>s" ];
+      # };
+      # for when your keybaord does not have a printsc button
     };
   };
 }

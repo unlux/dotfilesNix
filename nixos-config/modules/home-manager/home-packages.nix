@@ -46,5 +46,6 @@
     libreoffice-fresh
     bun
     youtube-music
+    space-cadet-pinball
   ];
 }
