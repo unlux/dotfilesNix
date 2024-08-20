@@ -82,17 +82,17 @@
 
   environment.systemPackages = (with pkgs; [ 
     nvidia-vaapi-driver 
-    libva
-    libva-utils
-    libvdpau-va-gl 
-    vaapiVdpau
-    libva-vdpau-driver
-    nvtop
-    ]);
+    # libva
+    # libva-utils
+    # libvdpau-va-gl 
+    # vaapiVdpau
+    # libva-vdpau-driver
+    nvtopPackages.full ]);
   # services.supergfxd.enable = true;
 
   # code to turn off dGPU completely
   specialisation.fuck-you-nvidia.configuration = {
+      environment.variables = lib.mkForce { TERMINAL="wezterm"; };
       system.nixos.tags = ["fuck-you-nvidia"];
       boot = {
         extraModprobeConfig = lib.mkForce ''
