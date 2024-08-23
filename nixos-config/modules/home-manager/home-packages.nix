@@ -1,12 +1,12 @@
-{ config, lib, pkgs, ... }:
+{ config, lib, pkgs, pkgs-stable, ... }:
 {
-  home.packages = with pkgs; [
+  home.packages = (with pkgs; [
     # brave
     cloudflare-warp
     # discord
     # discord-ptb
     vesktop
-    easyeffects
+    # easyeffects
     lunarvim
     nodejs_22	
     nodePackages.pnpm
@@ -47,5 +47,8 @@
     bun
     youtube-music
     space-cadet-pinball
-  ];
+    openssl
+  ]) ++ ( with pkgs-stable; [
+    easyeffects
+  ]);
 }

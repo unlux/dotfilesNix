@@ -16,6 +16,7 @@
     # ../modules/nvidia/gpuPassthrough.nix
     ../modules/nvidia/default.nix
     ../modules/gaming/default.nix
+    ../modules/prisma/default.nix
 
 
     # Or modules from other flakes (such as nixos-hardware):
@@ -85,7 +86,7 @@
     backupFileExtension = "backup";
   };
 
-  # boot.kernelPackages = pkgs.linuxPackages_latest;
+  # boot.kernelPackages = pkgs.linuxPackages_zen;
   hardware.enableAllFirmware = true;
 
   # specialisation.no-leptup-keyboard.configuration = {

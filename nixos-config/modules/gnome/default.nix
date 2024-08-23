@@ -40,7 +40,7 @@ in
     dconf.settings = {
       
       "org/gnome/shell".favorite-apps = [
-        "floorp.desktop"
+        "io.github.zen_browser.zen.desktop"
         "code.desktop"
         "vesktop.desktop"
       ];

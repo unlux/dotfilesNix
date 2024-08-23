@@ -1,4 +1,4 @@
-{ inputs, outputs, lib, config, pkgs, ... }: 
+{ inputs, outputs, lib, config, pkgs, pkgs-stable, ... }: 
 
 {
   # You can import other home-manager modules here

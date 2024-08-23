@@ -22,7 +22,6 @@
       home-manager    
 
     # Language chains
-      cargo
       lua
       python3
       # rustup
@@ -42,7 +41,7 @@
       # starship
       tldr
       tmux
-      wezterm
+      # wezterm
       wget
       yadm
       zoxide
@@ -91,6 +90,7 @@
 
   ]) ++ (with pkgs-stable; [
     # floorp
+      cargo #need old version coz prisma-engine's `time` module build failing
   ]);
 
   environment.variables = {
