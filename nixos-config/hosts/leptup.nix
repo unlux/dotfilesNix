@@ -1,5 +1,5 @@
 # Use this to configure your system environment (it replaces /etc/nixos/configuration.nix)
-{ inputs, lib, config, pkgs, hostname, ... }:
+{ inputs, lib, config, pkgs, hostname, pkgs-stable, ... }:
 
 {
   imports = [
@@ -17,6 +17,8 @@
     ../modules/nvidia/default.nix
     ../modules/gaming/default.nix
     ../modules/prisma/default.nix
+    ../modules/kubernetes/default.nix
+
 
 
     # Or modules from other flakes (such as nixos-hardware):
@@ -99,6 +101,12 @@
     enable = false;
     drivers = [ pkgs.hplipWithPlugin ];
   };
+
+   hardware.opentabletdriver = {
+    enable = true;
+    daemon.enable = true;
+   };
+
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
   system.stateVersion = "23.11";
 }

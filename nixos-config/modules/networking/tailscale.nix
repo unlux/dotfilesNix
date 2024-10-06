@@ -1,15 +1,24 @@
-{ config, pkgs, username, ... }:
+{
+  config,
+  pkgs,
+  username,
+  ...
+}:
 
 {
-    environment.systemPackages = with pkgs; [
-        tailscale
+
+  services.tailscale = {
+    enable = true;
+    extraUpFlags = [
+      "--shields-up"
+      "--operator=${username}"
     ];
-    
-    services.tailscale = {
-        enable = true;
-        extraUpFlags = [
-        "--shields-up"
-        "--operator=${username}"
-        ];
+  };
+  networking = {
+    firewall = {
+      allowedUDPPorts = [ config.services.tailscale.port ];
+      checkReversePath = "loose";
+      trustedInterfaces = [ "tailscale0" ];
     };
+  };
 }

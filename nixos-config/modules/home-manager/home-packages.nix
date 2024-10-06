@@ -1,4 +1,4 @@
-{ config, lib, pkgs, pkgs-stable, ... }:
+{ config, lib, pkgs, ... }:
 {
   home.packages = (with pkgs; [
     # brave
@@ -6,7 +6,7 @@
     # discord
     # discord-ptb
     vesktop
-    # easyeffects
+    easyeffects
     lunarvim
     nodejs_22	
     nodePackages.pnpm
@@ -14,7 +14,7 @@
     mongodb-compass
     # notion-app-enhanced
     obs-studio
-    # obsidian
+    # obsidian # electron ded on wayland, use flatpak instaead
     postman
     # timeshift 
     # spotify
@@ -31,7 +31,7 @@
     # zoom
     # warp-terminal
     # authy
-    spotify
+    # spotify
     qbittorrent
     zoom-us
     lazygit
@@ -48,7 +48,5 @@
     youtube-music
     space-cadet-pinball
     openssl
-  ]) ++ ( with pkgs-stable; [
-    easyeffects
   ]);
 }

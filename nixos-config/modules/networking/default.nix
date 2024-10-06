@@ -11,14 +11,14 @@
 
     firewall = {
       enable = true;
-      allowedTCPPorts = [ 22 80 443 22000 21027 ];
-      allowedUDPPorts = [ 22000 21027 ];
+      allowedTCPPorts = [ 22 80 443 22000 21027 3131 ];
+      allowedUDPPorts = [ 22 80 443 22000 21027 3131 ];
       allowedUDPPortRanges = [ { from = 1714; to = 1764; } ];
       allowedTCPPortRanges = [ { from = 1714; to = 1764; } ]; 
     };
 
     hosts = {
-      "127.0.0.1:8384" = [ "syncthing" ];
+      # "127.0.0.1:8384" = [ "syncthing" ];
     };
   };
 
@@ -26,4 +26,6 @@
     tcpdump
     inetutils
   ]);
+  services.teamviewer.enable = true;
+
 }

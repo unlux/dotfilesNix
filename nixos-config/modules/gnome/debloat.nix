@@ -11,7 +11,7 @@
         evolution-data-server.enable = lib.mkForce false;
         gnome-initial-setup.enable = false;
         gnome-online-accounts.enable = lib.mkForce false;
-        gnome-online-miners.enable = lib.mkForce false;
+        # gnome-online-miners.enable = lib.mkForce false; #removed now
         gnome-user-share.enable = false;
         rygel.enable = false;
         };
@@ -51,8 +51,6 @@
             simple-scan
             totem
             yelp
-        ])
-        ++ (with pkgs.gnome; [
             atomix
             gnome-characters
             gnome-contacts
@@ -62,5 +60,8 @@
             hitori
             iagno
             tali
+        ])
+        ++ (with pkgs.gnome; [
+            #keeping it for memory
         ]);
 }

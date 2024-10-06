@@ -9,7 +9,7 @@
   desktopManager.gnome.enable = lib.mkDefault true;
   displayManager.gdm = lib.mkDefault { 
     enable = true;
-    wayland = true;
+    wayland = false;
     autoSuspend = false;
   };
 }

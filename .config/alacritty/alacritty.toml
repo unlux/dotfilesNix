@@ -9,11 +9,11 @@ TERM = "xterm-256color"
 [window]
 decorations = "none"
 dynamic_padding = false
-opacity = 0.9
+opacity = 0.8
 
 [window.padding]
-x = 25
-y = 20
+x = 20
+y = 15
 
 [font]
 size = 12
