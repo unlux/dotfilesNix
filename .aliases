@@ -74,4 +74,8 @@ alias nhpctest="nh os test $FLAKEREF -H pc"
 # alias zoho-meeting="appimage-run ~/Documents/Appimages/ZohoMeeting-x64.AppImage"
 alias nv-smi="watch -n 1 nvidia-smi"
 alias editnix="cd ~/nixos-config && codehere"
+alias iwdrestart="systemctl restart iwd"
+alias cls="clear"
 
+#web dev aliases
+alias bund="bun dev"

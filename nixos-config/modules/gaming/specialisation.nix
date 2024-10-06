@@ -1,4 +1,4 @@
-{ config, pkgs, lib, ... }:
+{ lib, ... }:
 {
   specialisation = {
     gaming-time.configuration = {

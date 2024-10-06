@@ -1,8 +1,5 @@
 {
-  pkgs,
   home-manager,
-  username,
-  lib,
   ...
 }:
 let 

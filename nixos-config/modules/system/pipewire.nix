@@ -1,6 +1,5 @@
-{config, pkgs, ...}:
+{ pkgs, ...}:
 let
-  json = pkgs.formats.json {};
   pw_rnnoise_config = {
   "context.modules"= [
     { "name" = "libpipewire-module-filter-chain";

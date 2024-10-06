@@ -5,7 +5,7 @@
     "10de:25a2" # Graphics
     "10de:2291" # Audio
   ];
-in { pkgs, lib, config, ... }: {
+in { lib, config, ... }: {
   options.vfio.enable = with lib;
     mkEnableOption "Configure the machine for VFIO";
 

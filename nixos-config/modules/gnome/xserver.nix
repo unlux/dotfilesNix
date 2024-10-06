@@ -1,5 +1,5 @@
 # different xserver file for gnome coz 
-{ lib, config, pkgs, ... }:
+{ lib, ... }:
 
 {
   imports = [
