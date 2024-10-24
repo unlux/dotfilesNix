@@ -29,8 +29,8 @@
       offload.enable = true;
       offload.enableOffloadCmd = true;
       # sync.enable = lib.mkForce false;
-      amdgpuBusId = "PCI:1:0:0";
-      nvidiaBusId = "PCI:5:0:0";
+      amdgpuBusId = "PCI:5:0:0";
+      nvidiaBusId = "PCI:1:0:0";
     };
     # Enable the Nvidia settings menu, accessible via `nvidia-settings`.
     nvidiaSettings = true;
@@ -92,15 +92,13 @@
 
   # code to turn off dGPU completely
   specialisation.fuck-you-nvidia.configuration = {
-      environment.variables = lib.mkForce { TERMINAL="wezterm"; };
       system.nixos.tags = ["fuck-you-nvidia"];
       boot = {
         extraModprobeConfig = lib.mkForce ''
         blacklist nouveau
         options nouveau modeset=-1
         '';
-        blacklistedKernelModules = lib.mkForce ["nouveau" "nvidia" "nvidia_drm" "nvidia_modeset"];
-        # loader.grub.splashImage = null ;
+        blacklistedKernelModules = lib.mkForce ["nouveau" "nvidia" "nvidia_drm" "nvidia_modeset" "nvidiafb"];
       };
 
       services.udev.extraRules = lib.mkForce ''

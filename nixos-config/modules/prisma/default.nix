@@ -1,7 +1,7 @@
-{ pkgs-stable , ...  }: 
+{ pkgs, pkgs-stable , ...  }: 
 
 {
-  environment.systemPackages = with pkgs-stable; [
+  environment.systemPackages = with pkgs; [
     # For Prisma:
     # nodePackages_latest.vercel
     nodePackages_latest.prisma
@@ -11,7 +11,7 @@
   ];
 
   # Prisma:
-  environment.variables.PRISMA_QUERY_ENGINE_LIBRARY = "${pkgs-stable.prisma-engines}/lib/libquery_engine.node";
-  environment.variables.PRISMA_QUERY_ENGINE_BINARY = "${pkgs-stable.prisma-engines}/bin/query-engine";
-  environment.variables.PRISMA_SCHEMA_ENGINE_BINARY = "${pkgs-stable.prisma-engines}/bin/schema-engine";
+  environment.variables.PRISMA_QUERY_ENGINE_LIBRARY = "${pkgs.prisma-engines}/lib/libquery_engine.node";
+  environment.variables.PRISMA_QUERY_ENGINE_BINARY = "${pkgs.prisma-engines}/bin/query-engine";
+  environment.variables.PRISMA_SCHEMA_ENGINE_BINARY = "${pkgs.prisma-engines}/bin/schema-engine";
 }

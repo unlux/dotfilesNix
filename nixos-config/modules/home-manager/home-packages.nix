@@ -37,7 +37,7 @@
     lazygit
     # flameshot
     # ulauncher
-    noisetorch
+    # noisetorch
     qdirstat
     atuin
     looking-glass-client
@@ -46,7 +46,7 @@
     libreoffice-fresh
     bun
     youtube-music
-    space-cadet-pinball
+    # space-cadet-pinball
     openssl
   ]);
 }
