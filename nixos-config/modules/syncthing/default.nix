@@ -1,4 +1,4 @@
-{ ... }: 
+{ ... }:
 {
   services.syncthing = {
     enable = true;
@@ -6,8 +6,8 @@
     # configDir = ""
     openDefaultPorts = true;
     systemService = true;
-    user    = "lux";
-    group   = "syncthing";
+    user = "lux";
+    group = "syncthing";
     dataDir = "/home/lux";
   };
 }

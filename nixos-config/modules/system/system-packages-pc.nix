@@ -6,20 +6,19 @@
     ../cloudflare-warp/warp.nix
     ../docker/dockerrootless.nix
     ../flatpak/flatpak.nix
-    
-
   ];
 
-  environment.systempackages = (with pkgs; [
+  environment.systempackages =
+    (with pkgs; [
       neovim
       wezterm
-
-  ]) ++ (with pkgs-stable; [
+    ])
+    ++ (with pkgs-stable; [
 
       microsoft-edge
       chromium
       # virt-manager
-      home-manager    
+      home-manager
       python3
       gcc
       bat
@@ -32,19 +31,19 @@
       yadm
       zoxide
 
-    # utils
+      # utils
       lshw
       inetutils
       pciutils
       usbutils
       xdg-utils
 
-    # archive tools
+      # archive tools
       p7zip
       unzip
       zip
 
-    # miscellaneous tools
+      # miscellaneous tools
       git
       ntfs3g
       ripgrep # recursively searches directories for a regex pattern
@@ -57,9 +56,8 @@
       tree
       appimage-run
 
-    # system monitoring tools
-      btop  # replacement of htop/nmon
+      # system monitoring tools
+      btop # replacement of htop/nmon
       iotop # io monitoring
-  ]) ;
+    ]);
 }
-

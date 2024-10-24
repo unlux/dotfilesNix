@@ -1,49 +1,60 @@
 { pkgs, ... }:
-let json = pkgs.formats.json {}; pw_rnnoise_config = {
-  "context.modules"= [
-    { "name" = "libpipewire-module-filter-chain";
+let
+  json = pkgs.formats.json { };
+  pw_rnnoise_config = {
+    "context.modules" = [
+      {
+        "name" = "libpipewire-module-filter-chain";
         "args" = {
-            "node.description" = "Noise Canceling source";
-            "media.name"       = "Noise Canceling source";
-            "filter.graph" = {
-                "nodes" = [
-                    {
-                        "type"   = "ladspa";
-                        "name"   = "rnnoise";
-                        "plugin" = "${pkgs.rnnoise-plugin}/lib/ladspa/librnnoise_ladspa.so";
-                        "label"  = "noise_suppressor_stereo";
-                        "control" = {
-                            "VAD Threshold (%)" = 50.0;
-                        };
-                    }
-                ];
-            };
-            "audio.position" = [ "FL" "FR" ];
-            "capture.props" = {
-                "node.name" = "effect_input.rnnoise";
-                "node.passive" = true;
-            };
-            "playback.props" = {
-                "node.name" = "effect_output.rnnoise";
-                "media.class" = "Audio/Source";
-            };
+          "node.description" = "Noise Canceling source";
+          "media.name" = "Noise Canceling source";
+          "filter.graph" = {
+            "nodes" = [
+              {
+                "type" = "ladspa";
+                "name" = "rnnoise";
+                "plugin" = "${pkgs.rnnoise-plugin}/lib/ladspa/librnnoise_ladspa.so";
+                "label" = "noise_suppressor_stereo";
+                "control" = {
+                  "VAD Threshold (%)" = 50.0;
+                };
+              }
+            ];
+          };
+          "audio.position" = [
+            "FL"
+            "FR"
+          ];
+          "capture.props" = {
+            "node.name" = "effect_input.rnnoise";
+            "node.passive" = true;
+          };
+          "playback.props" = {
+            "node.name" = "effect_output.rnnoise";
+            "media.class" = "Audio/Source";
+          };
         };
-    }
-];
-};
+      }
+    ];
+  };
 in
 {
   services.pipewire.extraConfig = {
-  "pipewire/source-rnnoise.conf" = {
+    "pipewire/source-rnnoise.conf" = {
       source = json.generate "source-rnnoise.conf" pw_rnnoise_config;
-  };
+    };
   };
   systemd.user.services."pipewire-source-rnnoise" = {
-    environment = { LADSPA_PATH = "${pkgs.rnnoise-plugin}/lib/ladspa"; };
+    environment = {
+      LADSPA_PATH = "${pkgs.rnnoise-plugin}/lib/ladspa";
+    };
     description = "Noise canceling source for pipewire";
-    wantedBy = ["pipewire.service"];
+    wantedBy = [ "pipewire.service" ];
     script = "${pkgs.pipewire}/bin/pipewire -c source-rnnoise.conf";
     enable = true;
-    path = with pkgs; [pipewire rnnoise-plugin];
+    path = with pkgs; [
+      pipewire
+      rnnoise-plugin
+    ];
   };
 }

@@ -1,6 +1,6 @@
-{ pkgs, ... }: 
+{ pkgs, ... }:
 let
-  commitmonolux =  pkgs.callPackage .cdefault.nix { inherit pkgs; };
+  commitmonolux = pkgs.callPackage.cdefault.nix { inherit pkgs; };
 in
 {
   fonts = {
@@ -11,4 +11,3 @@ in
     ];
   };
 }
-

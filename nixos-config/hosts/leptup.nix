@@ -1,5 +1,10 @@
 # Use this to configure your system environment (it replaces /etc/nixos/configuration.nix)
-{ inputs, config, pkgs, ... }:
+{
+  inputs,
+  config,
+  pkgs,
+  ...
+}:
 
 {
   imports = [
@@ -18,8 +23,6 @@
     ../modules/gaming/default.nix
     # ../modules/prisma/default.nix
     ../modules/kubernetes/default.nix
-
-
 
     # Or modules from other flakes (such as nixos-hardware):
     # inputs.hardware.nixosModules.common-cpu-amd
@@ -45,11 +48,14 @@
   #     value.source = value.flake;
   #   })
   #   config.nix.registry;
-  
+
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   nix.settings = {
-    experimental-features = ["nix-command" "flakes"];
+    experimental-features = [
+      "nix-command"
+      "flakes"
+    ];
     # auto-optimise-store = true;
   };
 
@@ -68,10 +74,16 @@
     lux = {
       # initialPassword = "  ";
       isNormalUser = true;
-      extraGroups = 
-        [ "wheel" "networkmanager" "docker" 
-          "qemu-libvirtd" "libvirtd" "kvm" 
-          "adbusers" "syncthing" ];
+      extraGroups = [
+        "wheel"
+        "networkmanager"
+        "docker"
+        "qemu-libvirtd"
+        "libvirtd"
+        "kvm"
+        "adbusers"
+        "syncthing"
+      ];
       # packages = with pkgs; [
       #   # user specific pkgs
       # ];
@@ -81,7 +93,9 @@
   # xdg.portal.wlr.enable = true;
 
   home-manager = {
-    extraSpecialArgs = { inherit inputs; };
+    extraSpecialArgs = {
+      inherit inputs;
+    };
     users = {
       lux = import ./home.nix;
     };
@@ -102,10 +116,10 @@
     drivers = [ pkgs.hplipWithPlugin ];
   };
 
-   hardware.opentabletdriver = {
+  hardware.opentabletdriver = {
     enable = true;
     daemon.enable = true;
-   };
+  };
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
   system.stateVersion = "23.11";

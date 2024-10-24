@@ -8,7 +8,10 @@
   ];
 
   services.kubernetes = {
-    roles = [ "master" "node" ];
+    roles = [
+      "master"
+      "node"
+    ];
     masterAddress = "api.kube";
     apiserverAddress = "https://api.kube:6443";
     easyCerts = true;

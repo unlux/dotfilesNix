@@ -9,16 +9,17 @@
 #   };
 # }
 
-
 { pkgs, ... }:
 
 {
-  environment.systemPackages = (with pkgs; [
-    nix-output-monitor
-    nh
-    nvd
-    nix-index
-    nixpkgs-fmt
-
-  ]);
+  environment.systemPackages = (
+    with pkgs;
+    [
+      nix-output-monitor
+      nh
+      nvd
+      nix-index
+      nixpkgs-fmt
+    ]
+  );
 }

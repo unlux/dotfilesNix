@@ -1,8 +1,8 @@
 { pkgs, ... }:
 
 {
-    home.packages = with pkgs; [
-        android-tools
-        payload-dumper-go
-    ];
+  home.packages = with pkgs; [
+    android-tools
+    payload-dumper-go
+  ];
 }

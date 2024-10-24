@@ -1,4 +1,9 @@
-{ lib, config, pkgs, ... }:
+{
+  lib,
+  config,
+  pkgs,
+  ...
+}:
 
 {
   services.xserver = {
@@ -7,5 +12,5 @@
       defaultSession = "xfce";
     };
     desktopManager.xfce.enable = true;
-  }
+  };
 }

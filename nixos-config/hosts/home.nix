@@ -1,4 +1,4 @@
-{ config, ... }: 
+{ config, ... }:
 
 {
   # You can import other home-manager modules here
@@ -24,7 +24,7 @@
   };
 
   # targets.genericLinux.enable = true; # enable this on non-nixos
-  nixpkgs.config.allowUnfree = true;  
+  nixpkgs.config.allowUnfree = true;
 
   programs = {
     home-manager = {
@@ -34,11 +34,11 @@
   };
 
   programs = {
-      direnv = {
-        enable = true;
-        nix-direnv.enable = true;
-      };
+    direnv = {
+      enable = true;
+      nix-direnv.enable = true;
     };
+  };
   # Nicely reload system units when changing configs
   systemd.user.startServices = "sd-switch";
 }

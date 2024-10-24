@@ -16,7 +16,6 @@ pkgs.stdenv.mkDerivation rec {
 
   meta = with pkgs.lib; {
     description = "Custom commit mono installation";
-    license = licenses.mit; 
+    license = licenses.mit;
   };
 }
-

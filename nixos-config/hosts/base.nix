@@ -15,14 +15,12 @@
     # ../modules/gnome/gnome2.nix
     ../modules/networking/default.nix
 
-
     # Or modules from other flakes (such as nixos-hardware):
     # inputs.hardware.nixosModules.common-cpu-amd
     # inputs.hardware.nixosModules.common-pc-ssd
 
     # home-manager
     # inputs.home-manager.nixosModules.default
-
   ];
 
   # # This will add each flake input as a registry
@@ -39,11 +37,14 @@
   #     value.source = value.flake;
   #   })
   #   config.nix.registry;
-  
+
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   nix.settings = {
-    experimental-features = ["nix-command" "flakes"];
+    experimental-features = [
+      "nix-command"
+      "flakes"
+    ];
     # auto-optimise-store = true;
   };
 
@@ -61,11 +62,16 @@
   users.users = {
     lux = {
       isNormalUser = true;
-      initialPassword= "jj";
-      extraGroups = 
-        [ "wheel" "networkmanager" "docker" 
-          "qemu-libvirtd" "libvirtd" "kvm" 
-          "adbusers" ];
+      initialPassword = "jj";
+      extraGroups = [
+        "wheel"
+        "networkmanager"
+        "docker"
+        "qemu-libvirtd"
+        "libvirtd"
+        "kvm"
+        "adbusers"
+      ];
       # packages = with pkgs; [
       #   # user specific pkgs
       # ];
@@ -82,9 +88,7 @@
   # };
 
   # services.qemuGuest.enable=true;
-  
+
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
   system.stateVersion = "23.11";
-
 }
-

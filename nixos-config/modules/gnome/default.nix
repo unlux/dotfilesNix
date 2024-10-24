@@ -1,19 +1,14 @@
-{
-  pkgs,
-  home-manager,
-  ...
-}:
-let 
+{ pkgs, home-manager, ... }:
+let
   username = "lux";
 in
 {
-  imports = [ 
+  imports = [
     ./debloat.nix
     ./extensions.nix
     ./keybindings.nix
     # ./triple-buffering.nix #TODO: fix the hash
   ];
-
 
   # ---- Home Configuration ----
   home-manager.users.${username} = {
@@ -23,7 +18,7 @@ in
       theme = {
         name = "Dracula";
         package = pkgs.dracula-theme;
-        };
+      };
       cursorTheme = {
         name = "Dracula-cursors";
         package = pkgs.dracula-theme;
@@ -36,7 +31,7 @@ in
     };
 
     dconf.settings = {
-      
+
       "org/gnome/shell".favorite-apps = [
         "io.github.zen_browser.zen.desktop"
         "code.desktop"
@@ -68,16 +63,16 @@ in
       "org/gnome/mutter".workspaces-only-on-primary = true;
 
       "org/gnome/settings-daemon/plugins/power" = {
-          power-button-action = "nothing";
-          # Suspend only on battery power, not while charging.
-          sleep-inactive-ac-type = "nothing";
-        };
-        
+        power-button-action = "nothing";
+        # Suspend only on battery power, not while charging.
+        sleep-inactive-ac-type = "nothing";
+      };
+
       "org/gtk/gtk4/settings/file-chooser" = {
-          show-hidden = true;
-          sort-directories-first = true;
-          view-type = "list";
-        };
+        show-hidden = true;
+        sort-directories-first = true;
+        view-type = "list";
+      };
 
       "org/gnome/desktop/sound" = {
         "allow-volume-above-100-percent" = true;
@@ -93,13 +88,13 @@ in
 
   programs.dconf.enable = true;
 
-  environment.systemPackages = with pkgs; [ 
+  environment.systemPackages = with pkgs; [
     dracula-theme
     dracula-icon-theme
-#    commit-mono
+    #    commit-mono
     gnome-tweaks
     dconf-editor
     # kdeconnect
     wl-clipboard
-    ];
+  ];
 }
