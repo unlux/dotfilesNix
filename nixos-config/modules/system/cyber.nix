@@ -17,5 +17,6 @@
     ldns # replacement of `dig`
     mtr # A network diagnostic tool
     socat # replacement of openbsd-netcat
+    wireshark
   ];
 }

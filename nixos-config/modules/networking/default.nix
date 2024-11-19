@@ -56,6 +56,7 @@
     [
       tcpdump
       inetutils
+      rclone
     ]
   );
   services.teamviewer.enable = true;

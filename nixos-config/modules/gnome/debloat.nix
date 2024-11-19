@@ -49,7 +49,7 @@
       geary
       gnome-font-viewer
       simple-scan
-      totem
+      # totem
       yelp
       atomix
       gnome-characters

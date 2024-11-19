@@ -1,9 +1,7 @@
-{ pkgs, ... }:
-{
+{pkgs, ...}: {
   home.packages = (
-    with pkgs;
-    [
-      # brave
+    with pkgs; [
+      brave
       cloudflare-warp
       # discord
       # discord-ptb
@@ -18,7 +16,7 @@
       obs-studio
       # obsidian # electron ded on wayland, use flatpak instaead
       postman
-      # timeshift 
+      # timeshift
       # spotify
       # sqlite
       syncthingtray
@@ -50,6 +48,10 @@
       youtube-music
       # space-cadet-pinball
       openssl
+
+      awscli2
+      yt-dlp
+      alejandra
     ]
   );
 }

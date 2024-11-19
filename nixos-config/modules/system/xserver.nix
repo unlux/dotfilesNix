@@ -4,11 +4,11 @@
   services.xserver = {
     enable = true;
     desktopManager.gnome.enable = lib.mkDefault true;
-    displayManager.gdm = lib.mkDefault {
+    displayManager.gdm = {
       enable = true;
-      wayland = true;
       autoSuspend = false;
     };
+    displayManager.gdm.wayland = lib.mkDefault true;
     xkb.layout = "us";
   };
   services.libinput.enable = true;

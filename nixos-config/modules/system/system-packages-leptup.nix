@@ -15,6 +15,7 @@
     (with pkgs; [
       # Editors
       neovim
+      alacritty
       # zed-editor
       # browsers
       floorp

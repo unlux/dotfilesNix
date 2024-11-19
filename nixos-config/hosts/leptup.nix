@@ -18,11 +18,11 @@
     ../modules/bootloader/grub.nix
     ../modules/gnome/default.nix
     ../modules/nix-ld/default.nix
-    # ../modules/nvidia/gpuPassthrough.nix
+    ../modules/nvidia/gpuPassthrough.nix
     ../modules/nvidia/default.nix
     ../modules/gaming/default.nix
     # ../modules/prisma/default.nix
-    ../modules/kubernetes/default.nix
+    # ../modules/kubernetes/default.nix
 
     # Or modules from other flakes (such as nixos-hardware):
     # inputs.hardware.nixosModules.common-cpu-amd
