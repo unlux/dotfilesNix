@@ -60,4 +60,8 @@
       btop # replacement of htop/nmon
       iotop # io monitoring
     ]);
+
+    nixpkgs.config.permittedInsecurePackages = [
+      "dotnet-runtime-6.0.36"
+  }
 }
