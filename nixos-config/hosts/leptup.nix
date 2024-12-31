@@ -16,7 +16,7 @@
     ../modules/bootloader/grub.nix
     ../modules/gnome/default.nix
     ../modules/nix-ld/default.nix
-    ../modules/nvidia/gpuPassthrough.nix
+    # ../modules/nvidia/gpuPassthrough.nix
     ../modules/nvidia/default.nix
     ../modules/gaming/default.nix
     ../modules/distrobox/default.nix
@@ -111,7 +111,7 @@
   # services.qemuGuest.enable=true;
 
   services.printing = {
-    enable = false;
+    enable = true;
     drivers = [pkgs.hplipWithPlugin];
   };
 

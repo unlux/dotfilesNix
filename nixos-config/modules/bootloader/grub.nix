@@ -1,6 +1,4 @@
-{ ... }:
-
-{
+{...}: {
   boot.loader = {
     efi = {
       canTouchEfiVariables = true;
@@ -12,6 +10,7 @@
       # useOSProber = true;
       # splashImage = ./peakpx.png;
       # splashmode = "stretch";
+      configurationLimit = 30;
     };
   };
 }

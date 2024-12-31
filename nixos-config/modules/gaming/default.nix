@@ -2,11 +2,11 @@
   imports = [./specialisation.nix];
 
   programs = {
-    # steam = {
-    #   enable = true;
-    #   gamescopeSession.enable = true;
-    #   remotePlay.openFirewall = true;
-    # };
+    steam = {
+      enable = true;
+      gamescopeSession.enable = true;
+      remotePlay.openFirewall = true;
+    };
     gamemode.enable = true;
   };
 
