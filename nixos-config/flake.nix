@@ -11,33 +11,34 @@
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
     # spicetify-nix.url = "github:the-argus/spicetify-nix";
     # hardware.url = "github:nixos/nixos-hardware";
+
+    ghostty = {url = "github:ghostty-org/ghostty";};
   };
 
-  outputs =
-    inputs@{
-      self,
-      nixpkgs,
-      nixpkgs-stable,
-      home-manager,
-      # spicetify-nix,
-      ...
-    }:
-    let
-      inherit (self) outputs;
-      system = "x86_64-linux";
-      # lib = inputs.nixpkgs-stable.lib;
-      pkgs = inputs.nixpkgs.legacyPackages.${system};
-      # pkgs-unstable = import inputs.nixpkgs-unstable.legacyPackages.${system};
-      # pkgs-unstable = nixpkgs-unstable.legacyPackages.${system};
+  outputs = inputs @ {
+    self,
+    nixpkgs,
+    nixpkgs-stable,
+    home-manager,
+    ghostty,
+    # spicetify-nix,
+    ...
+  }: let
+    inherit (self) outputs;
+    system = "x86_64-linux";
+    # lib = inputs.nixpkgs-stable.lib;
+    pkgs = inputs.nixpkgs.legacyPackages.${system};
+    # pkgs-unstable = import inputs.nixpkgs-unstable.legacyPackages.${system};
+    # pkgs-unstable = nixpkgs-unstable.legacyPackages.${system};
 
-      pkgs-stable = import inputs.nixpkgs-stable {
-        inherit system;
-        config = {
-          allowUnfree = true;
-          allowUnfreePredicate = (_: true);
-        };
+    pkgs-stable = import inputs.nixpkgs-stable {
+      inherit system;
+      config = {
+        allowUnfree = true;
+        allowUnfreePredicate = _: true;
       };
-    in
+    };
+  in
     # This is a function that generates an attribute by calling a function you
     # pass to it, with each system as an argument
     # forAllSystems = nixpkgs.lib.genAttrs systems;
@@ -46,7 +47,7 @@
       # Available through 'nixos-rebuild --flake .#your-hostname'
       nixpkgs.config = {
         allowUnfree.enable = true;
-        allowUnfreePredicate = (_: true);
+        allowUnfreePredicate = _: true;
       };
 
       nixosConfigurations = {
@@ -60,6 +61,11 @@
             # > Our main nixos configuration file <
             ./hosts/leptup.nix
             inputs.home-manager.nixosModules.default
+            {
+              environment.systemPackages = [
+                ghostty.packages.x86_64-linux.default
+              ];
+            }
           ];
         };
         pc = nixpkgs.lib.nixosSystem {

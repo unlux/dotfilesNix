@@ -1,6 +1,8 @@
-{ pkgs, pkgs-stable, ... }:
-
 {
+  pkgs,
+  pkgs-stable,
+  ...
+}: {
   imports = [
     ./nix-helper.nix
     ./cyber.nix
@@ -96,7 +98,7 @@
 
   environment.variables = {
     NIXOS_OZONE_WL = 1;
-    TERMINAL = "alacritty";
+    TERMINAL = "ghostty";
     MOZ_ENABLE_WAYLAND = 1;
   };
 
