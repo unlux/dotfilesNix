@@ -13,6 +13,8 @@
     # hardware.url = "github:nixos/nixos-hardware";
 
     ghostty = {url = "github:ghostty-org/ghostty";};
+    disko.url = "github:nix-community/disko";
+    disko.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs = inputs @ {
@@ -21,6 +23,7 @@
     nixpkgs-stable,
     home-manager,
     ghostty,
+    disko,
     # spicetify-nix,
     ...
   }: let
@@ -58,8 +61,13 @@
             inherit inputs outputs pkgs-stable;
           };
           modules = [
+	    disko.nixosModules.disko
             # > Our main nixos configuration file <
             ./hosts/leptup.nix
+            ./hosts/disk.nix
+            {
+          _module.args.disks = [ "/dev/nvme0n1" ];
+       		 }
             inputs.home-manager.nixosModules.default
             {
               environment.systemPackages = [

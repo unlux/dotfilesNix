@@ -1,5 +1,4 @@
-{ lib, ... }:
-{
+{lib, ...}: {
   specialisation = {
     gaming-time.configuration = {
       hardware.nvidia = {

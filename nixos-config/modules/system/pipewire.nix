@@ -1,5 +1,4 @@
-{ pkgs, ... }:
-let
+{pkgs, ...}: let
   pw_rnnoise_config = {
     "context.modules" = [
       {
@@ -36,10 +35,9 @@ let
       }
     ];
   };
-in
-{
+in {
   # sound.enable = true;
-  hardware.pulseaudio.enable = false;
+  services.pulseaudio.enable = false;
   security.rtkit.enable = true;
   services.pipewire = {
     enable = true;
@@ -63,11 +61,11 @@ in
     ];
     # If you want to use JACK applications, uncomment this
     #jack.enable = true;
-    # }; 
+    # };
     extraConfig.pipewire."99-input-denoising" = pw_rnnoise_config;
     # package = pkgs.pulseaudioFull;
   };
   # programs.noisetorch.enable = true;
 
-  environment.systemPackages = (with pkgs; [ pavucontrol ]);
+  environment.systemPackages = with pkgs; [pavucontrol];
 }
