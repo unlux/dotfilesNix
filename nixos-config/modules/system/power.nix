@@ -1,30 +1,20 @@
-{ ... }:
-
-{
-  # powerManagement = {
-  #     enable = true;
-  #     # powertop.enable = true;
-  #     # cpuFreqGovernor = "powersave";
-  # };
+{...}: {
+  # Enable powertop
+  powerManagement = {
+    #     enable = true;
+    powertop.enable = true;
+    #     # cpuFreqGovernor = "powersave";
+  };
 
   services = {
-
+    # Disable GNOMEs power management
     power-profiles-daemon.enable = false;
 
-    # upower.enable = true;
-
-    #   auto-cpufreq = {
-    #       enable = true;
-    #       settings = {
-    #           battery = { governor = "powersave"; turbo = "never"; };
-    #           charger = { governor = "performance"; turbo = "auto"; };
-    #       };
-    #   };
-
-    # system76-scheduler = {
-    #     enable = true;
-    #     useStockConfig = true;
-    # };
+    system76-scheduler = {
+      #   enable = true;
+      settings.cfsProfiles.enable = true;
+      #   useStockConfig = true;
+    };
 
     tlp = {
       enable = true;
@@ -54,9 +44,25 @@
         USB_EXCLUDE_PHONE = 1;
         RUNTIME_PM_BLACKLIST = "46d:c07e";
       };
+
       # extraConfig = ''
       #   USB_AUTOSUSPEND=0
       # '';
+      # upower.enable = true;
+
+      # auto-cpufreq = {
+      #   enable = true;
+      #   settings = {
+      #     battery = {
+      #       governor = "powersave";
+      #       turbo = "never";
+      #     };
+      #     charger = {
+      #       governor = "performance";
+      #       turbo = "auto";
+      #     };
+      #   };
+      # };
     };
   };
 }
