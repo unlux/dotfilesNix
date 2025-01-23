@@ -15,6 +15,9 @@
     ghostty = {url = "github:ghostty-org/ghostty";};
     disko.url = "github:nix-community/disko";
     disko.inputs.nixpkgs.follows = "nixpkgs";
+
+    # https://github.com/thiagokokada/nix-alien
+    nix-alien.url = "github:thiagokokada/nix-alien";
   };
 
   outputs = inputs @ {
@@ -22,9 +25,10 @@
     nixpkgs,
     nixpkgs-stable,
     home-manager,
+    # spicetify-nix,
     ghostty,
     disko,
-    # spicetify-nix,
+    nix-alien,
     ...
   }: let
     inherit (self) outputs;
@@ -61,19 +65,29 @@
             inherit inputs outputs pkgs-stable;
           };
           modules = [
-	    disko.nixosModules.disko
-            # > Our main nixos configuration file <
-            ./hosts/leptup.nix
-            ./hosts/disk.nix
+            # -_-_-_-_-_-_-_-_-_-_-_-_-
+            ({
+              self,
+              system,
+              ...
+            }: {
+              environment.systemPackages = with self.inputs.nix-alien.packages.${system}; [
+                nix-alien
+              ];
+            })
+            disko.nixosModules.disko
             {
-          _module.args.disks = [ "/dev/nvme0n1" ];
-       		 }
-            inputs.home-manager.nixosModules.default
+              _module.args.disks = ["/dev/nvme0n1"];
+            }
             {
               environment.systemPackages = [
                 ghostty.packages.x86_64-linux.default
               ];
             }
+            # inputs.home-manager.nixosModules.default
+            ./hosts/leptup.nix # > Our main nixos configuration file
+            ./hosts/disk.nix # disko config file
+            # -_-_-_-_-_-_-_-_-_-_-_-_-
           ];
         };
         pc = nixpkgs.lib.nixosSystem {

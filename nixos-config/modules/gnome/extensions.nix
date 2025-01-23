@@ -3,8 +3,7 @@
   home-manager,
   lib,
   ...
-}:
-let
+}: let
   username = "lux";
   gnomeExtensionsList = with pkgs; [
     gnomeExtensions.alphabetical-app-grid
@@ -24,6 +23,7 @@ let
     gnomeExtensions.auto-select-headset
     gnomeExtensions.media-controls
     gnomeExtensions.system-monitor
+    gnomeExtensions.notification-timeout
     #gnomeExtensions.arcmenu
     #gnomeExtensions.burn-my-windows
     # gnomeExtensions.compact-top-bar
@@ -34,11 +34,9 @@ let
     # user-themes
     # unblank
   ];
-in
-{
+in {
   # ---- Home Configuration ----
   home-manager.users.${username} = {
-
     home.packages = gnomeExtensionsList;
 
     dconf.settings = {
@@ -46,7 +44,7 @@ in
         lib.filter (p: p ? extensionUuid) gnomeExtensionsList
       );
 
-      # "org/gnome/shell".disabled-extensions = [ 
+      # "org/gnome/shell".disabled-extensions = [
       #     "just-perfection-desktop@just-perfection"
       # ];
 

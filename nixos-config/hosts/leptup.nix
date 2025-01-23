@@ -15,12 +15,12 @@
     ../modules/system/zram.nix
     ../modules/bootloader/grub.nix
     ../modules/gnome/default.nix
-    ../modules/nix-ld/default.nix
+    ../modules/nix-alien/default.nix
     # ../modules/nvidia/gpuPassthrough.nix
     ../modules/nvidia/default.nix
     ../modules/gaming/default.nix
     ../modules/distrobox/default.nix
-    # ../modules/prisma/default.nix
+    ../modules/prisma/default.nix
     # ../modules/kubernetes/default.nix
 
     # Or modules from other flakes (such as nixos-hardware):

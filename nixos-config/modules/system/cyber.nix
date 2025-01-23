@@ -1,9 +1,7 @@
-{ pkgs, ... }:
-
-{
+{pkgs, ...}: {
   environment.systemPackages = with pkgs; [
     gobuster
-    seclists
+    # seclists
     iptables
     nmap # A utility for network discovery and security auditing
     netcat-openbsd

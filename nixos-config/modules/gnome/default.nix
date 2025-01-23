@@ -1,8 +1,10 @@
-{ pkgs, home-manager, ... }:
-let
-  username = "lux";
-in
 {
+  pkgs,
+  home-manager,
+  ...
+}: let
+  username = "lux";
+in {
   imports = [
     ./debloat.nix
     ./extensions.nix
@@ -12,7 +14,6 @@ in
 
   # ---- Home Configuration ----
   home-manager.users.${username} = {
-
     gtk = {
       enable = true;
       theme = {
@@ -31,9 +32,8 @@ in
     };
 
     dconf.settings = {
-
       "org/gnome/shell".favorite-apps = [
-        "io.github.zen_browser.zen.desktop"
+        "app.zen_browser.zen.desktop"
         "code.desktop"
         "vesktop.desktop"
       ];
