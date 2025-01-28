@@ -8,9 +8,7 @@
     ./cyber.nix
     ../networking/tailscale.nix
     ../cloudflare-warp/default.nix
-    ../docker/default.nix
-    ../flatpak/default.nix
-    ../syncthing/default.nix
+    # ../docker/default.nix
   ];
 
   environment.systemPackages =

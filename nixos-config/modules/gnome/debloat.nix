@@ -1,6 +1,8 @@
-{ lib, pkgs, ... }:
-
 {
+  lib,
+  pkgs,
+  ...
+}: {
   services = {
     # Disable unused GNOME module features.
     avahi.enable = false;
@@ -63,5 +65,6 @@
     ])
     ++ (with pkgs.gnome; [
       #keeping it for memory
+      gvfs
     ]);
 }

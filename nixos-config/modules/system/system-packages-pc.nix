@@ -1,6 +1,8 @@
-{ pkgs, pkgs-stable, ... }:
-
 {
+  pkgs,
+  pkgs-stable,
+  ...
+}: {
   imports = [
     ../networking/tailscale.nix
     ../cloudflare-warp/warp.nix
@@ -14,7 +16,6 @@
       wezterm
     ])
     ++ (with pkgs-stable; [
-
       microsoft-edge
       chromium
       # virt-manager
@@ -61,7 +62,7 @@
       iotop # io monitoring
     ]);
 
-    nixpkgs.config.permittedInsecurePackages = [
-      "dotnet-runtime-6.0.36"
-  }
+  nixpkgs.config.permittedInsecurePackages = [
+    "dotnet-runtime-6.0.36"
+  ];
 }

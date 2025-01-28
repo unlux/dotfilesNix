@@ -3,8 +3,7 @@
   hostname,
   lib,
   ...
-}:
-{
+}: {
   networking = {
     hostName = hostname;
 
@@ -52,12 +51,11 @@
   };
 
   environment.systemPackages = (
-    with pkgs;
-    [
+    with pkgs; [
       tcpdump
       inetutils
       rclone
     ]
   );
-  services.teamviewer.enable = true;
+  # services.teamviewer.enable = true;
 }

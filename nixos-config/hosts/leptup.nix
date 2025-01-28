@@ -22,7 +22,10 @@
     ../modules/distrobox/default.nix
     ../modules/prisma/default.nix
     # ../modules/kubernetes/default.nix
-
+    ../modules/iphone/default.nix
+    ../podman/default.nix
+    ../flatpak/default.nix
+    ../syncthing/default.nix
     # Or modules from other flakes (such as nixos-hardware):
     # inputs.hardware.nixosModules.common-cpu-amd
     # inputs.hardware.nixosModules.common-pc-ssd
@@ -111,7 +114,7 @@
   # services.qemuGuest.enable=true;
 
   services.printing = {
-    enable = true;
+    enable = false;
     drivers = [pkgs.hplipWithPlugin];
   };
 
