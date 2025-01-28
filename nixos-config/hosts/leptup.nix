@@ -23,9 +23,9 @@
     ../modules/prisma/default.nix
     # ../modules/kubernetes/default.nix
     ../modules/iphone/default.nix
-    ../podman/default.nix
-    ../flatpak/default.nix
-    ../syncthing/default.nix
+    ../modules/podman/default.nix
+    ../modules/flatpak/default.nix
+    ../modules/syncthing/default.nix
     # Or modules from other flakes (such as nixos-hardware):
     # inputs.hardware.nixosModules.common-cpu-amd
     # inputs.hardware.nixosModules.common-pc-ssd
