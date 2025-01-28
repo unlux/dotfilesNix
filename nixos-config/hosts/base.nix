@@ -1,6 +1,4 @@
-{ config, ... }:
-
-{
+{config, ...}: {
   imports = [
     ../modules/bootloader/grub.nix
     # ../modules/system/kvm.nix
@@ -9,12 +7,16 @@
     ../modules/system/openssh.nix
     ../modules/system/pipewire.nix
     ../modules/system/xserver.nix
-    ../modules/system/zsh.nix
+    # ../modules/system/zsh.nix
     # ../modules/xfce/default.nix
     # ../modules/system/systemd.nix
     # ../modules/gnome/gnome2.nix
     ../modules/networking/default.nix
-
+    ../modules/gnome/default.nix
+    ../modules/nix-helper/default.nix
+    ../modules/system/cyber.nix
+    ../modules/networking/tailscale.nix
+    # ../docker/default.nix
     # Or modules from other flakes (such as nixos-hardware):
     # inputs.hardware.nixosModules.common-cpu-amd
     # inputs.hardware.nixosModules.common-pc-ssd

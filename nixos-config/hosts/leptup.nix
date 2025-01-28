@@ -7,25 +7,27 @@
 }: {
   imports = [
     ./base.nix
+    ../modules/system/system-packages-leptup.nix
     ../modules/system/kvm.nix
     ../modules/system/power.nix
     # ../modules/system/noisecancel.nix
     ../modules/system/bluetooth.nix
-    ../modules/system/system-packages-leptup.nix
     ../modules/system/zram.nix
-    ../modules/bootloader/grub.nix
-    ../modules/gnome/default.nix
     ../modules/nix-alien/default.nix
-    # ../modules/nvidia/gpuPassthrough.nix
     ../modules/nvidia/default.nix
+    # ../modules/nvidia/gpuPassthrough.nix
     ../modules/gaming/default.nix
-    ../modules/distrobox/default.nix
+    # ../modules/distrobox/default.nix
     ../modules/prisma/default.nix
     # ../modules/kubernetes/default.nix
     ../modules/iphone/default.nix
     ../modules/podman/default.nix
     ../modules/flatpak/default.nix
     ../modules/syncthing/default.nix
+    ../modules/opentablet/default.nix
+    # ../modules/cloudflare-warp/default.nix
+    # ../modules/printing/default.nix
+
     # Or modules from other flakes (such as nixos-hardware):
     # inputs.hardware.nixosModules.common-cpu-amd
     # inputs.hardware.nixosModules.common-pc-ssd
@@ -35,62 +37,6 @@
 
     ./leptup-hardware.nix
   ];
-
-  # # This will add each flake input as a registry
-  # # To make nix3 commands consistent with your flake
-  # nix.registry = (lib.mapAttrs (_: flake: {inherit flake;})) ((lib.filterAttrs (_: lib.isType "flake")) inputs);
-
-  # # This will additionally add your inputs to the system's legacy channels
-  # # Making legacy nix commands consistent as well, awesome!
-  # nix.nixPath = ["/etc/nix/path"];
-  # environment.etc =
-  #   lib.mapAttrs'
-  #   (name: value: {
-  #     name = "nix/path/${name}";
-  #     value.source = value.flake;
-  #   })
-  #   config.nix.registry;
-
-  # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
-
-  nix.settings = {
-    experimental-features = [
-      "nix-command"
-      "flakes"
-    ];
-    # auto-optimise-store = true;
-  };
-
-  # system.autoUpgrade.enable = true;
-  # system.autoUpgrade.allowReboot = false;
-
-  nixpkgs = {
-    config = {
-      allowUnfree = true;
-      # Workaround for https://github.com/nix-community/home-manager/issues/2942
-      allowUnfreePredicate = _: true;
-    };
-  };
-
-  users.users = {
-    lux = {
-      # initialPassword = "  ";
-      isNormalUser = true;
-      extraGroups = [
-        "wheel"
-        "networkmanager"
-        "docker"
-        "qemu-libvirtd"
-        "libvirtd"
-        "kvm"
-        "adbusers"
-        "syncthing"
-      ];
-      # packages = with pkgs; [
-      #   # user specific pkgs
-      # ];
-    };
-  };
 
   # xdg.portal.wlr.enable = true;
 
@@ -104,24 +50,16 @@
     backupFileExtension = "backup";
   };
 
+  users.users.lux = {
+    shell = pkgs.nushell;
+  };
+
   # boot.kernelPackages = pkgs.linuxPackages_zen;
   hardware.enableAllFirmware = true;
 
   # specialisation.no-leptup-keyboard.configuration = {
   #   boot.kernelParams = lib.mkForce ["i8042.nokbd"];
   # }; # for use with external keyboard
-
-  # services.qemuGuest.enable=true;
-
-  services.printing = {
-    enable = false;
-    drivers = [pkgs.hplipWithPlugin];
-  };
-
-  hardware.opentabletdriver = {
-    enable = true;
-    daemon.enable = true;
-  };
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
   system.stateVersion = "23.11";

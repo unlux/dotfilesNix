@@ -3,14 +3,6 @@
   pkgs-stable,
   ...
 }: {
-  imports = [
-    ./nix-helper.nix
-    ./cyber.nix
-    ../networking/tailscale.nix
-    ../cloudflare-warp/default.nix
-    # ../docker/default.nix
-  ];
-
   environment.systemPackages =
     (with pkgs; [
       # Editors
