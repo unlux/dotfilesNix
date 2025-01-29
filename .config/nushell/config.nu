@@ -74,3 +74,4 @@ source ~/.config/nushell/zoxide.nu
 source ~/.config/nushell/aliases.nu
 mkdir ($nu.data-dir | path join "vendor/autoload")
 starship init nu | save -f ($nu.data-dir | path join "vendor/autoload/starship.nu")
+source ~/.cache/carapace/init.nu

@@ -50,9 +50,10 @@
     backupFileExtension = "backup";
   };
 
-  users.users.lux = {
-    shell = pkgs.nushell;
-  };
+  # nushell
+  # users.users.lux = {
+  #   shell = pkgs.nushell;
+  # };
 
   # boot.kernelPackages = pkgs.linuxPackages_zen;
   hardware.enableAllFirmware = true;
