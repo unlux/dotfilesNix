@@ -1,0 +1,16 @@
+theme = catppuccin-mocha
+mouse-hide-while-typing = true
+window-decoration = true
+macos-option-as-alt = true
+background-opacity = 0.95
+clipboard-trim-trailing-spaces = true
+clipboard-paste-protection = false
+gtk-titlebar = false
+shell-integration = none
+gtk-single-instance = true
+window-padding-x = 7
+window-padding-y = 7
+font-size = 12
+#   /home/lux/.config/ghostty/config
+# Run `ghostty +show-config --default --docs` to view a list of
+# all available config options and their default values.
