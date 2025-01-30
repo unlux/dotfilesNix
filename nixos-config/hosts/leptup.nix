@@ -51,9 +51,9 @@
   };
 
   # nushell
-  # users.users.lux = {
-  #   shell = pkgs.nushell;
-  # };
+  users.users.lux = {
+    shell = pkgs.nushell;
+  };
 
   # boot.kernelPackages = pkgs.linuxPackages_zen;
   hardware.enableAllFirmware = true;
