@@ -1,0 +1,84 @@
+# just is a command runner, Justfile is very similar to Makefile, but simpler.
+
+############################################################################
+#
+#  Nix commands related to the local machine
+#
+############################################################################
+
+# Update specific input
+# usage: make upp i=home-manager
+
+default:
+    @just --list
+
+history:
+  nix profile history --profile /nix/var/nix/profiles/system
+
+upp:
+  nix flake update
+
+repl:
+  nix repl -f flake:nixpkgs
+
+gc:
+  # garbage collect all unused nix store entries
+  nh clean all --keep 3
+
+nhrebuild:
+    nh os boot $FLAKEREF
+
+nhrebuildnow:
+    nh os switch $FLAKEREF
+
+nhtest:
+    nh os test $FLAKEREF
+
+nhleptup:
+    nh os boot $FLAKEREF -H leptup
+
+nhleptupnow:
+    nh os switch $FLAKEREF -H leptup
+
+nhleptuptest:
+    nh os test $FLAKEREF -H leptup
+
+nhpc:
+    nh os boot $FLAKEREF -H pc
+
+nhpcnow:
+    nh os switch $FLAKEREF -H pc
+
+nhpctest:
+    nh os test $FLAKEREF -H pc
+
+############################################################################
+#
+#  Idols, Commands related to my remote distributed building cluster
+#
+############################################################################
+
+#add-idols-ssh-key:
+#  ssh-add ~/.ssh/ai-idols
+#
+#aqua: add-idols-ssh-key
+#  nixos-rebuild --flake .#aquamarine --target-host aquamarine --build-host aquamarine switch --use-remote-sudo
+#
+#aqua-debug: add-idols-ssh-key
+#  nixos-rebuild --flake .#aquamarine --target-host aquamarine --build-host aquamarine switch --use-remote-sudo --show-trace --verbose
+#
+#ruby: add-idols-ssh-key
+#  nixos-rebuild --flake .#ruby --target-host ruby --build-host ruby switch --use-remote-sudo
+#
+#ruby-debug: add-idols-ssh-key
+#  nixos-rebuild --flake .#ruby --target-host ruby --build-host ruby switch --use-remote-sudo --show-trace --verbose
+#
+#kana: add-idols-ssh-key
+#  nixos-rebuild --flake .#kana --target-host kana --build-host kana switch --use-remote-sudo
+#
+#kana-debug: add-idols-ssh-key
+#  nixos-rebuild --flake .#kana --target-host kana --build-host kana switch --use-remote-sudo --show-trace --verbose
+#
+#idols: aqua ruby kana
+#
+#idols-debug: aqua-debug ruby-debug kana-debug
