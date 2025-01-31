@@ -1,6 +1,4 @@
-{ pkgs, pkgs-stable, ... }:
-
-{
+{pkgs, ...}: {
   environment.systemPackages = with pkgs; [
     # For Prisma:
     # nodePackages_latest.vercel

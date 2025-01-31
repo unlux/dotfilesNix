@@ -6,15 +6,16 @@ let
     "10de:2291" # Audio
   ];
 in
-{ lib, config, ... }:
-{
-  options.vfio.enable = with lib; mkEnableOption "Configure the machine for VFIO";
+  {
+    lib,
+    config,
+    ...
+  }: {
+    options.vfio.enable = with lib; mkEnableOption "Configure the machine for VFIO";
 
-  config =
-    let
+    config = let
       cfg = config.vfio;
-    in
-    {
+    in {
       boot = {
         initrd.kernelModules = [
           "vfio_pci"
@@ -33,7 +34,7 @@ in
         #   efi.canTouchEfiVariables = true;
         # };
 
-        kernelModules = [ "kvm-amd" ];
+        kernelModules = ["kvm-amd"];
 
         kernelParams =
           [
@@ -41,8 +42,8 @@ in
             "amd_iommu=on"
           ]
           ++ lib.optional cfg.enable
-            # isolate the GPU
-            ("vfio-pci.ids=" + lib.concatStringsSep "," gpuIDs);
+          # isolate the GPU
+          ("vfio-pci.ids=" + lib.concatStringsSep "," gpuIDs);
 
         extraModprobeConfig = "options kvm_intel nested=1";
       };
@@ -51,13 +52,13 @@ in
       virtualisation.spiceUSBRedirection.enable = true;
 
       specialisation."VFIO".configuration = {
-        system.nixos.tags = [ "with-vfio" ];
+        system.nixos.tags = ["with-vfio"];
         vfio.enable = true;
         hardware.graphics.enable = true;
         #hardware.graphics.enable32bit = true; #disabling temproratily
 
         # Load nvidia driver for Xorg and Wayland
-        services.xserver.videoDrivers = [ "nvidia" ];
+        services.xserver.videoDrivers = ["nvidia"];
 
         hardware.nvidia = {
           modesetting.enable = true;
@@ -93,7 +94,6 @@ in
           # Optionally, you may need to select the appropriate driver version for your specific GPU.
           package = config.boot.kernelPackages.nvidiaPackages.stable;
         };
-
       };
     };
-}
+  }

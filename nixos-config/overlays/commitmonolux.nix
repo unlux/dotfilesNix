@@ -1,5 +1,4 @@
-{ pkgs }:
-
+{pkgs}:
 pkgs.stdenv.mkDerivation rec {
   pname = "commitmonolux";
   version = "2.0";

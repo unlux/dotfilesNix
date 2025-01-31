@@ -1,6 +1,4 @@
-{ lib, ... }:
-
-{
+{lib, ...}: {
   services.xserver = {
     enable = true;
     desktopManager.gnome.enable = lib.mkDefault true;

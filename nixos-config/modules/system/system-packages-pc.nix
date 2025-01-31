@@ -6,7 +6,7 @@
   imports = [
     ../networking/tailscale.nix
     ../cloudflare-warp/warp.nix
-    ../docker/dockerrootless.nix
+    # ../docker/dockerrootless.nix
     ../flatpak/flatpak.nix
   ];
 

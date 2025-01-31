@@ -93,6 +93,7 @@
       # vaapiVdpau
       # libva-vdpau-driver
       nvtopPackages.full
+      nvidia-container-toolkit
     ]
   );
   # services.supergfxd.enable = true;

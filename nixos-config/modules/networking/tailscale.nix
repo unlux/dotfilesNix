@@ -1,7 +1,8 @@
-{ config, username, ... }:
-
 {
-
+  config,
+  username,
+  ...
+}: {
   services.tailscale = {
     enable = true;
     extraUpFlags = [
@@ -11,9 +12,9 @@
   };
   networking = {
     firewall = {
-      allowedUDPPorts = [ config.services.tailscale.port ];
+      allowedUDPPorts = [config.services.tailscale.port];
       checkReversePath = "loose";
-      trustedInterfaces = [ "tailscale0" ];
+      trustedInterfaces = ["tailscale0"];
     };
   };
 }

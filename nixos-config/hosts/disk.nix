@@ -1,5 +1,4 @@
-{ disks ? [ "/dev/nvme0n1" ], ... }: 
-{
+{disks ? ["/dev/nvme0n1"], ...}: {
   disko.devices = {
     disk = {
       main = {
@@ -18,16 +17,16 @@
                 type = "filesystem";
                 format = "vfat";
                 mountpoint = "/boot";
-                mountOptions = [ "umask=0077" ];
+                mountOptions = ["umask=0077"];
               };
             };
             root = {
               size = "100%";
               content = {
                 type = "btrfs";
-                extraArgs = [ "-f" ]; # Override existing partition
+                extraArgs = ["-f"]; # Override existing partition
                 mountpoint = "/";
-                mountOptions = [ "compress=zstd" "noatime" ];
+                mountOptions = ["compress=zstd" "noatime"];
               };
             };
           };

@@ -1,5 +1,4 @@
 # { config, pkgs, ... }:
-
 # {
 #   programs.nh = {
 #     enable = true;
@@ -8,13 +7,9 @@
 #     flake = "/home/lux/nixos-config";
 #   };
 # }
-
-{ pkgs, ... }:
-
-{
+{pkgs, ...}: {
   environment.systemPackages = (
-    with pkgs;
-    [
+    with pkgs; [
       nix-output-monitor
       nh
       nvd

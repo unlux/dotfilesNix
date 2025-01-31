@@ -1,5 +1,4 @@
-{ ... }:
-{
+{...}: {
   services.syncthing = {
     enable = true;
     # dataDir = "/home/lux";

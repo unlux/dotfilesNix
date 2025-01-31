@@ -22,5 +22,3 @@
     devShells.x86_64-linux.default = nixpkgs.mkShell {shellHook = prisma.shellHook;};
   };
 }
-
-

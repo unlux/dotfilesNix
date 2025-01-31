@@ -66,3 +66,5 @@ alias cls = clear
 # ===== Web Dev =====
 alias bund = bun dev
 
+# docker
+alias docker = podman

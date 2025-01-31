@@ -1,4 +1,4 @@
-{home-manager, ...}: let
+{...}: let
   username = "lux";
 in {
   # ---- Home Configuration ----

@@ -1,9 +1,6 @@
-{ pkgs, ... }:
-
-{
+{pkgs, ...}: {
   environment.systemPackages = (
-    with pkgs;
-    [
+    with pkgs; [
       cri-tools # for crictl
       busybox # for pstree
     ]

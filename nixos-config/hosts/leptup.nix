@@ -1,7 +1,6 @@
 # Use this to configure your system environment (it replaces /etc/nixos/configuration.nix)
 {
   inputs,
-  config,
   pkgs,
   ...
 }: {
@@ -25,6 +24,7 @@
     ../modules/flatpak/default.nix
     ../modules/syncthing/default.nix
     ../modules/opentablet/default.nix
+    ../modules/ollama/default.nix
     # ../modules/cloudflare-warp/default.nix
     # ../modules/printing/default.nix
 

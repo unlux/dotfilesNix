@@ -1,6 +1,5 @@
-{ pkgs, ... }:
-{
-  #  BROkEN FILE -x-x  BROkEN FILE -x-x  BROkEN FILE -x-x  BROkEN FILE -x-x BROkEN FILE -x-x 
+{pkgs, ...}: {
+  #  BROkEN FILE -x-x  BROkEN FILE -x-x  BROkEN FILE -x-x  BROkEN FILE -x-x BROkEN FILE -x-x
   # https://wiki.nixos.org/wiki/GNOME#Dynamic_triple_buffering
   nixpkgs.overlays = [
     # GNOME 46: triple-buffering-v4-46

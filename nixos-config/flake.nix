@@ -34,7 +34,6 @@
     inherit (self) outputs;
     system = "x86_64-linux";
     # lib = inputs.nixpkgs-stable.lib;
-    pkgs = inputs.nixpkgs.legacyPackages.${system};
     # pkgs-unstable = import inputs.nixpkgs-unstable.legacyPackages.${system};
     # pkgs-unstable = nixpkgs-unstable.legacyPackages.${system};
 

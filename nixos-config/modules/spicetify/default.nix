@@ -4,16 +4,14 @@
   lib,
   spicetify-nix,
   ...
-}:
-let
+}: let
   spicePkgs = spicetify-nix.packages.${pkgs.system}.default;
-in
-{
+in {
   # allow spotify to be installed if you don't have unfree enabled already
-  nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [ "spotify" ];
+  nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) ["spotify"];
 
   # import the flake's module for your system
-  imports = [ spicetify-nix.homeManagerModule ];
+  imports = [spicetify-nix.homeManagerModule];
 
   # configure spicetify :)
   programs.spicetify = {
@@ -28,7 +26,6 @@ in
     ];
   };
 }
-
 # # maximal config
 # {
 #   pkgs,
@@ -48,10 +45,8 @@ in
 #   nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
 #     "spotify"
 #   ];
-
 #   # import the flake's module
 #   imports = [ spicetify-nix.homeManagerModules.default ];
-
 #   # configure spicetify :)
 #   programs.spicetify =
 #     let
@@ -72,7 +67,6 @@ in
 #     {
 #       # use spotify from the nixpkgs master branch
 #       spotifyPackage = unstable.spotify;
-
 #       # use a custom build of spicetify
 #       spicetifyPackage = pkgs.spicetify-cli.overrideAttrs (oa: rec {
 #         pname = "spicetify-cli";
@@ -84,10 +78,8 @@ in
 #         };
 #         vendorSha256 = "sha256-E2Q+mXojMb8E0zSnaCOl9xp5QLeYcuTXjhcp3Hc8gH4=";
 #       });
-
 #       # actually enable the installation of spotify and spicetify
 #       enable = true;
-
 #       # custom Dribbblish theme
 #       theme = {
 #         name = "Dribbblish";
@@ -101,7 +93,6 @@ in
 #           }
 #         ];
 #         appendName = true; # theme is located at "${src}/Dribbblish" not just "${src}"
-
 #         # changes to make to config-xpui.ini for this theme:
 #         patches = {
 #           "xpui.js_find_8008" = ",(\\w+=)32,";
@@ -112,10 +103,8 @@ in
 #         overwriteAssets = true;
 #         sidebarConfig = true;
 #       };
-
 #       # specify that we want to use our custom colorscheme
 #       colorScheme = "custom";
-
 #       # color definition for custom color scheme. (rosepine)
 #       customColorScheme = {
 #         text = "ebbcba";
@@ -135,7 +124,6 @@ in
 #         notification-error = "eb6f92";
 #         misc = "6e6a86";
 #       };
-
 #       enabledCustomApps = with spicePkgs.apps; [
 #         new-releases
 #         {
@@ -155,3 +143,4 @@ in
 #       ];
 #     };
 # }
+

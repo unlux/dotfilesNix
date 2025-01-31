@@ -1,10 +1,8 @@
-{ pkgs, ... }:
+{pkgs, ...}: {
+  systemd.packages = [pkgs.cloudflare-warp];
 
-{
-  systemd.packages = [ pkgs.cloudflare-warp ];
-
-  systemd.services."warp-svc".wantedBy = [ "multi-user.target" ];
-  systemd.user.services."warp-taskbar".wantedBy = [ "tray.target" ];
+  systemd.services."warp-svc".wantedBy = ["multi-user.target"];
+  systemd.user.services."warp-taskbar".wantedBy = ["tray.target"];
 
   environment.systemPackages = [
     pkgs.cloudflare-warp

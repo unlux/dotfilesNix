@@ -1,4 +1,4 @@
-{config, ...}: {
+{...}: {
   imports = [
     ../modules/bootloader/grub.nix
     # ../modules/system/kvm.nix

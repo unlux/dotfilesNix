@@ -1,8 +1,4 @@
-{
-  pkgs,
-  home-manager,
-  ...
-}: let
+{pkgs, ...}: let
   username = "lux";
 in {
   imports = [
