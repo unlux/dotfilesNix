@@ -16,7 +16,7 @@
     ../modules/nix-helper/default.nix
     ../modules/system/cyber.nix
     ../modules/networking/tailscale.nix
-    # ../docker/default.nix
+    ../modules/docker/default.nix
     # Or modules from other flakes (such as nixos-hardware):
     # inputs.hardware.nixosModules.common-cpu-amd
     # inputs.hardware.nixosModules.common-pc-ssd

@@ -20,7 +20,7 @@
     ../modules/prisma/default.nix
     # ../modules/kubernetes/default.nix
     ../modules/iphone/default.nix
-    ../modules/podman/default.nix
+    # ../modules/podman/default.nix
     ../modules/flatpak/default.nix
     ../modules/syncthing/default.nix
     ../modules/opentablet/default.nix
