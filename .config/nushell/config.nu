@@ -18,7 +18,7 @@ source ~/.cache/carapace/init.nu
 # use ./custom-completions/docker/docker-completions.nu
 # use ./custom-completions/eza/eza-completions.nu
 # use ./custom-completions/fastboot/fastboot-completions.nu
-# use ./custom-completions/git/git-completions.nu
+use ./custom-completions/git/git-completions.nu
 # use ./custom-completions/nix/nix-completions.nu
 # use ./custom-completions/npm/npm-completions.nu
 # use ./custom-completions/ssh/ssh-completions.nu
@@ -27,7 +27,7 @@ source ~/.cache/carapace/init.nu
 # use ./custom-completions/winget/winget-completions.nu
 
 #completers
-let zoxide_completer = {|spans| $spans | skip 1 | zoxide query -l ...$in | lines | where {|x| $x != $env.PWD} }
+# let zoxide_completer = {|spans| $spans | skip 1 | zoxide query -l ...$in | lines | where {|x| $x != $env.PWD} }
 let carapace_completer = {|spans: list<string>|
     carapace $spans.0 nushell ...$spans
     | from json
@@ -59,7 +59,7 @@ let external_completer = {|spans|
         # carapace doesn't have completions for asdf
         asdf => $fish_completer
         # use zoxide completions for zoxide commands
-        __zoxide_z | __zoxide_zi => $zoxide_completer
+        # __zoxide_z | __zoxide_zi => $zoxide_completer
         _ => $carapace_completer
     } | do $in $spans
 }
