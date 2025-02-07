@@ -2,7 +2,6 @@
   home.packages = (
     with pkgs; [
       brave
-      cloudflare-warp
       # discord
       # discord-ptb
       vesktop

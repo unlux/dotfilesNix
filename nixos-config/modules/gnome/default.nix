@@ -7,7 +7,7 @@ in {
     ./keybindings.nix
     # ./triple-buffering.nix #TODO: fix the hash
   ];
-
+  services.udev.packages = [pkgs.gnome-settings-daemon];
   # ---- Home Configuration ----
   home-manager.users.${username} = {
     gtk = {
@@ -68,11 +68,10 @@ in {
         show-hidden = true;
         sort-directories-first = true;
         view-type = "list";
+        default-zoom-level = "small";
       };
 
-      "org/gnome/desktop/sound" = {
-        "allow-volume-above-100-percent" = true;
-      };
+      "org/gnome/desktop/sound"."allow-volume-above-100-percent" = true;
     };
   };
 

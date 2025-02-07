@@ -18,7 +18,7 @@
     gnomeExtensions.tray-icons-reloaded
     gnomeExtensions.user-themes
     gnomeExtensions.vitals
-    gnomeExtensions.cloudflare-warp-toggle
+    # gnomeExtensions.cloudflare-warp-toggle
     gnomeExtensions.auto-select-headset
     gnomeExtensions.media-controls
     gnomeExtensions.system-monitor
@@ -59,6 +59,9 @@ in {
       #   blur = true;
       #   style-dialogs = 0;
       # };
+      "org/gnome/shell/extensions/dash-to-panel" = {
+        appicon-padding = "4";
+      };
     };
   };
 }
