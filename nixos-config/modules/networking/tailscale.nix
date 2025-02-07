@@ -8,6 +8,7 @@
     extraUpFlags = [
       "--shields-up"
       "--operator=${username}"
+      "--ssh"
     ];
   };
   networking = {
