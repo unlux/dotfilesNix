@@ -21,7 +21,8 @@
       gcc
 
       # Terminal utilities
-      oh-my-posh
+      carapace
+      # oh-my-posh
       bat
       eza
       fd
@@ -86,7 +87,7 @@
       cargo # need old version coz prisma-engine's `time` module build failing
     ]);
 
-  environment.variables = {
+  environment.sessionVariables = {
     NIXOS_OZONE_WL = 1;
     TERMINAL = "ghostty";
     MOZ_ENABLE_WAYLAND = 1;
