@@ -6,7 +6,7 @@
       # discord-ptb
       vesktop
       easyeffects
-      lunarvim
+      # lunarvim
       nodejs_22
       nodePackages.pnpm
       jdk
@@ -47,7 +47,6 @@
       youtube-music
       # space-cadet-pinball
       openssl
-
       awscli2
       yt-dlp
       alejandra
