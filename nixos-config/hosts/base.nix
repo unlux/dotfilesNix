@@ -90,6 +90,7 @@
   # };
 
   # services.qemuGuest.enable=true;
+  boot.kernel.sysctl."kernel.sysrq" = 1; #press alt+sysreq+f to trigger oom killer
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
   system.stateVersion = "23.11";
