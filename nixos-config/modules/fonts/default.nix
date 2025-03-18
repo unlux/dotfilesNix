@@ -1,11 +1,25 @@
-{pkgs, ...}: let
-  commitmonolux = pkgs.callPackage.cdefault.nix {inherit pkgs;};
+{
+  pkgs,
+  namespace,
+  lib,
+  ...
+}: let
+  # commitmonolux = pkgs.callPackage.nix ./commitmono.nix {};
+  # customFont = pkgs.callPackage ./monolisa.nix {};
 in {
+  # imports = [
+  # ./monolisa.nix
+  # ./commitmono.nix
+  #   # ./fontConfig.nix
+  # ];
   fonts = {
     fontDir.enable = true;
+    fontconfig.enable = true;
     packages = with pkgs; [
-      jetbrains-mono
-      commitmonolux
+      nerd-fonts.commit-mono
+      # commitmonolux
+      # customFont
+      # pkgs.monolisa-nerdfonts
     ];
   };
 }

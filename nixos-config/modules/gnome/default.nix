@@ -10,22 +10,22 @@ in {
   services.udev.packages = [pkgs.gnome-settings-daemon];
   # ---- Home Configuration ----
   home-manager.users.${username} = {
-    gtk = {
-      enable = true;
-      theme = {
-        name = "Dracula";
-        package = pkgs.dracula-theme;
-      };
-      cursorTheme = {
-        name = "Dracula-cursors";
-        package = pkgs.dracula-theme;
-      };
+    # gtk = {
+    #   enable = true;
+    #   # theme = {
+    #   #   name = "Dracula";
+    #   #   package = pkgs.dracula-theme;
+    #   # };
+    #   cursorTheme = {
+    #     name = "Dracula-cursors";
+    #     package = pkgs.dracula-theme;
+    #   };
 
-      iconTheme = {
-        name = "Dracula";
-        package = pkgs.dracula-icon-theme;
-      };
-    };
+    #   iconTheme = {
+    #     name = "Dracula";
+    #     package = pkgs.dracula-icon-theme;
+    #   };
+    # };
 
     dconf.settings = {
       "org/gnome/shell".favorite-apps = [
@@ -38,18 +38,18 @@ in {
         enable-hot-corners = true;
         clock-show-weekday = true;
         clock-show-date = true;
-        monospace-font-name = "CommitMono Nerd Font Regular";
+        # monospace-font-name = "CommitMono Nerd Font Regular";
         font-antialiasing = "rgba";
         color-scheme = "prefer-dark";
         show-battery-percentage = true;
-        gtk-theme = "Dracula";
-        cursor-theme = "Dracula-cursors";
-        icon-theme = "Dracula";
+        # gtk-theme = "Dracula";
+        # cursor-theme = "Dracula-cursors";
+        # icon-theme = "Dracula";
       };
 
-      "org/gnome/shell/extensions/user-theme" = {
-        name = "Dracula";
-      };
+      # "org/gnome/shell/extensions/user-theme" = {
+      #   name = "Dracula";
+      # };
 
       "org/gnome/desktop/peripherals/mouse".accel-profile = "flat";
       "org/gnome/desktop/peripherals/touchpad".tap-to-click = true;
@@ -84,8 +84,8 @@ in {
   programs.dconf.enable = true;
 
   environment.systemPackages = with pkgs; [
-    dracula-theme
-    dracula-icon-theme
+    # dracula-theme
+    # dracula-icon-theme
     #    commit-mono
     gnome-tweaks
     dconf-editor

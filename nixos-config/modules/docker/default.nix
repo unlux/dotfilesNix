@@ -12,8 +12,8 @@
 
   hardware.nvidia-container-toolkit.enable = true;
 
-  environment.systemPackages = with pkgs; [
-    docker-compose
+  environment.systemPackages = [
+    pkgs.docker-compose
     # devenv
   ];
 }

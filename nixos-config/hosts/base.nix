@@ -7,7 +7,7 @@
     ../modules/system/openssh.nix
     ../modules/system/pipewire.nix
     ../modules/system/xserver.nix
-    # ../modules/system/zsh.nix
+    ../modules/system/zsh.nix
     # ../modules/xfce/default.nix
     # ../modules/system/systemd.nix
     # ../modules/gnome/gnome2.nix
@@ -74,9 +74,6 @@
         "kvm"
         "adbusers"
       ];
-      # packages = with pkgs; [
-      #   # user specific pkgs
-      # ];
     };
   };
 

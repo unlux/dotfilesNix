@@ -5,6 +5,7 @@
   config,
   lib,
   modulesPath,
+  pkgs,
   ...
 }: {
   imports = [(modulesPath + "/installer/scan/not-detected.nix")];
@@ -14,10 +15,15 @@
     "xhci_pci"
     "usb_storage"
     "sd_mod"
+    "asus-wmi-sensors"
   ];
   boot.initrd.kernelModules = [];
-  boot.kernelModules = ["kvm-amd"];
-  boot.extraModulePackages = [];
+  boot.kernelModules = ["kvm-amd" "amdgpu"];
+  boot.extraModulePackages = [
+    config.boot.kernelPackages.asus-wmi-sensors
+    pkgs.bluez
+  ];
+  hardware.enableAllFirmware = true;
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
   # (the default) this is the recommended approach. When using systemd-networkd it's

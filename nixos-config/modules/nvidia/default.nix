@@ -14,12 +14,24 @@
     enable = true;
     enable32Bit = true;
     extraPackages = with pkgs; [
+      # https://discourse.nixos.org/t/nvidia-open-breaks-hardware-acceleration/58770/2
       nvidia-vaapi-driver
+      vaapiVdpau
+      libvdpau
+      libvdpau-va-gl
+      vdpauinfo
+      libva
+      libva-utils
+      # https://wiki.nixos.org/wiki/Intel_Graphics
+      #vpl-gpu-rt
     ];
   };
 
   hardware.nvidia = {
-    modesetting.enable = true;
+    # This will no longer be necessary when
+    # https://github.com/NixOS/nixpkgs/pull/326369 hits stable
+    #modesetting.enable = true;
+    modesetting.enable = lib.mkDefault true;
     powerManagement = {
       enable = true;
       finegrained = true;
@@ -45,7 +57,7 @@
 
   boot = {
     # kernelPackages = lib.mkForce pkgs.linuxKernel.packages.linux_xanmod;
-    kernelPackages = pkgs.linuxPackages_latest;
+    kernelPackages = pkgs.linuxPackages_6_6; # use 6.6 LTS kernel
 
     kernelParams = lib.mkMerge [
       ["nvidia-drm.fbdev=1"]
@@ -84,16 +96,21 @@
       # __NV_PRIME_RENDER_OFFLOAD = "1";
       # __NV_PRIME_RENDER_OFFLOAD_PROVIDER = "NVIDIA-G0";
       # __VK_LAYER_NV_optimus = "NVIDIA_only";
-      NVD_BACKEND = "direct";
-      LIBVA_DRIVER_NAME = "nvidia";
+
+      # https://discourse.nixos.org/t/nvidia-open-breaks-hardware-acceleration/58770/12?u=randomizedcoder
+      # https://gist.github.com/chrisheib/162c8cad466638f568f0fb7e5a6f4f6b#file-config-nix-L193
       MOZ_DISABLE_RDD_SANDBOX = "1";
-      # Required to run the correct GBM backend for nvidia GPUs on wayland
+      LIBVA_DRIVER_NAME = "nvidia";
       GBM_BACKEND = "nvidia-drm";
-      # Apparently, without this nouveau may attempt to be used instead
-      # (despite it being blacklisted)
       __GLX_VENDOR_LIBRARY_NAME = "nvidia";
-      # Hardware cursors are currently broken on wlroots
+      NVD_BACKEND = "direct";
+      EGL_PLATFORM = "wayland";
+      # prevents cursor disappear when using Nvidia drivers
       WLR_NO_HARDWARE_CURSORS = "1";
+
+      MOZ_ENABLE_WAYLAND = "1";
+      XDG_SESSION_TYPE = "wayland";
+      NIXOS_OZONE_WL = "1";
     };
   };
 

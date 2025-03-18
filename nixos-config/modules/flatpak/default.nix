@@ -1,4 +1,4 @@
 {pkgs, ...}: {
-  environment.systemPackages = with pkgs; [flatpak];
+  environment.systemPackages = [pkgs.flatpak];
   services.flatpak.enable = true;
 }

@@ -43,6 +43,8 @@
         USB_EXCLUDE_BTUSB = 1;
         USB_EXCLUDE_PHONE = 1;
         RUNTIME_PM_BLACKLIST = "46d:c07e";
+        PCIE_ASPM_ON_BAT = "default";
+        RUNTIME_PM_ON_BAT = "on";
       };
 
       # extraConfig = ''

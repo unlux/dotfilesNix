@@ -3,8 +3,8 @@
     enable = true;
     package = pkgs.usbmuxd2;
   };
-  environment.systemPackages = with pkgs; [
-    libimobiledevice
-    ifuse # optional, to mount using 'ifuse'
+  environment.systemPackages = [
+    pkgs.libimobiledevice
+    pkgs.ifuse # optional, to mount using 'ifuse'
   ];
 }

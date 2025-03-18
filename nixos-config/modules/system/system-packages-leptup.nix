@@ -81,6 +81,8 @@
 
       # glow # markdown previewer in terminal
       # hugo # static site generator
+      vdpauinfo # sudo vainfo
+      libva-utils # sudo vainfo
     ])
     ++ (with pkgs-stable; [
       # floorp

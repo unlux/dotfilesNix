@@ -1,6 +1,6 @@
 {pkgs, ...}: {
-  home.packages = with pkgs; [
-    android-tools
-    payload-dumper-go
+  home.packages = [
+    pkgs.android-tools
+    pkgs.payload-dumper-go
   ];
 }

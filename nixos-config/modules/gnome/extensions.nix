@@ -7,7 +7,7 @@
   gnomeExtensionsList = with pkgs; [
     gnomeExtensions.alphabetical-app-grid
     gnomeExtensions.appindicator
-    # gnomeExtensions.blur-my-shell
+    gnomeExtensions.blur-my-shell
     gnomeExtensions.clipboard-indicator
     gnomeExtensions.dash-to-panel
     # gnomeExtensions.gesture-improvements

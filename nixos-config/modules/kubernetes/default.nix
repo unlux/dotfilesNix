@@ -1,8 +1,8 @@
 {pkgs, ...}: {
   # Include the Kubernetes packages you need
-  environment.systemPackages = with pkgs; [
+  environment.systemPackages = [
     # kubernetes
-    kubectl
+    pkgs.kubectl
   ];
 
   services.kubernetes = {

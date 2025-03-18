@@ -2,11 +2,9 @@
   description = "i've spent way too much time on nix";
 
   inputs = {
-    # Nixpkgs
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-24.05";
 
-    # Home manager
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
     # spicetify-nix.url = "github:the-argus/spicetify-nix";
@@ -18,6 +16,7 @@
 
     # https://github.com/thiagokokada/nix-alien
     nix-alien.url = "github:thiagokokada/nix-alien";
+    stylix.url = "github:danth/stylix";
   };
 
   outputs = inputs @ {
@@ -29,95 +28,83 @@
     ghostty,
     disko,
     nix-alien,
+    stylix,
     ...
   }: let
     inherit (self) outputs;
     system = "x86_64-linux";
-    # lib = inputs.nixpkgs-stable.lib;
-    # pkgs-unstable = import inputs.nixpkgs-unstable.legacyPackages.${system};
-    # pkgs-unstable = nixpkgs-unstable.legacyPackages.${system};
 
-    pkgs-stable = import inputs.nixpkgs-stable {
+    # The main package set (nixos-unstable)
+    pkgs = import nixpkgs {
       inherit system;
-      config = {
-        allowUnfree = true;
-        allowUnfreePredicate = _: true;
+      config.allowUnfree = true;
+    };
+
+    # A secondary package set (nixos-24.05) for stable versions
+    pkgs-stable = import nixpkgs-stable {
+      inherit system;
+      config.allowUnfree = true;
+    };
+  in {
+    nixosConfigurations = {
+      leptup = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        specialArgs = {
+          hostname = "leptup";
+          inherit inputs outputs pkgs-stable;
+        };
+        modules = [
+          disko.nixosModules.disko
+          stylix.nixosModules.stylix
+          ./hosts/leptup.nix # > Our main nixos configuration file
+          ./hosts/disk.nix # disko config file
+          ({
+            self,
+            system,
+            ...
+          }: {
+            environment.systemPackages = with self.inputs.nix-alien.packages.${system}; [
+              nix-alien
+            ];
+          })
+          {
+            _module.args.disks = ["/dev/nvme0n1"];
+          }
+          {
+            environment.systemPackages = [
+              ghostty.packages.x86_64-linux.default
+            ];
+          }
+        ];
+      };
+      # pc = nixpkgs.lib.nixosSystem {
+      #   system = "x86_64-linux";
+      #   specialArgs = {
+      #     hostname = "pc";
+      #     inherit inputs outputs;
+      #   };
+      #   modules = [
+      #     # > Our main nixos configuration file <
+      #     ./hosts/pc.nix
+      #     # inputs.home-manager.nixosModules.default
+      #   ];
+      # };
+    };
+
+    # Standalone home-manager configuration entrypoint
+    homeConfigurations = {
+      "lux@leptup" = home-manager.lib.homeManagerConfiguration {
+        pkgs = nixpkgs.legacyPackages.x86_64-linux;
+        pkgs-stable = nixpkgs-stable.legacyPackages.x86_64-linux;
+        extraSpecialArgs = {
+          inherit inputs outputs pkgs pkgs-stable;
+        };
+        modules = [
+          ./hosts/home.nix
+          # stylix.homeManagerModules.stylix
+          # ./modules/spicetify/default.nix
+        ];
       };
     };
-  in
-    # This is a function that generates an attribute by calling a function you
-    # pass to it, with each system as an argument
-    # forAllSystems = nixpkgs.lib.genAttrs systems;
-    {
-      # NixOS configuration entrypoint
-      # Available through 'nixos-rebuild --flake .#your-hostname'
-      nixpkgs.config = {
-        allowUnfree.enable = true;
-        allowUnfreePredicate = _: true;
-      };
-
-      nixosConfigurations = {
-        leptup = nixpkgs.lib.nixosSystem {
-          system = "x86_64-linux";
-          specialArgs = {
-            hostname = "leptup";
-            inherit inputs outputs pkgs-stable;
-          };
-          modules = [
-            # -_-_-_-_-_-_-_-_-_-_-_-_-
-            ({
-              self,
-              system,
-              ...
-            }: {
-              environment.systemPackages = with self.inputs.nix-alien.packages.${system}; [
-                nix-alien
-              ];
-            })
-            disko.nixosModules.disko
-            {
-              _module.args.disks = ["/dev/nvme0n1"];
-            }
-            {
-              environment.systemPackages = [
-                ghostty.packages.x86_64-linux.default
-              ];
-            }
-            # inputs.home-manager.nixosModules.default
-            ./hosts/leptup.nix # > Our main nixos configuration file
-            ./hosts/disk.nix # disko config file
-            # -_-_-_-_-_-_-_-_-_-_-_-_-
-          ];
-        };
-        pc = nixpkgs.lib.nixosSystem {
-          system = "x86_64-linux";
-          specialArgs = {
-            hostname = "pc";
-            inherit inputs outputs pkgs-stable;
-          };
-          modules = [
-            # > Our main nixos configuration file <
-            ./hosts/pc.nix
-            # inputs.home-manager.nixosModules.default
-          ];
-        };
-      };
-
-      # Standalone home-manager configuration entrypoint
-      # Available through 'home-manager --flake .#your-username@your-hostname'
-      homeConfigurations = {
-        "lux@leptup" = home-manager.lib.homeManagerConfiguration {
-          pkgs = nixpkgs.legacyPackages.x86_64-linux; # Home-manager requires 'pkgs' instance
-          pkgs-stable = nixpkgs-stable.legacyPackages.x86_64-linux;
-          extraSpecialArgs = {
-            inherit inputs outputs pkgs-stable;
-          }; # add spicetify-nix to the inherit
-          modules = [
-            # > Our main home-manager configuration file <
-            ./hosts/home.nix
-            # ./modules/spicetify/default.nix
-          ];
-        };
-      };
-    };
+  };
 }

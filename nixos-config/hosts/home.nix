@@ -12,7 +12,14 @@
     # ../modules/tailscale.nix
     ../modules/home-manager/home-packages.nix
     ../modules/home-manager/git.nix
+    # ../modules/fonts/default.nix
   ];
+
+  # home-manager.sharedModules = [
+  #   {
+  #     stylix.targets.xyz.enable = false;
+  #   }
+  # ];
 
   home = {
     username = "lux";
@@ -38,16 +45,16 @@
     starship = {
       enable = true;
       # Configuration written to ~/.config/starship.toml
-      settings = {
-        # add_newline = false;
+      # settings = {
+      # add_newline = false;
 
-        # character = {
-        #   success_symbol = "[➜](bold green)";
-        #   error_symbol = "[➜](bold red)";
-        # };
+      # character = {
+      #   success_symbol = "[➜](bold green)";
+      #   error_symbol = "[➜](bold red)";
+      # };
 
-        # package.disabled = true;
-      };
+      # package.disabled = true;
+      # };
     };
   };
 
