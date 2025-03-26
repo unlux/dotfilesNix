@@ -21,7 +21,6 @@
       # virt-manager
       home-manager
       python3
-      gcc
       bat
       fastfetch
       fzf

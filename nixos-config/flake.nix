@@ -17,6 +17,8 @@
     # https://github.com/thiagokokada/nix-alien
     nix-alien.url = "github:thiagokokada/nix-alien";
     stylix.url = "github:danth/stylix";
+
+    determinate.url = "https://flakehub.com/f/DeterminateSystems/determinate/0.1";
   };
 
   outputs = inputs @ {
@@ -29,6 +31,7 @@
     disko,
     nix-alien,
     stylix,
+    determinate,
     ...
   }: let
     inherit (self) outputs;
@@ -56,17 +59,9 @@
         modules = [
           disko.nixosModules.disko
           stylix.nixosModules.stylix
+          determinate.nixosModules.default
           ./hosts/leptup.nix # > Our main nixos configuration file
           ./hosts/disk.nix # disko config file
-          ({
-            self,
-            system,
-            ...
-          }: {
-            environment.systemPackages = with self.inputs.nix-alien.packages.${system}; [
-              nix-alien
-            ];
-          })
           {
             _module.args.disks = ["/dev/nvme0n1"];
           }

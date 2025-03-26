@@ -4,115 +4,49 @@
   pkgs,
   ...
 }: {
-  imports = [
-    ./fuck-you-nvidia.nix
-  ];
-
-  services.xserver.videoDrivers = ["nvidia"];
-
-  hardware.graphics = {
-    enable = true;
-    enable32Bit = true;
-    extraPackages = with pkgs; [
-      # https://discourse.nixos.org/t/nvidia-open-breaks-hardware-acceleration/58770/2
-      nvidia-vaapi-driver
-      vaapiVdpau
-      libvdpau
-      libvdpau-va-gl
-      vdpauinfo
-      libva
-      libva-utils
-      # https://wiki.nixos.org/wiki/Intel_Graphics
-      #vpl-gpu-rt
-    ];
-  };
-
-  hardware.nvidia = {
-    # This will no longer be necessary when
-    # https://github.com/NixOS/nixpkgs/pull/326369 hits stable
-    #modesetting.enable = true;
-    modesetting.enable = lib.mkDefault true;
-    powerManagement = {
-      enable = true;
-      finegrained = true;
-    };
-    dynamicBoost.enable = true;
-    prime = {
-      offload.enable = true;
-      offload.enableOffloadCmd = true;
-      amdgpuBusId = "PCI:5:0:0";
-      nvidiaBusId = "PCI:1:0:0";
-    };
-    nvidiaSettings = true;
-    # package = config.boot.kernelPackages.nvidiaPackages.beta;
-    open = true; #https://wiki.nixos.org/wiki/NVIDIA#cite_note-1
-    package = config.boot.kernelPackages.nvidiaPackages.mkDriver {
-      version = "570.86.16"; # use new 570 drivers
-      sha256_64bit = "sha256-RWPqS7ZUJH9JEAWlfHLGdqrNlavhaR1xMyzs8lJhy9U=";
-      openSha256 = "sha256-DuVNA63+pJ8IB7Tw2gM4HbwlOh1bcDg2AN2mbEU9VPE=";
-      settingsSha256 = "sha256-9rtqh64TyhDF5fFAYiWl3oDHzKJqyOW3abpcf2iNRT8=";
-      usePersistenced = false;
-    };
-  };
-
   boot = {
-    # kernelPackages = lib.mkForce pkgs.linuxKernel.packages.linux_xanmod;
-    kernelPackages = pkgs.linuxPackages_6_6; # use 6.6 LTS kernel
-
-    kernelParams = lib.mkMerge [
-      ["nvidia-drm.fbdev=1"]
-      [
-        "nvidia.NVreg_UsePageAttributeTable=1" # why this isn't default is beyond me.
-        "nvidia_modeset.disable_vrr_memclk_switch=1" # stop really high memclk when vrr is in use.
-      ]
-      (lib.mkIf config.hardware.nvidia.powerManagement.enable [
-        "nvidia.NVreg_TemporaryFilePath=/var/tmp" # store on disk, not /tmp which is on RAM
-      ])
+    extraModprobeConfig = lib.mkDefault ''
+      blacklist nouveau
+      options nouveau modeset=0
+    '';
+    blacklistedKernelModules = lib.mkDefault [
+      "nouveau"
+      "nvidia"
+      "nvidiafb"
+      "nvidia_drm"
+      "nvidia-uvm"
+      "nvidia_modeset"
+      "nv"
+      "rivafb"
+      "rivatv"
+      "ipmi_msghandler"
+      "ipmi_devintf"
     ];
-
-    blacklistedKernelModules = ["nouveau"];
   };
 
-  environment = {
-    systemPackages = (
-      with pkgs; [
-        # nvidia-vaapi-driver
-        # # libva
-        # libva-utils
-        # nvidia-utils
-        # # libvdpau-va-gl
-        # # vaapiVdpau
-        # # libva-vdpau-driver
-        nvtopPackages.full
-        nvidia-container-toolkit
-      ]
-    );
-    # sessionVariables = {
-    #   "__EGL_VENDOR_LIBRARY_FILENAMES" = "${config.hardware.nvidia.package}/share/glvnd/egl_vendor.d/10_nvidia.json";
-    # };
+  services.udev.extraRules = lib.mkDefault ''
+    # Remove NVIDIA USB xHCI Host Controller devices, if present
+    ACTION=="add", SUBSYSTEM=="pci", ATTR{vendor}=="0x10de", ATTR{class}=="0x0c0330", ATTR{power/control}="auto", ATTR{remove}="1"
+    # Remove NVIDIA USB Type-C UCSI devices, if present
+    ACTION=="add", SUBSYSTEM=="pci", ATTR{vendor}=="0x10de", ATTR{class}=="0x0c8000", ATTR{power/control}="auto", ATTR{remove}="1"
+    # Remove NVIDIA Audio devices, if present
+    ACTION=="add", SUBSYSTEM=="pci", ATTR{vendor}=="0x10de", ATTR{class}=="0x040300", ATTR{power/control}="auto", ATTR{remove}="1"
+    # Remove NVIDIA VGA/2D controller devices
+    ACTION=="add", SUBSYSTEM=="pci", ATTR{vendor}=="0x10de", ATTR{class}=="0x03[0-9]*", ATTR{power/control}="auto", ATTR{remove}="1"
+  '';
 
-    variables = {
-      # WLR_DRM_DEVICES = "/dev/dri/card2:/dev/dri/card1";
-      # __NV_PRIME_RENDER_OFFLOAD = "1";
-      # __NV_PRIME_RENDER_OFFLOAD_PROVIDER = "NVIDIA-G0";
-      # __VK_LAYER_NV_optimus = "NVIDIA_only";
+  services.xserver.videoDrivers = lib.mkForce ["amdgpu"];
+  services.xserver.deviceSection = ''
+    Option "Modesetting" "true"
+  '';
 
-      # https://discourse.nixos.org/t/nvidia-open-breaks-hardware-acceleration/58770/12?u=randomizedcoder
-      # https://gist.github.com/chrisheib/162c8cad466638f568f0fb7e5a6f4f6b#file-config-nix-L193
-      MOZ_DISABLE_RDD_SANDBOX = "1";
-      LIBVA_DRIVER_NAME = "nvidia";
-      GBM_BACKEND = "nvidia-drm";
-      __GLX_VENDOR_LIBRARY_NAME = "nvidia";
-      NVD_BACKEND = "direct";
-      EGL_PLATFORM = "wayland";
-      # prevents cursor disappear when using Nvidia drivers
-      WLR_NO_HARDWARE_CURSORS = "1";
+  hardware.nvidia-container-toolkit.enable = lib.mkForce false;
 
-      MOZ_ENABLE_WAYLAND = "1";
-      XDG_SESSION_TYPE = "wayland";
-      NIXOS_OZONE_WL = "1";
-    };
-  };
+  # Add this to ensure no GPU drivers are loaded in default config
+  # services.xserver.videoDrivers = lib.mkDefault ["modesetting"];
+
+  # Uncomment if you want AMD to be your only GPU in default mode
+  # services.xserver.videoDrivers = lib.mkDefault ["amdgpu"];
 
   # environment.variables = {
   #   # references -> https://github.com/TLATER/dotfiles/blob/e633196dca42d96f42f9aa9016fa8d307959232f/home-config/config/graphical-applications/firefox.nix#L68

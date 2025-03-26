@@ -46,7 +46,6 @@
       bun
       youtube-music
       # space-cadet-pinball
-      openssl
       awscli2
       yt-dlp
       alejandra

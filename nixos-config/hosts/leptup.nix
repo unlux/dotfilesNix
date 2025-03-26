@@ -13,7 +13,7 @@
     # ../modules/system/noisecancel.nix
     ../modules/system/bluetooth.nix
     ../modules/system/zram.nix
-    # ../modules/nix-alien/default.nix
+    ../modules/nix-alien/default.nix
     ../modules/nvidia/default.nix
     # ../modules/nvidia/gpuPassthrough.nix
     ../modules/gaming/default.nix
@@ -61,7 +61,7 @@
   #   shell = pkgs.nushell;
   # };
 
-  # boot.kernelPackages = pkgs.linuxPackages_zen;
+  boot.kernelPackages = pkgs.linuxPackages_6_6; # use 6.6 LTS kernel
 
   # specialisation.no-leptup-keyboard.configuration = {
   #   boot.kernelParams = lib.mkForce ["i8042.nokbd"];

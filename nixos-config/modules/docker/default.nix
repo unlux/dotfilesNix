@@ -10,7 +10,7 @@
     storageDriver = "btrfs";
   };
 
-  hardware.nvidia-container-toolkit.enable = true;
+  # hardware.nvidia-container-toolkit.enable = true;
 
   environment.systemPackages = [
     pkgs.docker-compose

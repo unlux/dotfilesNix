@@ -18,7 +18,6 @@
       lua
       python3
       # rustup
-      gcc
 
       # Terminal utilities
       carapace
