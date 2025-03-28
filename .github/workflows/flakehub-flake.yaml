@@ -10,6 +10,9 @@ jobs:
     permissions:
       id-token: write
       contents: read
+    defaults:
+      run:
+        working-directory: ./nixos-config
     steps:
       - uses: actions/checkout@v4
 
@@ -20,4 +23,3 @@ jobs:
           rolling: true
           visibility: private
           include-output-paths: true
-        working-directory: nixos-config
