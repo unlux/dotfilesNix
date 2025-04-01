@@ -5,29 +5,29 @@
 }: {
   stylix = {
     enable = true;
-    # targets = {
-    #   gnome.enable = true;
-    #   gtk.enable = true;
-    #   console.enable = true;
-    #   # btop.enable = true;
-    #   # bat.enable = true;
-    #   # exa.enable = true;
-    #   # fd.enable = true;
-    #   # ripgrep.enable = true;
-    #   # zoxide.enable = true;
-    #   # zsh.enable = true;
-    #   # neovim.enable = true;
-    #   # ghostty.enable = true;
-    #   # mangohud.enable = true;
-    #   # nixos.enable = true;
-    #   # nushell.enable = true;
-    #   plymouth.enable = true;
-    #   plymouth.logoAnimated = true;
-    #   # tmux.enable = true;
-    # };
+    targets = {
+      #   gnome.enable = true;
+      #   gtk.enable = true;
+      #   console.enable = true;
+      #   # btop.enable = true;
+      #   # bat.enable = true;
+      #   # exa.enable = true;
+      #   # fd.enable = true;
+      #   # ripgrep.enable = true;
+      #   # zoxide.enable = true;
+      #   # zsh.enable = true;
+      #   # neovim.enable = true;
+      #   # ghostty.enable = true;
+      #   # mangohud.enable = true;
+      #   # nixos.enable = true;
+      #   # nushell.enable = true;
+      #   plymouth.enable = true;
+      #   plymouth.logoAnimated = true;
+      #   # tmux.enable = true;
+    };
 
     autoEnable = true;
-    base16Scheme = "${pkgs.base16-schemes}/share/themes/tokyo-night-dark.yaml";
+    base16Scheme = "${pkgs.base16-schemes}/share/themes/rose-pine.yaml";
     # cursor.package = pkgs.apple-cursor;
     # cursor.name = "apple_cursor";
     cursor = {
