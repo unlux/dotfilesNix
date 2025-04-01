@@ -19,7 +19,7 @@
     # package = pkgs.bluez;
     # hsphfpd.enable = true;
   };
-  systemd.services.bluetooth.serviceConfig.ConfigurationDirectoryMode = "755";
+  # systemd.services.bluetooth.serviceConfig.ConfigurationDirectoryMode = "755";
   # services.blueman.enable = true;
   hardware.firmware = [pkgs.linux-firmware]; # Include the latest firmware
 }

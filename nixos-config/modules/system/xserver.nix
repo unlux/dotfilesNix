@@ -1,12 +1,16 @@
-{lib, ...}: {
+{
+  lib,
+  pkgs,
+  ...
+}: {
   services.xserver = {
     enable = true;
-    desktopManager.gnome.enable = lib.mkDefault true;
+    desktopManager.gnome.enable = true;
     displayManager.gdm = {
       enable = true;
+      wayland = true;
       autoSuspend = false;
     };
-    displayManager.gdm.wayland = lib.mkDefault true;
     xkb.layout = "us";
   };
   services.libinput.enable = true;
