@@ -79,3 +79,4 @@ alias cls="clear"
 
 #web dev aliases
 alias bund="bun dev"
+alias lazyyadm="yadm enter lazygit"

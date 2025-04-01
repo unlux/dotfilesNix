@@ -82,3 +82,9 @@ export PATH="$PATH:/home/lux/.local/bin"
 
 # bunjs stuff
 export PATH="/home/lux/.bun/bin:$PATH"
+
+# carapace stuff
+export LS_COLORS=$(vivid generate dracula)
+export CARAPACE_BRIDGES='zsh,fish,bash,inshellisense' # optional
+zstyle ':completion:*:git:*' group-order 'main commands' 'alias commands' 'external commands'
+source <(carapace _carapace)
