@@ -36,14 +36,11 @@ in
 
         kernelModules = ["kvm-amd"];
 
-        kernelParams =
-          [
-            # enable IOMMU
-            "amd_iommu=on"
-          ]
-          ++ lib.optional cfg.enable
-          # isolate the GPU
-          ("vfio-pci.ids=" + lib.concatStringsSep "," gpuIDs);
+        kernelParams = [
+          # enable IOMMU
+          "amd_iommu=on"
+          "vfio-pci.ids=10de:25a2,10de:2291"
+        ];
 
         extraModprobeConfig = "options kvm_intel nested=1";
       };
@@ -92,7 +89,13 @@ in
           nvidiaSettings = true;
 
           # Optionally, you may need to select the appropriate driver version for your specific GPU.
-          package = config.boot.kernelPackages.nvidiaPackages.stable;
+          package = config.boot.kernelPackages.nvidiaPackages.mkDriver {
+            version = "570.86.16"; # use new 570 drivers
+            sha256_64bit = "sha256-RWPqS7ZUJH9JEAWlfHLGdqrNlavhaR1xMyzs8lJhy9U=";
+            openSha256 = "sha256-DuVNA63+pJ8IB7Tw2gM4HbwlOh1bcDg2AN2mbEU9VPE=";
+            settingsSha256 = "sha256-9rtqh64TyhDF5fFAYiWl3oDHzKJqyOW3abpcf2iNRT8=";
+            usePersistenced = false;
+          };
         };
       };
     };

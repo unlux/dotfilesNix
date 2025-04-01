@@ -1,5 +1,5 @@
 {pkgs, ...}: {
-  imports = [./specialisation.nix];
+  # imports = [./specialisation.nix];
 
   programs = {
     steam = {

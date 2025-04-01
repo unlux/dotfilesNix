@@ -4,7 +4,7 @@
   ...
 }: {
   specialisation.fuck-you-nvidia.configuration = {
-    system.nixos.tags = ["fuck-you-nvidia"];
+    # system.nixos.tags = ["fuck-you-nvidia"];
     boot = {
       extraModprobeConfig = lib.mkForce ''
         blacklist nouveau
