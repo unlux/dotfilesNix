@@ -33,6 +33,7 @@
     # ../modules/plymouth/default.nix
     ../modules/stylix/default.nix
     ../modules/fonts/default.nix
+    ../modules/custom/download-sorter.nix
 
     # Or modules from other flakes (such as nixos-hardware):
     # inputs.hardware.nixosModules.common-cpu-amd
