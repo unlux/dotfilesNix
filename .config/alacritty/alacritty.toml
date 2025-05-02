@@ -5,7 +5,9 @@ TERM = "xterm-256color"
 [window]
 decorations = "none"
 dynamic_padding = false
-opacity = 0.8
+opacity = 0.95
+blur = true
+
 
 [window.padding]
 x = 20
@@ -34,5 +36,4 @@ style = "Medium"
 
 live_config_reload = true
 
-import = [ "~/.config/alacritty/themes/themes/catppuccin_mocha.toml" ]
-
+import = ["~/.config/alacritty/rose-pine.toml"]

@@ -1,31 +1,13 @@
-{...}: {
-  # You can import other home-manager modules here
+{pkgs, ...}: {
   imports = [
-    # If you want to use modules your own flake exports (from modules/home-manager):
-    # outputs.homeManagerModules.example
-
-    # Or modules exported from other flakes (such as nix-colors):
-    # inputs.nix-colors.homeManagerModules.default
-
-    ../modules/home-manager/adb.nix
-    # ../modules/flatpak.nix
-    # ../modules/tailscale.nix
     ../modules/home-manager/home-packages.nix
-    ../modules/home-manager/git.nix
     # ../modules/fonts/default.nix
   ];
-
-  # home-manager.sharedModules = [
-  #   {
-  #     stylix.targets.xyz.enable = false;
-  #   }
-  # ];
 
   home = {
     username = "lux";
     homeDirectory = "/home/lux";
     stateVersion = "23.11";
-    # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
   };
 
   # targets.genericLinux.enable = true; # enable this on non-nixos
@@ -34,7 +16,6 @@
   programs = {
     home-manager = {
       enable = true;
-      # backupFileExtension = "backup";
     };
 
     direnv = {
@@ -55,6 +36,39 @@
 
       # package.disabled = true;
       # };
+    };
+  };
+
+  programs = {
+    git = {
+      enable = true;
+      userName = "lakshay choudhary";
+      userEmail = "lakshaychoudhary77712@gmail.com";
+      extraConfig = {
+        init.defaultBranch = "main";
+        help.autocorrect = "1";
+        diff.algorithm = "histogram";
+        transfer.fsckObjects = true;
+        fetch.fsckObjects = true;
+        receive.fsckObjects = true;
+        core = {
+          excludeFile = "~/.gitignore";
+          pager = "delta";
+          editor = "nvim";
+          autocrlf = "input";
+        };
+        pull.rebase = true;
+        push.autoSetupRemote = true;
+        # credential.helper = "store";
+        merge = {
+          conflictStyle = "diff3";
+          tool = "vimdiff";
+        };
+        rerere = {
+          enabled = true;
+          autoupdate = true;
+        };
+      };
     };
   };
 

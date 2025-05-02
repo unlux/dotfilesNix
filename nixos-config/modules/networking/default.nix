@@ -1,18 +1,17 @@
 {
   pkgs,
   hostname,
+  username,
   lib,
+  config,
   ...
 }: {
   networking = {
     hostName = hostname;
-
     networkmanager = {
       enable = true;
-      # Prefer iwd to wpa_supplicant.
       wifi.backend = lib.mkDefault "iwd";
     };
-
     firewall = {
       enable = true;
       allowedTCPPorts = [
@@ -23,14 +22,9 @@
         21027
         3131
       ];
-      allowedUDPPorts = [
-        22
-        80
-        443
-        22000
-        21027
-        3131
-      ];
+      allowedUDPPorts =
+        [22 80 443 22000 21027 3131]
+        ++ (lib.optional config.services.tailscale.enable config.services.tailscale.port);
       allowedUDPPortRanges = [
         {
           from = 1714;
@@ -43,19 +37,36 @@
           to = 1764;
         }
       ];
+      checkReversePath = "loose";
+      trustedInterfaces =
+        ["tailscale0"]
+        ++ (lib.optional config.services.tailscale.enable "tailscale0");
     };
-
     hosts = {
       # "127.0.0.1:8384" = [ "syncthing" ];
     };
   };
 
-  environment.systemPackages = (
-    with pkgs; [
-      tcpdump
-      inetutils
-      rclone
-    ]
-  );
+  environment.systemPackages = with pkgs; [
+    tcpdump
+    inetutils
+    rclone
+    # cloudflare-warp
+    # cloudflared
+  ];
+
   # services.teamviewer.enable = true;
+
+  services.tailscale = {
+    enable = true;
+    extraUpFlags = [
+      "--shields-up"
+      "--operator=${username}"
+      "--ssh"
+    ];
+  };
+
+  # systemd.packages = [pkgs.cloudflare-warp];
+  # systemd.services."warp-svc".wantedBy = ["multi-user.target"];
+  # systemd.user.services."warp-taskbar".wantedBy = ["tray.target"];
 }

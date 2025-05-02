@@ -4,7 +4,10 @@
   pkgs,
   ...
 }: {
-  hardware.nvidia-container-toolkit.enable = true;
+  imports = [
+    ./fuck-you-nvidia.nix
+  ];
+  hardware.nvidia-container-toolkit.enable = lib.lists.elem "nvidia" config.services.xserver.videoDrivers;
   services.xserver.videoDrivers = ["nvidia"];
 
   hardware.graphics = {
@@ -28,9 +31,17 @@
     # https://github.com/NixOS/nixpkgs/pull/326369 hits stable
     modesetting.enable = true;
     dynamicBoost.enable = true;
+    powerManagement.enable = false;
+    powerManagement.finegrained = false;
     prime = {
       amdgpuBusId = "PCI:5:0:0";
       nvidiaBusId = "PCI:1:0:0";
+      offload = {
+        enable = false;
+        enableOffloadCmd = false;
+      };
+      sync.enable = true;
+      # reverseSync.enable = true;
     };
     nvidiaSettings = true;
     open = true; #https://wiki.nixos.org/wiki/NVIDIA#cite_note-1
@@ -40,14 +51,6 @@
       openSha256 = "sha256-DuVNA63+pJ8IB7Tw2gM4HbwlOh1bcDg2AN2mbEU9VPE=";
       settingsSha256 = "sha256-9rtqh64TyhDF5fFAYiWl3oDHzKJqyOW3abpcf2iNRT8=";
       usePersistenced = false;
-    };
-
-    prime.reverseSync.enable = true;
-    powerManagement.enable = false;
-    powerManagement.finegrained = false;
-    prime.offload = {
-      enable = false;
-      enableOffloadCmd = false;
     };
   };
 

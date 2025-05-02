@@ -1,54 +1,70 @@
 {pkgs, ...}: {
   home.packages = (
     with pkgs; [
+      # Browsers
       brave
+      ungoogled-chromium
+
+      # Communication
       # discord
       # discord-ptb
       vesktop
-      easyeffects
-      # lunarvim
-      nodejs_22
+      legcord
+      telegram-desktop
+
+      # Development
+      nodejs_23
       nodePackages.pnpm
       jdk
+      bun
+      vscode
+      bruno
+      # lunarvim
+
+      # Databases & Tools
       mongodb-compass
-      # notion-app-enhanced
-      obs-studio
-      # obsidian # electron ded on wayland, use flatpak instaead
-      postman
-      # timeshift
-      # spotify
       # sqlite
-      syncthingtray
-      # teamviewer
-      telegram-desktop
-      termius
-      # turso-cli
-      ungoogled-chromium
+
+      # Productivity
+      libreoffice-fresh
+      # notion-app-enhanced
+      # obsidian # electron ded on wayland, use flatpak instaead
+      # postman
+      # timeshift
+
+      # Media
+      obs-studio
       vlc
+      # youtube-music
+      # spotify
+
+      # Utilities
+      syncthingtray
+      termius
+      qbittorrent
+      # zoom-us
+      lazygit
+      qdirstat
+      atuin
+      # looking-glass-client
+      piper
+      # awscli2
+      yt-dlp
+      restic
+      ente-auth
+
+      # Optional/Commented
+      # teamviewer
+      # turso-cli
       # vscode
       # webcord
       # zoom
       # warp-terminal
       # authy
-      # spotify
-      qbittorrent
-      zoom-us
-      lazygit
       # flameshot
       # ulauncher
       # noisetorch
-      qdirstat
-      atuin
-      looking-glass-client
-      vscode
-      piper
-      libreoffice-fresh
-      bun
-      youtube-music
       # space-cadet-pinball
-      awscli2
-      yt-dlp
-      alejandra
     ]
   );
 }

@@ -4,7 +4,7 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-24.05";
-
+    nixos-hardware.url = "github:NixOS/nixos-hardware/master";
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
     # spicetify-nix.url = "github:the-argus/spicetify-nix";
@@ -25,6 +25,7 @@
     self,
     nixpkgs,
     nixpkgs-stable,
+    nixos-hardware,
     home-manager,
     # spicetify-nix,
     ghostty,
@@ -54,6 +55,7 @@
         system = "x86_64-linux";
         specialArgs = {
           hostname = "leptup";
+          username = "lux";
           inherit inputs outputs pkgs-stable;
         };
         modules = [
@@ -97,7 +99,6 @@
         modules = [
           ./hosts/home.nix
           # stylix.homeManagerModules.stylix
-          # ./modules/spicetify/default.nix
         ];
       };
     };

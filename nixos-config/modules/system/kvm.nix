@@ -1,4 +1,10 @@
 {pkgs, ...}: {
+  services.spice-vdagentd.enable = true;
+  virtualisation.spiceUSBRedirection.enable = true;
+  environment.systemPackages = with pkgs; [
+    spice-gtk
+    usbredir
+  ];
   virtualisation.libvirtd = {
     enable = true;
     qemu = {

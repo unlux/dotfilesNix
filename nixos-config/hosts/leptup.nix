@@ -12,23 +12,14 @@
     ../modules/system/power.nix
     # ../modules/system/noisecancel.nix
     ../modules/system/bluetooth.nix
-    ../modules/system/zram.nix
-    ../modules/nix-alien/default.nix
     ../modules/nvidia/default.nix
     # ../modules/nvidia/gpuPassthrough.nix
     ../modules/gaming/default.nix
-    # ../modules/distrobox/default.nix
     # ../modules/prisma/default.nix
     # ../modules/kubernetes/default.nix
-    ../modules/iphone/default.nix
-    # ../modules/podman/default.nix
-    ../modules/flatpak/default.nix
-    ../modules/syncthing/default.nix
-    # ../modules/opentablet/default.nix
-    ../modules/ollama/default.nix
-    # ../modules/cloudflare-warp/default.nix
+    # ../modules/iphone/default.nix
+    # ../modules/ollama/default.nix
     # ../modules/printing/default.nix
-    ../modules/fonts/default.nix
     # ../overlays/default.nix
     # ../modules/plymouth/default.nix
     ../modules/stylix/default.nix
@@ -41,7 +32,6 @@
 
     # home-manager
     inputs.home-manager.nixosModules.default
-
     ./leptup-hardware.nix
   ];
 
@@ -57,7 +47,6 @@
     backupFileExtension = "backup";
   };
 
-  # nushell
   # users.users.lux = {
   #   shell = pkgs.nushell;
   # };
@@ -68,14 +57,37 @@
   #   boot.kernelParams = lib.mkForce ["i8042.nokbd"];
   # }; # for use with external keyboard
 
-  # gnome quick login crash fix
-  systemd.services."getty@tty1".enable = false;
-  systemd.services."autovt@tty1".enable = false;
-
   security.sudo-rs.enable = true;
+
+  boot.blacklistedKernelModules = ["btmtk"]; # MediaTek Bluetooth driver
+  services.udev.extraRules = ''
+    SUBSYSTEM=="bluetooth", ATTR{address}=="A8:6E:84:20:D8:B7", ATTR{powered}="0"
+  '';
 
   programs.appimage.enable = true;
   programs.appimage.binfmt = true;
+
+  # environment.systemPackages = [pkgs.distrobox];
+
+  # services.sunshine = {
+  #   enable = true;
+  #   autoStart = true;
+  #   capSysAdmin = true; # only needed for Wayland -- omit this when using with Xorg
+  #   openFirewall = true;
+  #   package = pkgs.sunshine.override {
+  #     cudaSupport = true;
+  #   };
+  # };
+
+  services.syncthing = {
+    enable = true;
+    # configDir = ""
+    openDefaultPorts = true;
+    systemService = true;
+    user = "lux";
+    group = "syncthing";
+    dataDir = "/home/lux";
+  };
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
   system.stateVersion = "23.11";

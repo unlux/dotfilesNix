@@ -9,9 +9,15 @@
       neovim
       alacritty
       # zed-editor
+
+      # Browsers
       # browsers
-      floorp
+      # floorp
+
+      # Virtualization
       virt-manager
+
+      # Nix/NixOS
       home-manager
 
       # Language chains
@@ -27,7 +33,7 @@
       fd
       fastfetch
       ffmpeg
-      #devbox
+      # devbox
       fzf
       mpv
       rsync
@@ -39,14 +45,16 @@
       yadm
       zoxide
 
-      # utils
+      # System utilities
       lshw
       pciutils
       usbutils
       xdg-utils
+      iptables
+      nmap
 
       # Archive tools
-      p7zip
+      # p7zip
       unzip
       zip
 
@@ -57,15 +65,14 @@
       cowsay
       file
       gawk
-      gnupg
-      gnused
-      gnumake
-      gnutar
-      nnn # terminal file manager
+      # gnupg
+      # gnused
+      # gnumake
+      # gnutar
+      # nnn # terminal file manager
       tree
       # zstd
       appimage-run
-      distrobox
 
       # System monitoring tools
       btop # replacement of htop/nmon
@@ -75,13 +82,13 @@
       # strace # system call monitoring
       # sysstat
 
-      jq # A lightweight and flexible command-line JSON processor
+      # Data processing
+      # jq # A lightweight and flexible command-line JSON processor
       # yq-go # yaml processor https://github.com/mikefarah/yq
 
+      # Other/Optional
       # glow # markdown previewer in terminal
       # hugo # static site generator
-      vdpauinfo # sudo vainfo
-      libva-utils # sudo vainfo
     ])
     ++ (with pkgs-stable; [
       # floorp

@@ -22,6 +22,7 @@
   boot.extraModulePackages = [
     config.boot.kernelPackages.asus-wmi-sensors
     pkgs.bluez
+    config.boot.kernelPackages.rtl8821au
   ];
   hardware.enableAllFirmware = true;
 

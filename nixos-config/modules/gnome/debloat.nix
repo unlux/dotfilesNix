@@ -6,8 +6,7 @@
   services = {
     # Disable unused GNOME module features
     avahi.enable = lib.mkForce false;
-    dleyna-renderer.enable = lib.mkForce false;
-    dleyna-server.enable = lib.mkForce false;
+    dleyna.enable = lib.mkForce false;
     hardware.bolt.enable = lib.mkForce false;
     gnome = {
       evolution-data-server.enable = lib.mkForce false;

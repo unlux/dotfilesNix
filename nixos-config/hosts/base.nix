@@ -1,22 +1,15 @@
-{...}: {
+{pkgs, ...}: {
   imports = [
-    ../modules/bootloader/grub.nix
     # ../modules/system/kvm.nix
-    ../modules/system/locale.nix
     # ../modules/system/nvidia.nix
-    ../modules/system/openssh.nix
     ../modules/system/pipewire.nix
     ../modules/system/xserver.nix
-    ../modules/system/zsh.nix
-    # ../modules/xfce/default.nix
-    # ../modules/system/systemd.nix
-    # ../modules/gnome/gnome2.nix
+    ../modules/system/zram.nix
     ../modules/networking/default.nix
     ../modules/gnome/default.nix
-    ../modules/nix-helper/default.nix
-    ../modules/system/cyber.nix
-    ../modules/networking/tailscale.nix
+    ../modules/nix-helpers/default.nix
     ../modules/docker/default.nix
+
     # Or modules from other flakes (such as nixos-hardware):
     # inputs.hardware.nixosModules.common-cpu-amd
     # inputs.hardware.nixosModules.common-pc-ssd
@@ -40,7 +33,30 @@
   #   })
   #   config.nix.registry;
 
-  # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
+  boot.loader = {
+    efi = {
+      canTouchEfiVariables = true;
+    };
+    grub = {
+      enable = true;
+      efiSupport = true;
+      device = "nodev";
+      # useOSProber = true;
+      # splashImage = ./peakpx.png;
+      # splashmode = "stretch";
+      configurationLimit = 30;
+    };
+  };
+
+  services.openssh = {
+    enable = true;
+    settings = {
+      X11Forwarding = true;
+      PermitRootLogin = "no"; # disable root login
+      PasswordAuthentication = true; # disable (i enabled it) password login
+    };
+    # openFirewall = true;
+  };
 
   nix.settings = {
     experimental-features = [
@@ -50,9 +66,6 @@
     # auto-optimise-store = true;
   };
 
-  # system.autoUpgrade.enable = true;
-  # system.autoUpgrade.allowReboot = false;
-
   nixpkgs = {
     config = {
       allowUnfree = true;
@@ -61,30 +74,67 @@
     };
   };
 
-  users.users = {
-    lux = {
-      isNormalUser = true;
-      initialPassword = "jj";
-      extraGroups = [
-        "wheel"
-        "networkmanager"
-        "docker"
-        "qemu-libvirtd"
-        "libvirtd"
-        "kvm"
-        "adbusers"
-      ];
+  users = {
+    defaultUserShell = pkgs.zsh;
+    users = {
+      lux = {
+        isNormalUser = true;
+        initialPassword = "jj";
+        extraGroups = [
+          "wheel"
+          "networkmanager"
+          "docker"
+          "qemu-libvirtd"
+          "libvirtd"
+          "kvm"
+          "adbusers"
+          "video"
+        ];
+      };
     };
   };
 
-  # xdg.portal.wlr.enable = true;
+  programs.zsh = {
+    enable = true;
+    autosuggestions.enable = true;
+    syntaxHighlighting.enable = true;
+    enableCompletion = true;
+    # history.extended = true;
+  };
+  # programs.zoxide.enableZshIntegration = true;
+  # programs.nix-index.enableZshIntegration = true;
+  # programs.carapace.enableZshIntegration = true;
+  # programs.atuin.enableZshIntegration = true;
 
-  # home-manager = {
-  #   extraSpecialArgs = { inherit inputs; };
-  #   users = {
-  #     lux = import ./home.nix;
-  #   };
-  # };
+  environment.systemPackages = [pkgs.flatpak pkgs.gnome-software];
+  services.flatpak.enable = true;
+
+  fonts = {
+    fontDir.enable = true;
+    fontconfig.enable = true;
+    packages = with pkgs; [
+      nerd-fonts.commit-mono
+      # commitmonolux
+      # customFont
+      # pkgs.monolisa-nerdfonts
+    ];
+  };
+
+  time.timeZone = "Asia/Kolkata";
+
+  i18n.defaultLocale = "en_US.UTF-8";
+
+  i18n.extraLocaleSettings = {
+    LC_ADDRESS = "en_IN";
+    LC_IDENTIFICATION = "en_IN";
+    LC_MEASUREMENT = "en_IN";
+    LC_MONETARY = "en_IN";
+    LC_NAME = "en_IN";
+    LC_NUMERIC = "en_IN";
+    LC_PAPER = "en_IN";
+    LC_TELEPHONE = "en_IN";
+    LC_TIME = "en_IN";
+  };
 
   # services.qemuGuest.enable=true;
   boot.kernel.sysctl."kernel.sysrq" = 1; #press alt+sysreq+f to trigger oom killer

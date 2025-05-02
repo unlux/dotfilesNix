@@ -4,18 +4,15 @@
   ...
 }: {
   imports = [
-    ../networking/tailscale.nix
-    ../cloudflare-warp/warp.nix
     # ../docker/dockerrootless.nix
-    ../flatpak/flatpak.nix
   ];
 
   environment.systempackages =
     (with pkgs; [
-      neovim
-      wezterm
-    ])
+      ])
     ++ (with pkgs-stable; [
+      wezterm
+      neovim
       microsoft-edge
       chromium
       # virt-manager
@@ -33,7 +30,6 @@
 
       # utils
       lshw
-      inetutils
       pciutils
       usbutils
       xdg-utils
@@ -50,9 +46,6 @@
       cowsay
       file
       gawk
-      gnupg
-      gnused
-      gnutar
       tree
       appimage-run
 

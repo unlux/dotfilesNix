@@ -2,8 +2,6 @@
   environment.systemPackages = with pkgs; [
     gobuster
     # seclists
-    iptables
-    nmap # A utility for network discovery and security auditing
     netcat-openbsd
     ethtool
     iftop # network monitoring
