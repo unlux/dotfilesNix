@@ -33,6 +33,11 @@
   #   })
   #   config.nix.registry;
 
+  services.printing = {
+    enable = true;
+    drivers = [pkgs.hplipWithPlugin];
+  };
+
   boot.loader = {
     efi = {
       canTouchEfiVariables = true;
