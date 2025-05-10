@@ -1,6 +1,5 @@
 {
   lib,
-  pkgs,
   ...
 }: {
   specialisation.fuck-you-nvidia.configuration = {
