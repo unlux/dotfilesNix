@@ -83,8 +83,18 @@ export PATH="$PATH:/home/lux/.local/bin"
 # bunjs stuff
 export PATH="/home/lux/.bun/bin:$PATH"
 
+# android stewwdio
+export ANDROID_HOME="/home/lux/Android/Sdk"
+export PATH=$PATH:$ANDROID_HOME/emulator
+export PATH=$PATH:$ANDROID_HOME/platform-tools
+
+#default editor 
+export EDITOR="/run/current-system/sw/bin/nvim"
+
 # carapace stuff
 export LS_COLORS=$(vivid generate dracula)
 export CARAPACE_BRIDGES='zsh,fish,bash,inshellisense' # optional
 zstyle ':completion:*:git:*' group-order 'main commands' 'alias commands' 'external commands'
 source <(carapace _carapace)
+
+

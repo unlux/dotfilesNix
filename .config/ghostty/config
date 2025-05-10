@@ -1,7 +1,6 @@
 #theme = tokyonight-storm
 theme = rose-pine
 mouse-hide-while-typing = true
-window-decoration = true
 macos-option-as-alt = true
 background-opacity = 0.95
 background-blur = true
@@ -10,9 +9,14 @@ clipboard-paste-protection = false
 gtk-titlebar = false
 shell-integration = zsh
 gtk-single-instance = true
+window-decoration = true
 window-padding-x = 7
 window-padding-y = 7
 font-size = 12
+link-url = true
+desktop-notifications = true
+
+
 # font-family = "CommitMonoNerdFontMono"
 #   /home/lux/.config/ghostty/config
 # Run `ghostty +show-config --default --docs` to view a list of
