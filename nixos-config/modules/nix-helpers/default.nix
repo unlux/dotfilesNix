@@ -9,7 +9,6 @@
 # }
 {
   pkgs,
-  inputs,
   ...
 }: {
   environment.systemPackages =

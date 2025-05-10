@@ -43,16 +43,13 @@
     self,
     nixpkgs,
     nixpkgs-stable,
-    nixos-hardware,
     home-manager,
     # spicetify-nix,
     ghostty,
     disko,
-    nix-alien,
     stylix,
     determinate,
     sops-nix,
-    zen-browser,
     ...
   }: let
     inherit (self) outputs;

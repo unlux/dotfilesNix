@@ -1,21 +1,12 @@
 # GPU Passthrough (imma kms)
-let
-  # RTX 3050 Mobile
-  gpuIDs = [
-    "10de:25a2" # Graphics
-    "10de:2291" # Audio
-  ];
-in
-  {
+{
     lib,
     config,
     ...
   }: {
     options.vfio.enable = with lib; mkEnableOption "Configure the machine for VFIO";
 
-    config = let
-      cfg = config.vfio;
-    in {
+    config = {
       boot = {
         initrd.kernelModules = [
           "vfio_pci"
