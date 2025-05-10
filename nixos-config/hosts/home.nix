@@ -1,6 +1,12 @@
-{pkgs, ...}: {
+{
+  pkgs,
+  inputs,
+  system,
+  ...
+}: {
   imports = [
     # ../modules/fonts/default.nix
+    inputs.zen-browser.homeModules.beta
   ];
 
   home = {
@@ -67,10 +73,31 @@
         };
       };
     };
+
+    carapace = {
+      enable = true;
+      enableNushellIntegration = true;
+      enableBashIntegration = true;
+      enableZshIntegration = true;
+    };
+
+    zen-browser = {
+      enable = true;
+      policies = {
+        DisableAppUpdate = true;
+        DisableTelemetry = true;
+        DisableFirefoxStudies = true;
+        DontCheckDefaultBrowser = true;
+        NoDefaultBookmarks = true;
+        OfferToSaveLogins = false;
+        # find more options here: https://mozilla.github.io/policy-templates/
+      };
+    };
   };
 
   home.packages = (
     with pkgs; [
+      # inputs.zen-browser.packages."${system}".default
       # Browsers
       brave
       ungoogled-chromium
@@ -78,16 +105,17 @@
       # Communication
       # discord
       # discord-ptb
-      vesktop
+      # vesktop
       legcord
       telegram-desktop
 
       # Development
-      nodejs_23
+      nodejs_22
       nodePackages.pnpm
       jdk
       bun
       vscode
+      code-cursor
       bruno
       # lunarvim
 
@@ -112,7 +140,7 @@
       syncthingtray
       termius
       qbittorrent
-      # zoom-us
+      zoom-us
       lazygit
       qdirstat
       atuin
@@ -126,9 +154,7 @@
       # Optional/Commented
       # teamviewer
       # turso-cli
-      # vscode
       # webcord
-      zoom
       # warp-terminal
       # authy
       # flameshot

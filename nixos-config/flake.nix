@@ -17,8 +17,26 @@
     # https://github.com/thiagokokada/nix-alien
     nix-alien.url = "github:thiagokokada/nix-alien";
     stylix.url = "github:danth/stylix";
+    sops-nix.url = "github:Mic92/sops-nix";
 
     determinate.url = "https://flakehub.com/f/DeterminateSystems/determinate/0.1";
+
+    zen-browser.url = "github:0xc000022070/zen-browser-flake";
+    nix-flatpak.url = "github:gmodena/nix-flatpak";
+
+    # flake-compat = {
+    #   type = "github";
+    #   owner = "edolstra";
+    #   repo = "flake-compat";
+    #   flake = false;
+    # };
+    # prismlauncher = {
+    #   url = "github:Diegiwg/PrismLauncher-Cracked";
+    #   inputs = {
+    #     flake-compat.follows = "flake-compat";
+    #     nixpkgs.follows = "nixpkgs";
+    #   };
+    # };
   };
 
   outputs = inputs @ {
@@ -33,30 +51,29 @@
     nix-alien,
     stylix,
     determinate,
+    sops-nix,
+    zen-browser,
     ...
   }: let
     inherit (self) outputs;
     system = "x86_64-linux";
-
-    # The main package set (nixos-unstable)
+    username = "lux";
     pkgs = import nixpkgs {
       inherit system;
       config.allowUnfree = true;
     };
-
-    # A secondary package set (nixos-24.05) for stable versions
     pkgs-stable = import nixpkgs-stable {
       inherit system;
       config.allowUnfree = true;
     };
+    lib = nixpkgs.lib;
   in {
     nixosConfigurations = {
       leptup = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
         specialArgs = {
           hostname = "leptup";
           username = "lux";
-          inherit inputs outputs pkgs-stable;
+          inherit inputs outputs pkgs-stable system;
         };
         modules = [
           disko.nixosModules.disko
@@ -69,9 +86,10 @@
           }
           {
             environment.systemPackages = [
-              ghostty.packages.x86_64-linux.default
+              ghostty.packages.${system}.default
             ];
           }
+          sops-nix.nixosModules.sops
         ];
       };
       # pc = nixpkgs.lib.nixosSystem {
@@ -91,10 +109,8 @@
     # Standalone home-manager configuration entrypoint
     homeConfigurations = {
       "lux@leptup" = home-manager.lib.homeManagerConfiguration {
-        pkgs = nixpkgs.legacyPackages.x86_64-linux;
-        pkgs-stable = nixpkgs-stable.legacyPackages.x86_64-linux;
         extraSpecialArgs = {
-          inherit inputs outputs pkgs pkgs-stable;
+          inherit inputs outputs pkgs pkgs-stable system;
         };
         modules = [
           ./hosts/home.nix

@@ -41,23 +41,23 @@
         name = "CommitMono Nerd Font Regular";
       };
       serif = {
-        name = "Cantarell";
-        package = pkgs.cantarell-fonts;
+        name = "vegur";
+        package = pkgs.vegur;
       };
 
       sansSerif = {
-        name = "Cantarell";
-        package = pkgs.cantarell-fonts;
+        name = "Inter";
+        package = pkgs.inter;
       };
       emoji = {
         package = pkgs.noto-fonts-emoji;
         name = "Noto Color Emoji";
       };
       sizes = {
-        applications = 12;
-        desktop = 10;
-        popups = 10;
-        terminal = 12;
+        applications = 11;
+        desktop = 11;
+        popups = 11;
+        # terminal = 10;
       };
     };
     polarity = "dark";

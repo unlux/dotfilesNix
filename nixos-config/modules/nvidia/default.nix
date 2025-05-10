@@ -45,19 +45,22 @@
     };
     nvidiaSettings = true;
     open = true; #https://wiki.nixos.org/wiki/NVIDIA#cite_note-1
-    package = config.boot.kernelPackages.nvidiaPackages.mkDriver {
-      version = "570.86.16"; # use new 570 drivers
-      sha256_64bit = "sha256-RWPqS7ZUJH9JEAWlfHLGdqrNlavhaR1xMyzs8lJhy9U=";
-      openSha256 = "sha256-DuVNA63+pJ8IB7Tw2gM4HbwlOh1bcDg2AN2mbEU9VPE=";
-      settingsSha256 = "sha256-9rtqh64TyhDF5fFAYiWl3oDHzKJqyOW3abpcf2iNRT8=";
-      usePersistenced = false;
-    };
+    package = config.boot.kernelPackages.nvidiaPackages.production;
+    # package = config.boot.kernelPackages.nvidiaPackages.mkDriver {
+    #   version = "570.86.16"; # use new 570 drivers
+    #   sha256_64bit = "sha256-RWPqS7ZUJH9JEAWlfHLGdqrNlavhaR1xMyzs8lJhy9U=";
+    #   openSha256 = "sha256-DuVNA63+pJ8IB7Tw2gM4HbwlOh1bcDg2AN2mbEU9VPE=";
+    #   settingsSha256 = "sha256-9rtqh64TyhDF5fFAYiWl3oDHzKJqyOW3abpcf2iNRT8=";
+    #   usePersistenced = false;
+    # };
   };
 
   boot = {
     # kernelPackages =  pkgs.linuxKernel.packages.linux_xanmod;
     # kernelPackages = pkgs.linuxPackages_6_6; # use 6.6 LTS kernel
-
+    initrd.kernelModules = ["nvidia" "i915" "nvidia_modeset" "nvidia_drm"];
+    blacklistedKernelModules = ["nouveau"];
+    kernelModules = ["nvidia-uvm"];
     kernelParams = lib.mkMerge [
       ["nvidia-drm.fbdev=1"]
       [
@@ -68,25 +71,20 @@
         "nvidia.NVreg_TemporaryFilePath=/var/tmp" # store on disk, not /tmp which is on RAM
       ])
     ];
-
-    blacklistedKernelModules = ["nouveau"];
-    kernelModules = ["nvidia-uvm"];
   };
 
   environment = {
-    systemPackages = (
-      with pkgs; [
-        # nvidia-vaapi-driver
-        # # libva
-        # libva-utils
-        # nvidia-utils
-        # # libvdpau-va-gl
-        # # vaapiVdpau
-        # # libva-vdpau-driver
-        nvtopPackages.full
-        # nvidia-container-toolkit
-      ]
-    );
+    systemPackages = [
+      # nvidia-vaapi-driver
+      # # libva
+      # libva-utils
+      # nvidia-utils
+      # # libvdpau-va-gl
+      # # vaapiVdpau
+      # # libva-vdpau-driver
+      pkgs.nvtopPackages.full
+      # nvidia-container-toolkit
+    ];
     # sessionVariables = {
     #   "__EGL_VENDOR_LIBRARY_FILENAMES" = "${config.hardware.nvidia.package}/share/glvnd/egl_vendor.d/10_nvidia.json";
     # };

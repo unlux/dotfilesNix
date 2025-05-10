@@ -1,5 +1,0 @@
-# This directory is a Syncthing folder marker.
-# Do not delete.
-
-folderID: iaiog-ryshl
-created: 2024-07-31T18:43:38+05:30

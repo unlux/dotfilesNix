@@ -4,6 +4,7 @@
   pkgs,
   pkgs-stable,
   config,
+  system,
   ...
 }: {
   imports = [
@@ -25,6 +26,8 @@
     ../modules/stylix/default.nix
     ../modules/fonts/default.nix
     ../modules/custom/download-sorter.nix
+    ../modules/android/default.nix
+    ../modules/custom/zen-autobackup.nix
 
     # Or modules from other flakes (such as nixos-hardware):
     # inputs.hardware.nixosModules.common-cpu-amd
@@ -36,6 +39,10 @@
   ];
 
   # xdg.portal.wlr.enable = true;
+
+  sops.defaultSopsFile = ../secrets/secrets.yaml;
+  sops.defaultSopsFormat = "yaml";
+  sops.age.keyFile = "/home/lux/.ssh/keys.txt";
 
   home-manager = {
     extraSpecialArgs = {
@@ -91,28 +98,18 @@
 
   environment.systemPackages =
     (with pkgs; [
-      # Editors
-      neovim
       alacritty
       # zed-editor
 
-      # Browsers
-      # browsers
-      # floorp
-
-      # Virtualization
       virt-manager
-
-      # Nix/NixOS
       home-manager
 
-      # Language chains
+      # Language
       lua
       python3
       # rustup
 
       # Terminal utilities
-      carapace
       # oh-my-posh
       bat
       eza
@@ -123,13 +120,11 @@
       fzf
       mpv
       rsync
-      # starship
       tldr
       tmux
       # wezterm
       wget
       yadm
-      zoxide
 
       # System utilities
       lshw
@@ -191,6 +186,7 @@
       # mtr # A network diagnostic tool
       # socat # replacement of openbsd-netcat
       # wireshark
+      openssl.dev
     ])
     ++ (with pkgs-stable; [
       # floorp

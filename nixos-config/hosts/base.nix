@@ -1,4 +1,8 @@
-{pkgs, ...}: {
+{
+  pkgs,
+  inputs,
+  ...
+}: {
   imports = [
     # ../modules/system/kvm.nix
     # ../modules/system/nvidia.nix
@@ -9,6 +13,7 @@
     ../modules/gnome/default.nix
     ../modules/nix-helpers/default.nix
     ../modules/docker/default.nix
+    inputs.nix-flatpak.nixosModules.nix-flatpak
 
     # Or modules from other flakes (such as nixos-hardware):
     # inputs.hardware.nixosModules.common-cpu-amd
@@ -106,13 +111,43 @@
     enableCompletion = true;
     # history.extended = true;
   };
-  # programs.zoxide.enableZshIntegration = true;
+  programs.zoxide = {
+    enable = true;
+    enableZshIntegration = true;
+  };
+
+  programs.neovim = {
+    enable = true;
+    defaultEditor = true;
+    viAlias = true;
+    vimAlias = true;
+    withNodeJs = true;
+    withPython3 = true;
+  };
+
   # programs.nix-index.enableZshIntegration = true;
   # programs.carapace.enableZshIntegration = true;
   # programs.atuin.enableZshIntegration = true;
 
   environment.systemPackages = [pkgs.flatpak pkgs.gnome-software];
-  services.flatpak.enable = true;
+
+  services.flatpak = {
+    enable = true;
+    packages = [
+      "com.github.tchx84.Flatseal"
+      # "io.github.everestapi.Olympus"
+    ];
+    overrides = {
+      global = {
+        # Force Wayland by default
+        Context.sockets = [
+          "wayland"
+          "!x11"
+          "!fallback-x11"
+        ];
+      };
+    };
+  };
 
   fonts = {
     fontDir.enable = true;

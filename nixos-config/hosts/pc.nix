@@ -90,7 +90,6 @@
       ])
     ++ (with pkgs-stable; [
       wezterm
-      neovim
       microsoft-edge
       chromium
       # virt-manager
@@ -104,7 +103,6 @@
       rsync
       wget
       yadm
-      zoxide
 
       # utils
       lshw
