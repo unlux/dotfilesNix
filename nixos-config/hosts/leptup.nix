@@ -3,7 +3,6 @@
   inputs,
   pkgs,
   pkgs-stable,
-  config,
   system,
   ...
 }: {
