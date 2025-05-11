@@ -1,10 +1,9 @@
 # Generated via dconf2nix: https://github.com/gvolpe/dconf2nix
 {
-  lib,
   username,
   ...
 }: {
-  home-manager.users.${username} = {lib, ...}: {
+  home-manager.users.${username} = { ...}: {
     dconf.settings = {
       "alphabetical-app-grid" = {
         folder-order-position = "start";
