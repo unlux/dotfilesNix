@@ -5,6 +5,7 @@ in {
     ./debloat.nix
     ./extensions.nix
     ./keybindings.nix
+    ./dconf.nix
     # ./triple-buffering.nix #TODO: fix the hash
   ];
 
@@ -13,9 +14,9 @@ in {
   home-manager.users.${username} = {
     dconf.settings = {
       "org/gnome/shell".favorite-apps = [
-        "app.zen_browser.zen.desktop"
+        "zen-beta.desktop"
         "code.desktop"
-        "vesktop.desktop"
+        "legcord.desktop"
       ];
       "org/gnome/desktop/interface" = {
         enable-hot-corners = true;

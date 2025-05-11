@@ -22,7 +22,9 @@
     gnomeExtensions.auto-select-headset
     gnomeExtensions.media-controls
     gnomeExtensions.system-monitor
-    gnomeExtensions.notification-timeout
+    gnomeExtensions.compiz-alike-magic-lamp-effect
+    gnomeExtensions.compiz-windows-effect
+    # gnomeExtensions.notification-timeout
     #gnomeExtensions.arcmenu
     #gnomeExtensions.burn-my-windows
     # gnomeExtensions.compact-top-bar
@@ -46,22 +48,6 @@ in {
       # "org/gnome/shell".disabled-extensions = [
       #     "just-perfection-desktop@just-perfection"
       # ];
-
-      # Configure blur-my-shell
-      # "org/gnome/shell/extensions/blur-my-shell" = {
-      #   brightness = 0.85;
-      #   dash-opacity = 0.25;
-      #   sigma = 15; # Sigma means blur amount
-      #   static-blur = true;
-      # };
-      # "org/gnome/shell/extensions/blur-my-shell/panel".blur = true;
-      # "org/gnome/shell/extensions/blur-my-shell/appfolder" = {
-      #   blur = true;
-      #   style-dialogs = 0;
-      # };
-      "org/gnome/shell/extensions/dash-to-panel" = {
-        appicon-padding = "4";
-      };
     };
   };
 }

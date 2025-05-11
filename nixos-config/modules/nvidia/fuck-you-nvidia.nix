@@ -1,7 +1,4 @@
-{
-  lib,
-  ...
-}: {
+{lib, ...}: {
   specialisation.fuck-you-nvidia.configuration = {
     # system.nixos.tags = ["fuck-you-nvidia"];
     boot = {

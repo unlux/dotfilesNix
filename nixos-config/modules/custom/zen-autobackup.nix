@@ -1,7 +1,4 @@
-{
-  config,
-  ...
-}: {
+{config, ...}: {
   sops.secrets.restic_password = {
     sopsFile = ../../hosts/secrets/secrets.yaml;
     owner = "lux";

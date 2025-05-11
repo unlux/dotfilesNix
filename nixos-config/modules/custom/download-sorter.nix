@@ -1,7 +1,4 @@
-{
-  pkgs,
-  ...
-}: let
+{pkgs, ...}: let
   download-sorter-script = pkgs.writeScript "/etc/local/bin/download_sorter.py" ''
     #!/usr/bin/env python3
     import os

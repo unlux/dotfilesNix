@@ -59,8 +59,15 @@
           editor = "nvim";
           autocrlf = "input";
         };
-        pull.rebase = true;
-        push.autoSetupRemote = true;
+        pull = {
+          # default = current;
+          rebase = true;
+        };
+        push = {
+          autoSetupRemote = true;
+          followTags = true;
+          # default = current;
+        };
         # credential.helper = "store";
         merge = {
           conflictStyle = "diff3";
@@ -70,12 +77,17 @@
           enabled = true;
           autoupdate = true;
         };
+        status = {
+          branch = true;
+          showStash = true;
+          showUntrackedFiles = true;
+        };
       };
     };
 
     carapace = {
       enable = true;
-      enableNushellIntegration = true;
+      # enableNushellIntegration = true;
       enableBashIntegration = true;
       enableZshIntegration = true;
     };
@@ -105,6 +117,7 @@
       # discord
       # discord-ptb
       # vesktop
+      signal-desktop
       legcord
       telegram-desktop
 

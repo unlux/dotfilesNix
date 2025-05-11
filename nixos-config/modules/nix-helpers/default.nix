@@ -7,10 +7,7 @@
 #     flake = "/home/lux/nixos-config";
 #   };
 # }
-{
-  pkgs,
-  ...
-}: {
+{pkgs, ...}: {
   environment.systemPackages =
     (with pkgs; [
       nix-output-monitor
