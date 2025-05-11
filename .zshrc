@@ -52,16 +52,16 @@ setopt hist_save_no_dups
 setopt hist_ignore_dups
 setopt hist_find_no_dups
 
-# pnpm
-export PNPM_HOME="/home/lux/.local/share/pnpm"
-case ":$PATH:" in
-  *":$PNPM_HOME:"*) ;;
-  *) export PATH="$PNPM_HOME:$PATH" ;;
-esac
-# pnpm end
+# # pnpm
+# export PNPM_HOME="/home/lux/.local/share/pnpm"
+# case ":$PATH:" in
+#   *":$PNPM_HOME:"*) ;;
+#   *) export PATH="$PNPM_HOME:$PATH" ;;
+# esac
+# # pnpm end
 
-# Turso
-export PATH="/home/lux/.turso:$PATH"
+# # Turso
+# export PATH="/home/lux/.turso:$PATH"
 
 # adding file for lux's aliases
 source $HOME/.aliases
@@ -96,5 +96,8 @@ export LS_COLORS=$(vivid generate dracula)
 export CARAPACE_BRIDGES='zsh,fish,bash,inshellisense' # optional
 zstyle ':completion:*:git:*' group-order 'main commands' 'alias commands' 'external commands'
 source <(carapace _carapace)
+
+bindkey -e
+
 
 
