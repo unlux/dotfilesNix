@@ -2,7 +2,6 @@ on:
   pull_request:
   push:
     branches: [main]
-    
 jobs:
   build:
     name: Build Nix targets
@@ -13,5 +12,7 @@ jobs:
         uses: DeterminateSystems/flake-checker-action@v4
       - name: Install Nix
         uses: DeterminateSystems/nix-installer-action@v3
-      - name: Build default package
-        run: cd nixos-config && nix build
+      - name: Check flake
+        run: cd nixos-config && nix flake check
+      - name: Show flake info
+        run: cd nixos-config && nix flake show
