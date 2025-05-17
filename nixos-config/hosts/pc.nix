@@ -1,5 +1,5 @@
 # Use this to configure your system environment (it replaces /etc/nixos/configuration.nix)
-{...}: {
+{config, pkgs, pkgs-stable, system, ...}: {
   imports = [
     ./base.nix
     ../modules/system/system-packages-pc.nix
