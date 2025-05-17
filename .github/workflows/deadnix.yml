@@ -1,15 +1,70 @@
-on: [push]
+# ported from astro/deadnix, huge thanks to him.
 
-name: Dead code analysis
+name: Deadnix Analysis and PR
+
+on:
+  push:
+    branches:
+      - main 
+  workflow_dispatch: 
 
 jobs:
-  deadnix:
-    name: Deadnix
+  find-and-fix-deadnix:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write 
+      pull-requests: write 
     steps:
-      - uses: actions/checkout@v4
-      - uses: cachix/install-nix-action@v31
-      - uses: cachix/cachix-action@v16
+      - name: Checkout repository
+        uses: actions/checkout@v4
         with:
-          name: deadnix
-      - uses: astro/deadnix-action@main
+          fetch-depth: 0 
+
+      - name: Install Nix
+        uses: cachix/install-nix-action@v25
+
+      - name: Run Deadnix Action (edits files only)
+        uses: astro/deadnix-action@main 
+        with:
+          flags: '--edit' 
+          directory: '.'  
+          create_pr: 'false' # Crucial: Disable internal PR creation
+
+      - name: Configure Git User
+        run: |
+          git config user.name "unlux"
+          git config user.email "92749166+unlux@users.noreply.github.com"
+
+      - name: Commit Deadnix Changes
+        id: commit_deadnix_changes
+        run: |
+          # Check if there are changes staged by deadnix --edit
+          if ! git diff --quiet; then
+            git add . # Stage all changes made by deadnix
+            git commit -m "Fix: Apply deadnix suggestions"
+            echo "changes_committed=true" >> $GITHUB_OUTPUT
+            echo "BRANCH_NAME=deadnix/$(date +%Y%m%d%H%M%S)" >> $GITHUB_OUTPUT
+          else
+            echo "No changes to commit."
+            echo "changes_committed=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Create Pull Request in Your Name
+        if: steps.commit_deadnix_changes.outputs.changes_committed == 'true'
+        uses: peter-evans/create-pull-request@v6
+        with:
+          token: ${{ secrets.GH_PAT }} 
+          commit-message: "Fix: Apply deadnix suggestions"
+          author: unlux <92749166+unlux@users.noreply.github.com>
+          committer: unlux <92749166+unlux@users.noreply.github.com> 
+          branch: ${{ steps.commit_deadnix_changes.outputs.BRANCH_NAME }} 
+          base: main 
+          delete-branch: true 
+          title: "Automated Deadnix Code Cleanup"
+          body: |
+            Deadnix has found and fixed unused Nix code.
+          labels: |
+            nix
+            automated-pr
+            deadnix
+          assignees: unlux 
