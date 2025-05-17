@@ -201,6 +201,18 @@
   services.hardware.openrgb.enable = true; # openrgb udev rules
   services.ratbagd.enable = true; # piper
 
+  services.earlyoom = {
+    enable = true;
+    freeSwapThreshold = 2; # in percent
+    freeMemThreshold = 2; # in percent
+    enableNotifications = true;
+    extraArgs = [
+      "-g"
+      "--avoid '(^|/)(init|Xorg|ssh)$'"
+      "--prefer '(^|/)(java|chromium)$'"
+    ];
+  };
+
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
   system.stateVersion = "23.11";
 }

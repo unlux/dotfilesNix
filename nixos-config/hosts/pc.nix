@@ -11,7 +11,7 @@
     # home-manager
     # inputs.home-manager.nixosModules.default
 
-    # ./pc-hardware.nix
+    ./pc-hardware.nix
   ];
 
   # # This will add each flake input as a registry
@@ -85,7 +85,7 @@
     };
   };
 
-  environment.systempackages =
+  environment.systemPackages =
     (with pkgs; [
       ])
     ++ (with pkgs-stable; [
@@ -128,6 +128,8 @@
       # system monitoring tools
       btop # replacement of htop/nmon
       iotop # io monitoring
+      carapace
+      vivid
     ]);
 
   nixpkgs.config.permittedInsecurePackages = [

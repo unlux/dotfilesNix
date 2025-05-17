@@ -89,18 +89,19 @@
           sops-nix.nixosModules.sops
         ];
       };
-      # pc = nixpkgs.lib.nixosSystem {
-      #   system = "x86_64-linux";
-      #   specialArgs = {
-      #     hostname = "pc";
-      #     inherit inputs outputs;
-      #   };
-      #   modules = [
-      #     # > Our main nixos configuration file <
-      #     ./hosts/pc.nix
-      #     # inputs.home-manager.nixosModules.default
-      #   ];
-      # };
+      pc = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        specialArgs = {
+          hostname = "pc";
+          username = "lux";
+          inherit inputs outputs pkgs-stable system;
+        };
+        modules = [
+          # > Our main nixos configuration file <
+          ./hosts/pc.nix
+          # inputs.home-manager.nixosModules.default
+        ];
+      };
     };
 
     # Standalone home-manager configuration entrypoint
