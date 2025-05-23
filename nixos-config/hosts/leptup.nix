@@ -27,6 +27,7 @@
     ../modules/custom/download-sorter.nix
     ../modules/android/default.nix
     ../modules/custom/zen-autobackup.nix
+    # ../modules/custom/mpris-proxy.nix
 
     # Or modules from other flakes (such as nixos-hardware):
     # inputs.hardware.nixosModules.common-cpu-amd
@@ -98,98 +99,45 @@
   environment.systemPackages =
     (with pkgs; [
       alacritty
-      # zed-editor
-
-      virt-manager
       home-manager
-
-      # Language
+      appimage-run
+      openssl.dev
+      ghostty
+      thefuck
+    ])
+    ++ (with pkgs-stable; [
+      virt-manager
       lua
       python3
-      # rustup
-
-      # Terminal utilities
-      # oh-my-posh
-      bat
-      eza
-      fd
-      fastfetch
-      ffmpeg
-      # devbox
-      fzf
-      mpv
-      rsync
-      tldr
-      tmux
-      # wezterm
-      wget
-      yadm
-
-      # System utilities
       lshw
       pciutils
       usbutils
       xdg-utils
       iptables
       nmap
-
-      # Archive tools
-      # p7zip
       unzip
       zip
-
-      # Miscellaneous tools
+      bat
+      eza
+      fd
+      fastfetch
+      ffmpeg
+      fzf
+      mpv
+      rsync
+      tldr
+      tmux
+      wget
+      yadm
       git
       ntfs3g
-      ripgrep # recursively searches directories for a regex pattern
-      cowsay
       file
       gawk
-      # gnupg
-      # gnused
-      # gnumake
-      # gnutar
-      # nnn # terminal file manager
       tree
-      # zstd
-      appimage-run
-
-      # System monitoring tools
-      btop # replacement of htop/nmon
-      iotop # io monitoring
-      # lm_sensors # for `sensors` command
-      # lsof # list open files
-      # strace # system call monitoring
-      # sysstat
-
-      # Data processing
-      # jq # A lightweight and flexible command-line JSON processor
-      # yq-go # yaml processor https://github.com/mikefarah/yq
-
-      # Other/Optional
-      # glow # markdown previewer in terminal
-      # hugo # static site generator
-
-      #CYBER PKGS
-      # gobuster
-      # seclists
-      # netcat-openbsd
-      # ethtool
-      # iftop # network monitoring
-      # ltrace # library call monitoring
-      # aria2 # A lightweight multi-protocol & multi-source command-line download utility
-      # dnsutils # `dig` + `nslookup`
-      # iperf3
-      # ipcalc # it is a calculator for the IPv4/v6 addresses
-      # ldns # replacement of `dig`
-      # mtr # A network diagnostic tool
-      # socat # replacement of openbsd-netcat
-      # wireshark
-      openssl.dev
-    ])
-    ++ (with pkgs-stable; [
-      # floorp
-      cargo # need old version coz prisma-engine's `time` module build failing
+      btop
+      iotop
+      cargo
+      nvtopPackages.full
     ]);
 
   environment.sessionVariables = {
@@ -208,7 +156,7 @@
     enableNotifications = true;
     extraArgs = [
       "-g"
-      "--avoid '(^|/)(init|Xorg|ssh)$'"
+      # "--avoid '(^|/)(init|Xorg|ssh)$'"
       "--prefer '(^|/)(java|chromium)$'"
     ];
   };

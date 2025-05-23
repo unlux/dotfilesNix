@@ -1,4 +1,4 @@
-{pkgs, ...}: {
+{pkgs-stable, ...}: {
   virtualisation = {
     oci-containers.backend = "docker";
     docker = {
@@ -16,7 +16,7 @@
   # hardware.nvidia-container-toolkit.enable = true;
 
   environment.systemPackages = [
-    pkgs.docker-compose
+    pkgs-stable.docker-compose
     # devenv
   ];
 }

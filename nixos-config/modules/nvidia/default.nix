@@ -82,7 +82,7 @@
       # # libvdpau-va-gl
       # # vaapiVdpau
       # # libva-vdpau-driver
-      pkgs.nvtopPackages.full
+      # pkgs.nvtopPackages.full
       # nvidia-container-toolkit
     ];
     # sessionVariables = {

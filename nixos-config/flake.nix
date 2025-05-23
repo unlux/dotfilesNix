@@ -10,7 +10,7 @@
     # spicetify-nix.url = "github:the-argus/spicetify-nix";
     # hardware.url = "github:nixos/nixos-hardware";
 
-    ghostty = {url = "github:ghostty-org/ghostty";};
+    # ghostty = {url = "github:ghostty-org/ghostty";};
     disko.url = "github:nix-community/disko";
     disko.inputs.nixpkgs.follows = "nixpkgs";
 
@@ -45,7 +45,7 @@
     nixpkgs-stable,
     home-manager,
     # spicetify-nix,
-    ghostty,
+    # ghostty,
     disko,
     stylix,
     determinate,
@@ -82,9 +82,9 @@
             _module.args.disks = ["/dev/nvme0n1"];
           }
           {
-            environment.systemPackages = [
-              ghostty.packages.${system}.default
-            ];
+            # environment.systemPackages = [
+            #   ghostty.packages.${system}.default
+            # ];
           }
           sops-nix.nixosModules.sops
         ];

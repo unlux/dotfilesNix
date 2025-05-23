@@ -80,7 +80,7 @@
         status = {
           branch = true;
           showStash = true;
-          showUntrackedFiles = true;
+          # showUntrackedFiles = true;
         };
       };
     };
