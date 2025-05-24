@@ -2,7 +2,6 @@
 {config, pkgs, pkgs-stable, system, ...}: {
   imports = [
     ./base.nix
-    ../modules/system/system-packages-pc.nix
 
     # Or modules from other flakes (such as nixos-hardware):
     # inputs.hardware.nixosModules.common-cpu-amd
