@@ -38,15 +38,8 @@
   #   })
   #   config.nix.registry;
 
-  services.printing = {
-    enable = true;
-    drivers = [pkgs.hplipWithPlugin];
-  };
-
   boot.loader = {
-    efi = {
-      canTouchEfiVariables = true;
-    };
+    efi.canTouchEfiVariables = true;
     grub = {
       enable = true;
       efiSupport = true;
@@ -58,30 +51,13 @@
     };
   };
 
-  services.openssh = {
-    enable = true;
-    settings = {
-      X11Forwarding = true;
-      PermitRootLogin = "no"; # disable root login
-      PasswordAuthentication = true; # disable (i enabled it) password login
-    };
-    # openFirewall = true;
-  };
+  nix.settings.experimental-features = ["nix-command" "flakes"];
+  # auto-optimise-store = true;
 
-  nix.settings = {
-    experimental-features = [
-      "nix-command"
-      "flakes"
-    ];
-    # auto-optimise-store = true;
-  };
-
-  nixpkgs = {
-    config = {
-      allowUnfree = true;
-      # Workaround for https://github.com/nix-community/home-manager/issues/2942
-      allowUnfreePredicate = _: true;
-    };
+  nixpkgs.config = {
+    allowUnfree = true;
+    # Workaround for https://github.com/nix-community/home-manager/issues/2942
+    allowUnfreePredicate = _: true;
   };
 
   users = {
@@ -115,7 +91,6 @@
     enable = true;
     enableZshIntegration = true;
   };
-
   programs.neovim = {
     enable = true;
     defaultEditor = true;
@@ -124,13 +99,21 @@
     withNodeJs = true;
     withPython3 = true;
   };
-
   # programs.nix-index.enableZshIntegration = true;
   # programs.carapace.enableZshIntegration = true;
   # programs.atuin.enableZshIntegration = true;
 
   environment.systemPackages = [pkgs.flatpak pkgs.gnome-software];
 
+  services.openssh = {
+    enable = true;
+    settings = {
+      X11Forwarding = true;
+      PermitRootLogin = "no"; # disable root login
+      PasswordAuthentication = true; # disable (i enabled it) password login
+    };
+    # openFirewall = true;
+  };
   services.flatpak = {
     enable = true;
     packages = [
@@ -161,9 +144,7 @@
   };
 
   time.timeZone = "Asia/Kolkata";
-
   i18n.defaultLocale = "en_US.UTF-8";
-
   i18n.extraLocaleSettings = {
     LC_ADDRESS = "en_IN";
     LC_IDENTIFICATION = "en_IN";

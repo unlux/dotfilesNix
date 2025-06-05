@@ -1,13 +1,15 @@
 {...}: {
-  services.xserver = {
-    enable = true;
+  services = {
     desktopManager.gnome.enable = true;
     displayManager.gdm = {
       enable = true;
       wayland = true;
       autoSuspend = false;
     };
-    xkb.layout = "us";
+    xserver = {
+      enable = true;
+      xkb.layout = "us";
+    };
   };
   services.libinput.enable = true;
 }

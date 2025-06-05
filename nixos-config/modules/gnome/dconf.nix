@@ -1,9 +1,6 @@
 # Generated via dconf2nix: https://github.com/gvolpe/dconf2nix
-{
-  username,
-  ...
-}: {
-  home-manager.users.${username} = { ...}: {
+{username, ...}: {
+  home-manager.users.${username} = {...}: {
     dconf.settings = {
       "alphabetical-app-grid" = {
         folder-order-position = "start";
@@ -74,7 +71,7 @@
       };
 
       "gsconnect" = {
-        discoverable = false;
+        discoverable = true;
         enabled = true;
         id = "392dd798-c242-46e5-a856-b5f3fc31b295";
         name = "leptup";

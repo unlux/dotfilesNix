@@ -59,6 +59,7 @@
   # };
 
   boot.kernelPackages = pkgs.linuxPackages_6_6; # use 6.6 LTS kernel
+  boot.blacklistedKernelModules = ["btmtk"]; # MediaTek Bluetooth driver
 
   # specialisation.no-leptup-keyboard.configuration = {
   #   boot.kernelParams = lib.mkForce ["i8042.nokbd"];
@@ -66,15 +67,12 @@
 
   security.sudo-rs.enable = true;
 
-  boot.blacklistedKernelModules = ["btmtk"]; # MediaTek Bluetooth driver
-  services.udev.extraRules = ''
-    SUBSYSTEM=="bluetooth", ATTR{address}=="A8:6E:84:20:D8:B7", ATTR{powered}="0"
-  '';
-
   programs.appimage.enable = true;
   programs.appimage.binfmt = true;
 
-  # environment.systemPackages = [pkgs.distrobox];
+  services.udev.extraRules = ''
+    SUBSYSTEM=="bluetooth", ATTR{address}=="A8:6E:84:20:D8:B7", ATTR{powered}="0"
+  '';
 
   services.sunshine = {
     enable = true;
@@ -103,7 +101,8 @@
       appimage-run
       openssl.dev
       ghostty
-      thefuck
+      # thefuck
+      pay-respects
     ])
     ++ (with pkgs-stable; [
       virt-manager
@@ -155,9 +154,9 @@
     freeMemThreshold = 2; # in percent
     enableNotifications = true;
     extraArgs = [
-      "-g"
+      # "-g"
       # "--avoid '(^|/)(init|Xorg|ssh)$'"
-      "--prefer '(^|/)(java|chromium)$'"
+      # "--prefer '(^|/)(java|chromium)$'"
     ];
   };
 

@@ -1,5 +1,5 @@
 {
-# https://github.com/VanCoding/nix-prisma-utils
+  # https://github.com/VanCoding/nix-prisma-utils
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
     prisma-utils.url = "github:VanCoding/nix-prisma-utils";

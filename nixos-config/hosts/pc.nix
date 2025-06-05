@@ -1,5 +1,11 @@
 # Use this to configure your system environment (it replaces /etc/nixos/configuration.nix)
-{config, pkgs, pkgs-stable, system, ...}: {
+{
+  config,
+  pkgs,
+  pkgs-stable,
+  system,
+  ...
+}: {
   imports = [
     ./base.nix
 
@@ -36,6 +42,11 @@
       "flakes"
     ];
     # auto-optimise-store = true;
+  };
+
+  services.printing = {
+    enable = true;
+    drivers = [pkgs.hplipWithPlugin];
   };
 
   # system.autoUpgrade.enable = true;

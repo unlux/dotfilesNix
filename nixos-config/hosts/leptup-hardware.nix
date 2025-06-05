@@ -20,7 +20,7 @@
   boot.initrd.kernelModules = [];
   boot.kernelModules = ["kvm-amd" "amdgpu"];
   boot.extraModulePackages = [
-    config.boot.kernelPackages.asus-wmi-sensors
+    # config.boot.kernelPackages.asus-wmi-sensors
     pkgs.bluez
     config.boot.kernelPackages.rtl8821au
   ];

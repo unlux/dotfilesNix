@@ -99,5 +99,6 @@ source <(carapace _carapace)
 
 bindkey -e
 
+eval "$(pay-respects zsh)"
 
 
