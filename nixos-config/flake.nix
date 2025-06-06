@@ -104,6 +104,10 @@
       };
     };
 
+    nixosModules = {
+      nvidia = import ./modules/easyNvidia;
+    };
+
     # Standalone home-manager configuration entrypoint
     homeConfigurations = {
       "lux@leptup" = home-manager.lib.homeManagerConfiguration {

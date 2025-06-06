@@ -19,7 +19,6 @@
 
   environment.gnome.excludePackages = with pkgs;
     [
-      # Alphabetical order, no duplicates
       atomix
       baobab
       eog
@@ -45,14 +44,5 @@
       yelp
     ]
     ++ (with pkgs.gnome; [
-      #keeping it for memory
-      gvfs
-    ]);
-
-  # # Add GNOME Shell extensions to disable
-  # environment.gnome.excludeShellExtensions = [
-  #   "background-logo@fedorahosted.org"
-  #   "desktop-icons@csoriano"
-  #   "window-list@gnome-shell-extensions.gcampax.github.com"
-  # ];
+      ]);
 }

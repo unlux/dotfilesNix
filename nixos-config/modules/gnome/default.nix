@@ -9,6 +9,15 @@ in {
     # ./triple-buffering.nix #TODO: fix the hash
   ];
 
+  services = {
+    desktopManager.gnome.enable = true;
+    displayManager.gdm = {
+      enable = true;
+      wayland = true;
+      autoSuspend = false;
+    };
+  };
+
   services.udev.packages = [pkgs.gnome-settings-daemon];
   programs.dconf.enable = true;
   home-manager.users.${username} = {
@@ -58,6 +67,7 @@ in {
 
   environment.systemPackages = with pkgs; [
     gnome-tweaks
+    gnome-software
     dconf-editor
     # kdeconnect
     wl-clipboard

@@ -51,6 +51,7 @@
     tcpdump
     inetutils
     rclone
+    rsync
     # cloudflare-warp
     # cloudflared
   ];

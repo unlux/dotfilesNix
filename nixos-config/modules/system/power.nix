@@ -1,17 +1,12 @@
 {...}: {
-  # Enable powertop
-  powerManagement = {
-    #     enable = true;
-    powertop.enable = true;
-    #     # cpuFreqGovernor = "powersave";
-  };
+  powerManagement.powertop.enable = true;
 
   services = {
     # Disable GNOMEs power management
     power-profiles-daemon.enable = false;
 
     system76-scheduler = {
-      #   enable = true;
+      enable = true;
       settings.cfsProfiles.enable = true;
       #   useStockConfig = true;
     };

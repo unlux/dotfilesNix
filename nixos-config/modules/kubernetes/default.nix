@@ -1,5 +1,4 @@
 {pkgs, ...}: {
-  # Include the Kubernetes packages you need
   environment.systemPackages = [
     # kubernetes
     pkgs.cri-tools # for crictl

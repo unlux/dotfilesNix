@@ -36,10 +36,8 @@
     # unblank
   ];
 in {
-  # ---- Home Configuration ----
   home-manager.users.${username} = {
     home.packages = gnomeExtensionsList;
-
     dconf.settings = {
       "org/gnome/shell".enabled-extensions = builtins.map (x: x.extensionUuid) (
         lib.filter (p: p ? extensionUuid) gnomeExtensionsList

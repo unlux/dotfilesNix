@@ -1,4 +1,3 @@
-# Use this to configure your system environment (it replaces /etc/nixos/configuration.nix)
 {
   inputs,
   pkgs,
@@ -12,7 +11,7 @@
     ../modules/system/power.nix
     # ../modules/system/noisecancel.nix
     ../modules/system/bluetooth.nix
-    ../modules/nvidia/default.nix
+    # ../modules/nvidia/default.nix
     # ../modules/nvidia/gpuPassthrough.nix
     ../modules/gaming/default.nix
     # ../modules/prisma/default.nix
@@ -21,7 +20,7 @@
     # ../modules/ollama/default.nix
     # ../modules/printing/default.nix
     # ../overlays/default.nix
-    # ../modules/plymouth/default.nix
+    ../modules/plymouth/default.nix
     ../modules/stylix/default.nix
     ../modules/fonts/default.nix
     ../modules/custom/download-sorter.nix
@@ -29,14 +28,24 @@
     ../modules/custom/zen-autobackup.nix
     # ../modules/custom/mpris-proxy.nix
 
-    # Or modules from other flakes (such as nixos-hardware):
     # inputs.hardware.nixosModules.common-cpu-amd
     # inputs.hardware.nixosModules.common-pc-ssd
-
-    # home-manager
+    inputs.self.nixosModules.nvidia
     inputs.home-manager.nixosModules.default
     ./leptup-hardware.nix
   ];
+
+  easyNvidia = {
+    enable = true;
+    withIntegratedGPU = true;
+    vaapi.firefox.av1Support = true;
+    desktopEnvironment = "gnome";
+  };
+
+  hardware.nvidia.prime = {
+    amdgpuBusId = "PCI:5:0:0";
+    nvidiaBusId = "PCI:1:0:0";
+  };
 
   # xdg.portal.wlr.enable = true;
 
@@ -58,40 +67,51 @@
   #   shell = pkgs.nushell;
   # };
 
-  boot.kernelPackages = pkgs.linuxPackages_6_6; # use 6.6 LTS kernel
   boot.blacklistedKernelModules = ["btmtk"]; # MediaTek Bluetooth driver
-
-  # specialisation.no-leptup-keyboard.configuration = {
-  #   boot.kernelParams = lib.mkForce ["i8042.nokbd"];
-  # }; # for use with external keyboard
 
   security.sudo-rs.enable = true;
 
   programs.appimage.enable = true;
   programs.appimage.binfmt = true;
 
-  services.udev.extraRules = ''
-    SUBSYSTEM=="bluetooth", ATTR{address}=="A8:6E:84:20:D8:B7", ATTR{powered}="0"
-  '';
-
-  services.sunshine = {
-    enable = true;
-    autoStart = true;
-    capSysAdmin = true; # only needed for Wayland -- omit this when using with Xorg
-    openFirewall = true;
-    package = pkgs.sunshine.override {
-      cudaSupport = true;
+  services = {
+    sunshine = {
+      enable = true;
+      autoStart = true;
+      capSysAdmin = true; # only needed for Wayland -- omit this when using with Xorg
+      openFirewall = true;
+      package = pkgs.sunshine.override {
+        cudaSupport = true;
+      };
     };
-  };
 
-  services.syncthing = {
-    enable = true;
-    # configDir = ""
-    openDefaultPorts = true;
-    systemService = true;
-    user = "lux";
-    group = "syncthing";
-    dataDir = "/home/lux";
+    earlyoom = {
+      enable = true;
+      freeSwapThreshold = 2; # in percent
+      freeMemThreshold = 2; # in percent
+      enableNotifications = true;
+      extraArgs = [
+        # "-g"
+        # "--avoid '(^|/)(init|Xorg|ssh)$'"
+        # "--prefer '(^|/)(java|chromium)$'"
+      ];
+    };
+
+    syncthing = {
+      enable = true;
+      # configDir = ""
+      openDefaultPorts = true;
+      systemService = true;
+      user = "lux";
+      group = "syncthing";
+      dataDir = "/home/lux";
+    };
+
+    udev.extraRules = ''
+      SUBSYSTEM=="bluetooth", ATTR{address}=="A8:6E:84:20:D8:B7", ATTR{powered}="0"
+    '';
+    hardware.openrgb.enable = true; # openrgb udev rules
+    ratbagd.enable = true; # piper
   };
 
   environment.systemPackages =
@@ -123,7 +143,6 @@
       ffmpeg
       fzf
       mpv
-      rsync
       tldr
       tmux
       wget
@@ -143,21 +162,6 @@
     NIXOS_OZONE_WL = 1;
     TERMINAL = "ghostty";
     MOZ_ENABLE_WAYLAND = 1;
-  };
-
-  services.hardware.openrgb.enable = true; # openrgb udev rules
-  services.ratbagd.enable = true; # piper
-
-  services.earlyoom = {
-    enable = true;
-    freeSwapThreshold = 2; # in percent
-    freeMemThreshold = 2; # in percent
-    enableNotifications = true;
-    extraArgs = [
-      # "-g"
-      # "--avoid '(^|/)(init|Xorg|ssh)$'"
-      # "--prefer '(^|/)(java|chromium)$'"
-    ];
   };
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion

@@ -4,15 +4,14 @@ in {
   # ---- Home Configuration ----
   home-manager.users.${username} = {
     dconf.settings = {
-      # Keybindings
+      # gnome default Keybinding remapping
       "org/gnome/desktop/wm/keybindings" = {
-        close = ["<Super>w"];
-        move-to-monitor-down = "disabled";
-        move-to-monitor-left = "disabled";
-        move-to-monitor-right = "disabled";
-        move-to-monitor-up = "disabled";
-        move-to-workspace-down = "disabled";
-        toggle-message-tray = "disabled";
+        # close = ["<Super>w"];
+        move-to-monitor-down = "<Super>j";
+        # move-to-monitor-left = "disabled";
+        # move-to-monitor-right = "disabled";
+        move-to-monitor-up = "<Super>k";
+        # toggle-message-tray = "disabled";
         # maximize = "disabled";
         # minimize = "disabled";
       };
@@ -29,6 +28,7 @@ in {
         name = "File Manager";
       };
 
+      # for a keyboard with no dedicated volume keys
       # "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2" = {
       #   binding = "<ctrl><alt>o";
       #   command = "wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+";
