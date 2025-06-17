@@ -35,6 +35,8 @@
     ./leptup-hardware.nix
   ];
 
+  nix.settings.experimental-features = ["nix-command" "flakes"];
+
   easyNvidia = {
     enable = true;
     withIntegratedGPU = true;

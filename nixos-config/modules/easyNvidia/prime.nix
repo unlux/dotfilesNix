@@ -29,6 +29,7 @@ in {
   config = lib.mkIf cfg.enable {
     hardware.nvidia = {
       prime.offload.enable = true;
+      prime.offload.enableOffloadCmd = true;
       powerManagement.finegrained = true;
     };
 
