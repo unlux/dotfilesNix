@@ -73,11 +73,11 @@
           inherit inputs outputs pkgs-stable system;
         };
         modules = [
-          disko.nixosModules.disko
+          #disko.nixosModules.disko
           stylix.nixosModules.stylix
           determinate.nixosModules.default
           ./hosts/leptup.nix # > Our main nixos configuration file
-          ./hosts/disk.nix # disko config file
+          #./hosts/disk.nix # disko config file
           {
             _module.args.disks = ["/dev/nvme0n1"];
           }
@@ -89,19 +89,19 @@
           sops-nix.nixosModules.sops
         ];
       };
-      pc = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        specialArgs = {
-          hostname = "pc";
-          username = "lux";
-          inherit inputs outputs pkgs-stable system;
-        };
-        modules = [
-          # > Our main nixos configuration file <
-          ./hosts/pc.nix
-          # inputs.home-manager.nixosModules.default
-        ];
-      };
+      # pc = nixpkgs.lib.nixosSystem {
+      #   system = "x86_64-linux";
+      #   specialArgs = {
+      #     hostname = "pc";
+      #     username = "lux";
+      #     inherit inputs outputs pkgs-stable system;
+      #   };
+      #   modules = [
+      #     # > Our main nixos configuration file <
+      #     ./hosts/pc.nix
+      #     # inputs.home-manager.nixosModules.default
+      #   ];
+      # };
     };
 
     nixosModules = {

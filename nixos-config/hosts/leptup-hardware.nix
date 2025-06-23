@@ -9,6 +9,18 @@
   ...
 }: {
   imports = [(modulesPath + "/installer/scan/not-detected.nix")];
+  
+  fileSystems."/" =
+    { device = "/dev/disk/by-uuid/6abfb58e-3e47-4000-8cd9-99658d0f8e36";
+      fsType = "btrfs";
+      options = [ "subvol=@" ];
+    };
+
+  fileSystems."/boot" =
+    { device = "/dev/disk/by-uuid/0217-EB98";
+      fsType = "vfat";
+      options = [ "fmask=0022" "dmask=0022" ];
+    };
 
   boot.initrd.availableKernelModules = [
     "nvme"

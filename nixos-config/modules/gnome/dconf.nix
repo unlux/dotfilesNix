@@ -2,18 +2,18 @@
 {username, ...}: {
   home-manager.users.${username} = {...}: {
     dconf.settings = {
-      "alphabetical-app-grid" = {
+      "org/gnome/shell/extensions/alphabetical-app-grid" = {
         folder-order-position = "start";
       };
 
-      "com/github/hermes83/compiz-windows-effect" = {
+      "org/gnome/shell/extensions/com/github/hermes83/compiz-windows-effect" = {
         mass = 80.0;
         resize-effect = false;
         speedup-factor-divider = 6.0;
         spring-k = 2.4;
       };
 
-      "dash-to-panel" = {
+      "org/gnome/shell/extensions/dash-to-panel" = {
         animate-appicon-hover = true;
         appicon-margin = 0;
         appicon-padding = "4";
@@ -56,7 +56,7 @@
         window-preview-title-position = "TOP";
       };
 
-      "display-brightness-ddcutil" = {
+      "org/gnome/shell/extensions/display-brightness-ddcutil" = {
         button-location = 0;
         ddcutil-binary-path = "/usr/bin/ddcutil";
         ddcutil-queue-ms = 130.0;
@@ -70,20 +70,20 @@
         step-change-keyboard = 2.0;
       };
 
-      "gsconnect" = {
-        discoverable = true;
+      "org/gnome/shell/extensions/gsconnect" = {
+        discoverable = false;
         enabled = true;
         id = "392dd798-c242-46e5-a856-b5f3fc31b295";
         name = "leptup";
       };
 
-      "lockscreen-extension" = {
+      "org/gnome/shell/extensions/lockscreen-extension" = {
         background-size-1 = "cover";
         gradient-direction-1 = "none";
         hide-lockscreen-extension-button = true;
       };
 
-      "mediacontrols" = {
+      "org/gnome/shell/extensions/mediacontrols" = {
         colored-player-icon = true;
         extension-position = "Center";
         mouse-action-double = "PLAY_PAUSE";
@@ -91,21 +91,21 @@
         show-player-icon = true;
       };
 
-      "ncom/github/hermes83/compiz-alike-magic-lamp-effect" = {
+      "org/gnome/shell/extensions/com/github/hermes83/compiz-alike-magic-lamp-effect" = {
         duration = 223.0;
         x-tiles = 50.0;
         y-tiles = 50.0;
       };
 
-      "notification-timeout" = {
+      "org/gnome/shell/extensions/notification-timeout" = {
         always-normal = false;
       };
 
-      "quick-settings-resolution-and-refresh-rate" = {
+      "org/gnome/shell/extensions/quick-settings-resolution-and-refresh-rate" = {
         add-resolution-toggle-menu = false;
       };
 
-      "system-monitor" = {
+      "org/gnome/shell/extensions/system-monitor" = {
         show-cpu = true;
         show-download = true;
         show-memory = true;
@@ -113,11 +113,11 @@
         show-upload = true;
       };
 
-      "user-theme" = {
+      "org/gnome/shell/extensions/user-theme" = {
         name = "Stylix";
       };
 
-      "vitals" = {
+      "org/gnome/shell/extensions/vitals" = {
         battery-slot = 1;
         hot-sensors = ["_battery_rate_"];
         icon-style = 1;
