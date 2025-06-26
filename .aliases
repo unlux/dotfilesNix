@@ -49,6 +49,8 @@ alias cls="clear"
 alias bund="bun dev"
 alias lazyyadm="yadm enter lazygit"
 
+alias k="sudo kubectl"
+
 # alias gs="git status --short"
 # alias ga="git add"
 # alais gc="git commit"
