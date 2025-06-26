@@ -22,13 +22,14 @@
         dot-position = "TOP";
         extension-version = 68;
         hotkeys-overlay-combo = "TEMPORARILY";
-        intellihide = false;
+        intellihide = true;
+        intellihide-behaviour = "ALL_WINDOWS";
         intellihide-hide-from-windows = true;
         intellihide-only-secondary = false;
         intellihide-show-in-fullscreen = true;
         intellihide-use-pressure = false;
         leftbox-padding = -1;
-        multi-monitors = true;
+        multi-monitors = false;
         panel-anchors = ''
           {"AUO-0x00000000":"MIDDLE","ACR-4429030723W01":"MIDDLE"}
         '';
@@ -48,7 +49,7 @@
         prefs-opened = false;
         primary-monitor = "ACR-4429030723W01";
         status-icon-padding = -1;
-        trans-panel-opacity = 0.4;
+        trans-panel-opacity = 0.0;
         trans-use-custom-bg = false;
         trans-use-custom-opacity = true;
         trans-use-dynamic-opacity = true;

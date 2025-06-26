@@ -53,6 +53,7 @@ in {
         default-zoom-level = "small";
       };
       "org/gnome/desktop/sound"."allow-volume-above-100-percent" = true;
+      "org/gnome/desktop/wm/preferences"."resize-with-right-button" = true;
     };
   };
 

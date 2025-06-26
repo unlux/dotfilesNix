@@ -99,14 +99,14 @@
     with pkgs; [
       # inputs.zen-browser.packages."${system}".default
       # Browsers
-      brave
+      # brave
       ungoogled-chromium
 
       # Communication
       # discord
       # discord-ptb
       # vesktop
-      signal-desktop
+      # signal-desktop
       legcord
       telegram-desktop
 
@@ -141,7 +141,7 @@
       syncthingtray
       termius
       qbittorrent
-      zoom-us
+      # zoom-us
       lazygit
       qdirstat
       atuin

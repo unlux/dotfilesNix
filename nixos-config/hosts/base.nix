@@ -5,7 +5,6 @@
 }: {
   imports = [
     # ../modules/system/kvm.nix
-    # ../modules/system/nvidia.nix
     ../modules/system/pipewire.nix
     ../modules/system/xserver.nix
     ../modules/system/zram.nix

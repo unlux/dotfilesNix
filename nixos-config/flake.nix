@@ -7,15 +7,13 @@
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
-    # spicetify-nix.url = "github:the-argus/spicetify-nix";
     # hardware.url = "github:nixos/nixos-hardware";
 
-    # ghostty = {url = "github:ghostty-org/ghostty";};
-    disko.url = "github:nix-community/disko";
-    disko.inputs.nixpkgs.follows = "nixpkgs";
+    # disko.url = "github:nix-community/disko";
+    # disko.inputs.nixpkgs.follows = "nixpkgs";
 
     # https://github.com/thiagokokada/nix-alien
-    nix-alien.url = "github:thiagokokada/nix-alien";
+    # nix-alien.url = "github:thiagokokada/nix-alien";
     stylix.url = "github:danth/stylix";
     sops-nix.url = "github:Mic92/sops-nix";
 
@@ -44,8 +42,6 @@
     nixpkgs,
     nixpkgs-stable,
     home-manager,
-    # spicetify-nix,
-    # ghostty,
     disko,
     stylix,
     determinate,
@@ -81,14 +77,10 @@
           {
             _module.args.disks = ["/dev/nvme0n1"];
           }
-          {
-            # environment.systemPackages = [
-            #   ghostty.packages.${system}.default
-            # ];
-          }
           sops-nix.nixosModules.sops
         ];
       };
+
       # pc = nixpkgs.lib.nixosSystem {
       #   system = "x86_64-linux";
       #   specialArgs = {
@@ -104,10 +96,6 @@
       # };
     };
 
-    nixosModules = {
-      nvidia = import ./modules/easyNvidia;
-    };
-
     # Standalone home-manager configuration entrypoint
     homeConfigurations = {
       "lux@leptup" = home-manager.lib.homeManagerConfiguration {
@@ -119,6 +107,10 @@
           # stylix.homeManagerModules.stylix
         ];
       };
+    };
+
+    nixosModules = {
+      nvidia = import ./modules/easyNvidia;
     };
   };
 }
