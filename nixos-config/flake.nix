@@ -42,7 +42,7 @@
     nixpkgs,
     nixpkgs-stable,
     home-manager,
-    disko,
+    # disko,
     stylix,
     determinate,
     sops-nix,
@@ -59,7 +59,7 @@
       inherit system;
       config.allowUnfree = true;
     };
-    lib = nixpkgs.lib;
+    inherit (nixpkgs) lib;
   in {
     nixosConfigurations = {
       leptup = nixpkgs.lib.nixosSystem {

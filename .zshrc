@@ -101,4 +101,4 @@ bindkey -e
 
 eval "$(pay-respects zsh)"
 
-
+eval "$(starship init zsh)"

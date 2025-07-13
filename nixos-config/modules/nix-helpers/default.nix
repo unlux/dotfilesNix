@@ -9,16 +9,13 @@
 # }
 {pkgs, ...}: {
   environment.systemPackages =
-    (with pkgs; [
+    with pkgs; [
       nix-output-monitor
       nh
       nvd
       nix-index
       nixpkgs-fmt
       alejandra
-    ])
-    ++ [
-      # inputs.nix-alien.packages.${pkgs.system}.nix-alien
     ];
 
   # Enable nix-ld

@@ -4,7 +4,7 @@
   lib,
   ...
 }: {
-  home-manager.users.${username} = {...}: {
+  home-manager.users.${username} = _: {
     dconf.settings = {
       "org/gnome/Geary" = {
         migrated-config = true;

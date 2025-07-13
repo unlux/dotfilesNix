@@ -4,9 +4,7 @@ in {
   imports = [
     ./debloat.nix
     ./extensions.nix
-    ./keybindings.nix
     ./dconf.nix
-    # ./triple-buffering.nix #TODO: fix the hash
   ];
 
   services = {
@@ -72,6 +70,7 @@ in {
     dconf-editor
     # kdeconnect
     wl-clipboard
+    ddcutil
   ];
 
   # luxpfp in gnome

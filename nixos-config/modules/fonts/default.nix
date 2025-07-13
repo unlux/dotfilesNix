@@ -1,4 +1,4 @@
-{...}: {
+_: {
   # imports = [
   # ./monolisa.nix
   # ./commitmono.nix

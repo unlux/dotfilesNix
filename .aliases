@@ -50,6 +50,7 @@ alias bund="bun dev"
 alias lazyyadm="yadm enter lazygit"
 
 alias k="sudo kubectl"
+alias "k?"="echo \"alias k=kubectl\" | wl-copy && exit"
 
 # alias gs="git status --short"
 # alias ga="git add"

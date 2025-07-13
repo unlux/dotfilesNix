@@ -27,7 +27,7 @@
       buildInputs = with pkgs; [
         openssl
       ];
-      env = prisma.env;
+      inherit (prisma) env;
       # or, you can use `shellHook` instead of `env` to load the same environment variables.
       # shellHook = prisma.shellHook;
     };
