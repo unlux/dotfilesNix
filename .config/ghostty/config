@@ -12,7 +12,7 @@ gtk-single-instance = true
 window-decoration = true
 window-padding-x = 7
 window-padding-y = 7
-font-size = 12
+font-size = 16
 link-url = true
 desktop-notifications = true
 
