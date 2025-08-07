@@ -114,9 +114,8 @@
   home.packages = with pkgs; [
     # inputs.zen-browser.packages."${system}".default
     # Browsers
-    # brave
+    brave
     ungoogled-chromium
-
     # Communication
     # discord
     # discord-ptb
@@ -127,11 +126,12 @@
 
     # Development
     nodejs_22
-    nodePackages.pnpm
+    corepack_22
     jdk
     bun
     vscode
     code-cursor
+    windsurf
     # bruno
     # lunarvim
 
@@ -167,7 +167,7 @@
     yt-dlp
     restic
     ente-auth
-
+    supabase-cli
     # Optional/Commented
     # teamviewer
     # turso-cli

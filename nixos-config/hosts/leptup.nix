@@ -27,6 +27,7 @@
     ../modules/android/default.nix
     ../modules/custom/zen-autobackup.nix
     # ../modules/custom/mpris-proxy.nix
+    ../modules/adblock/blocky.nix
 
     # inputs.hardware.nixosModules.common-cpu-amd
     # inputs.hardware.nixosModules.common-pc-ssd
@@ -42,7 +43,6 @@
     withIntegratedGPU = true;
     vaapi.firefox.av1Support = true;
     desktopEnvironment = "gnome";
-    
   };
 
   hardware.nvidia.prime = {
@@ -124,10 +124,10 @@
       appimage-run
       openssl.dev
       ghostty
-      # thefuck
       pay-respects
     ])
     ++ (with pkgs-stable; [
+      vivid
       virt-manager
       lua
       python3

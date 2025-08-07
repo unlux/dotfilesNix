@@ -47,6 +47,8 @@ alias cls="clear"
 
 #web dev aliases
 alias bund="bun dev"
+alias nund="npm run dev"
+alias yund="yarn run dev"
 alias lazyyadm="yadm enter lazygit"
 
 alias k="sudo kubectl"

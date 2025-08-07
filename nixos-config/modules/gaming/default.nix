@@ -25,12 +25,16 @@
   };
 
   hardware.xone.enable = true; # support for the xbox controller USB dongle
+  environment.sessionVariables = {
+    STEAM_EXTRA_COMPAT_TOOLS_PATHS = "\${HOME}/.steam/root/compatibilitytools.d";
+  };
 
   environment.systemPackages = with pkgs; [
     protonup
     mangohud
     # heroic
     lutris
+    bottles
 
     # https://github.com/PhilT/nixos-files/blob/8b0f83eda1be94a38ba51735c3caaddaa922a7f6/src/gaming.nix
     game-devices-udev-rules # Udev rules to make controllers available with non-sudo permissions
