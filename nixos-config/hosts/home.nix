@@ -147,7 +147,7 @@
     # timeshift
 
     # Media
-    obs-studio
+    # obs-studio
     vlc
     # youtube-music
     # spotify

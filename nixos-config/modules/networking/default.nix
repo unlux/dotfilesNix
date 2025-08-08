@@ -8,6 +8,10 @@
 }: {
   networking = {
     hostName = hostname;
+    nat = {
+      enable = true;
+      internalInterfaces = ["virbr0"];
+    };
     networkmanager = {
       enable = true;
       wifi.backend = lib.mkDefault "iwd";
@@ -21,9 +25,10 @@
         22000
         21027
         3131
+        53
       ];
       allowedUDPPorts =
-        [22 80 443 22000 21027 3131]
+        [22 80 443 22000 21027 3131 53 67]
         ++ (lib.optional config.services.tailscale.enable config.services.tailscale.port);
       allowedUDPPortRanges = [
         {

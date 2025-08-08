@@ -52,8 +52,6 @@ setopt hist_save_no_dups
 setopt hist_ignore_dups
 setopt hist_find_no_dups
 
-autoload -U compinit
-compinit
 
 # # pnpm
 # export PNPM_HOME="/home/lux/.local/share/pnpm"
@@ -102,10 +100,5 @@ source <(carapace _carapace)
 
 bindkey -e
 
-export PATH="$HOME/.local/bin:$PATH"
 eval "$(pay-respects zsh)"
-
 eval "$(starship init zsh)"
-
-
-

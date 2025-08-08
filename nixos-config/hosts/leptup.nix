@@ -27,7 +27,7 @@
     ../modules/android/default.nix
     ../modules/custom/zen-autobackup.nix
     # ../modules/custom/mpris-proxy.nix
-    ../modules/adblock/blocky.nix
+    # ../modules/adblock/blocky.nix
 
     # inputs.hardware.nixosModules.common-cpu-amd
     # inputs.hardware.nixosModules.common-pc-ssd
