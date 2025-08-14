@@ -76,7 +76,7 @@
         resize-with-right-button = true;
       };
 
-      "org/gnome/eog/view" = {
+      "org/gnome/eog/view" = lib.mkDefault {
         background-color = "#191724";
       };
 

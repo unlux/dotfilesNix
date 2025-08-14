@@ -7,7 +7,7 @@
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
-    # hardware.url = "github:nixos/nixos-hardware";
+    hardware.url = "github:nixos/nixos-hardware";
 
     # disko.url = "github:nix-community/disko";
     # disko.inputs.nixpkgs.follows = "nixpkgs";
@@ -21,7 +21,10 @@
 
     zen-browser.url = "github:0xc000022070/zen-browser-flake";
     nix-flatpak.url = "github:gmodena/nix-flatpak";
-
+    auto-cpufreq = {
+      url = "github:AdnanHodzic/auto-cpufreq";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     # flake-compat = {
     #   type = "github";
     #   owner = "edolstra";
@@ -46,6 +49,7 @@
     stylix,
     determinate,
     sops-nix,
+    auto-cpufreq,
     ...
   }: let
     inherit (self) outputs;
@@ -69,15 +73,16 @@
           inherit inputs outputs pkgs-stable system;
         };
         modules = [
+          ./hosts/leptup.nix # > Our main nixos configuration file
           #disko.nixosModules.disko
+          #./hosts/disk.nix # disko config file
+          # {
+          #   _module.args.disks = ["/dev/nvme0n1"];
+          # }
           stylix.nixosModules.stylix
           determinate.nixosModules.default
-          ./hosts/leptup.nix # > Our main nixos configuration file
-          #./hosts/disk.nix # disko config file
-          {
-            _module.args.disks = ["/dev/nvme0n1"];
-          }
           sops-nix.nixosModules.sops
+          auto-cpufreq.nixosModules.default
         ];
       };
 

@@ -73,6 +73,9 @@ in {
     ddcutil
   ];
 
+  # Necessary for opening links in gnome under certain conditions
+  services.gvfs.enable = true;
+
   # luxpfp in gnome
   system.activationScripts.script.text = ''
     mkdir -p /var/lib/AccountsService/{icons,users}

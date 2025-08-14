@@ -29,8 +29,11 @@
     # ../modules/custom/mpris-proxy.nix
     # ../modules/adblock/blocky.nix
 
-    # inputs.hardware.nixosModules.common-cpu-amd
-    # inputs.hardware.nixosModules.common-pc-ssd
+    inputs.nixos-hardware.nixosModules.common-pc-laptop
+    inputs.nixos-hardware.nixosModules.common-pc-ssd
+    inputs.nixos-hardware.nixosModules.common-cpu-amd
+    inputs.nixos-hardware.nixosModules.common-cpu-amd-pstate
+
     inputs.self.nixosModules.nvidia
     inputs.home-manager.nixosModules.default
     ./leptup-hardware.nix
@@ -64,6 +67,8 @@
       lux = import ./home.nix;
     };
     backupFileExtension = "backup";
+    useGlobalPkgs = true;
+    useUserPackages = true;
   };
 
   # users.users.lux = {
