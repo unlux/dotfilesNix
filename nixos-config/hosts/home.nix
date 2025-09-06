@@ -15,7 +15,7 @@
   };
 
   # targets.genericLinux.enable = true; # enable this on non-nixos
-  nixpkgs.config.allowUnfree = true;
+  # NOTE: nixpkgs settings are managed at the system level (see hosts/base.nix)
 
   programs = {
     home-manager = {

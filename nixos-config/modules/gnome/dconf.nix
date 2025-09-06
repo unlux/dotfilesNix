@@ -60,7 +60,7 @@
       "org/gnome/desktop/peripherals/touchpad".tap-to-click = true;
       "org/gnome/desktop/privacy".remember-recent-files = false;
       "org/gnome/desktop/screensaver".lock-enabled = false;
-      "org/gnome/desktop/session".idle-delay = 0;
+      # "org/gnome/desktop/session".idle-delay = 0;
       "org/gnome/desktop/sound".allow-volume-above-100-percent = true;
 
       "org/gnome/desktop/wm/keybindings" = {

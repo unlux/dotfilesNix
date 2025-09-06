@@ -11,6 +11,7 @@ in {
     ./vaapi.nix
     ./prime.nix
     ./de-compat.nix
+    ./fkNvidia.nix
   ];
 
   options.easyNvidia = with lib.types; {

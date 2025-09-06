@@ -163,7 +163,7 @@
       btop
       iotop
       cargo
-      nvtopPackages.full
+      # nvtopPackages.full
     ]);
 
   environment.sessionVariables = {
