@@ -60,7 +60,7 @@
       "org/gnome/desktop/peripherals/touchpad".tap-to-click = true;
       "org/gnome/desktop/privacy".remember-recent-files = false;
       "org/gnome/desktop/screensaver".lock-enabled = false;
-      # "org/gnome/desktop/session".idle-delay = 0;
+      "org/gnome/desktop/session".idle-delay = 0;
       "org/gnome/desktop/sound".allow-volume-above-100-percent = true;
 
       "org/gnome/desktop/wm/keybindings" = {
@@ -112,7 +112,7 @@
       };
 
       "org/gnome/settings-daemon/plugins/media-keys" = {
-        custom-keybindings = ["/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/" "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/" "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom4/" "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom5/"];
+        custom-keybindings = ["/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/" "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/" "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom4/" "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom5/" "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom6/"];
       };
 
       "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0" = {
@@ -138,6 +138,11 @@
         command = "ddcutil setvcp 0x10 - 10";
         name = "Monitor Brightness Down";
       };
+      "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom6" = {
+        binding = "<Super>1";
+        command = "nvidia-offload zen";
+        name = "NVIDIA Offload Zen";
+      };
 
       "org/gnome/settings-daemon/plugins/power" = {
         power-button-action = "nothing";
@@ -145,7 +150,6 @@
       };
 
       "org/gnome/shell" = {
-        command-history = ["reboot"];
         favorite-apps = ["zen-beta.desktop" "code.desktop" "legcord.desktop"];
         last-selected-power-profile = "performance";
         welcome-dialog-last-shown-version = "46.2";

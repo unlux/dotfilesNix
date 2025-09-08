@@ -1,5 +1,7 @@
 #theme = tokyonight-storm
-theme = rose-pine
+# theme = rose-pine
+# theme = Oxocarbon
+theme = Builtin Solarized Dark
 mouse-hide-while-typing = true
 macos-option-as-alt = true
 background-opacity = 0.95

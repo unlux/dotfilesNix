@@ -15,7 +15,7 @@
     # ../modules/nvidia/gpuPassthrough.nix
     ../modules/gaming/default.nix
     # ../modules/prisma/default.nix
-    ../modules/kubernetes/default.nix
+    # ../modules/kubernetes/default.nix
     # ../modules/iphone/default.nix
     # ../modules/ollama/default.nix
     # ../modules/printing/default.nix

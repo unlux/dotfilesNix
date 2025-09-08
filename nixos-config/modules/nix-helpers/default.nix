@@ -1,22 +1,31 @@
-# { config, pkgs, ... }:
-# {
-#   programs.nh = {
-#     enable = true;
-#     # clean.enable = true;
-#     # clean.extraArgs = "--keep-since 4d --keep 3";
-#     flake = "/home/lux/nixos-config";
-#   };
-# }
-{pkgs, ...}: {
-  environment.systemPackages =
-    with pkgs; [
-      nix-output-monitor
-      nh
-      nvd
-      nix-index
-      nixpkgs-fmt
-      alejandra
-    ];
+{
+  pkgs,
+  inputs,
+  ...
+}: {
+  imports = [
+    # NOTE: The nix-index DB is slow to search, until
+    # https://github.com/nix-community/nix-index-database/issues/130
+    # Use the NixOS module variant here; Home Manager variant isn't needed at system level
+    inputs.nix-index-database.nixosModules.nix-index
+  ];
+  # command-not-found handler to suggest nix way of installing stuff.
+  # FIXME: This ought to show new nix cli commands though:
+  # https://github.com/nix-community/nix-index/issues/191
+  programs.nix-index = {
+    enable = true;
+    enableZshIntegration = true;
+  };
+  programs.nix-index-database.comma.enable = true;
+
+  environment.systemPackages = with pkgs; [
+    nix-output-monitor
+    nh
+    nvd
+    nix-index
+    nixpkgs-fmt
+    alejandra
+  ];
 
   # Enable nix-ld
   programs.nix-ld.enable = true;

@@ -155,7 +155,7 @@
     # Utilities
     delta
     syncthingtray
-    termius
+    # termius
     qbittorrent
     # zoom-us
     lazygit
@@ -167,7 +167,7 @@
     yt-dlp
     restic
     ente-auth
-    supabase-cli
+    # supabase-cli
     # Optional/Commented
     # teamviewer
     # turso-cli
@@ -179,6 +179,8 @@
     # noisetorch
     # space-cadet-pinball
     easyeffects
+
+    libnotify
   ];
 
   # Nicely reload system units when changing configs
