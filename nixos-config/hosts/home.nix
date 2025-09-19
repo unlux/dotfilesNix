@@ -143,7 +143,7 @@
     libreoffice-fresh
     # notion-app-enhanced
     # obsidian # electron ded on wayland, use flatpak instaead
-    postman
+    # postman
     # timeshift
 
     # Media

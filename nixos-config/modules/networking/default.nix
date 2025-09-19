@@ -50,6 +50,7 @@
     hosts = {
       # "127.0.0.1:8384" = [ "syncthing" ];
     };
+    enableIPv6 = true;
   };
 
   environment.systemPackages = with pkgs; [
