@@ -107,6 +107,7 @@
     # Standalone home-manager configuration entrypoint
     homeConfigurations = {
       "lux@leptup" = home-manager.lib.homeManagerConfiguration {
+        pkgs = pkgs;
         extraSpecialArgs = {
           inherit inputs outputs pkgs pkgs-stable system;
         };

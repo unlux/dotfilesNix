@@ -181,6 +181,7 @@
     easyeffects
 
     libnotify
+    # kiro-fhs
   ];
 
   # Nicely reload system units when changing configs
