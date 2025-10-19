@@ -28,7 +28,7 @@
         53
       ];
       allowedUDPPorts =
-        [22 80 443 22000 21027 3131 53 67]
+        [80 443 22000 21027 3131 53 67]
         ++ (lib.optional config.services.tailscale.enable config.services.tailscale.port);
       allowedUDPPortRanges = [
         {
@@ -44,8 +44,7 @@
       ];
       checkReversePath = "loose";
       trustedInterfaces =
-        ["tailscale0"]
-        ++ (lib.optional config.services.tailscale.enable "tailscale0");
+        ["tailscale0"];
     };
     hosts = {
       # "127.0.0.1:8384" = [ "syncthing" ];
@@ -71,6 +70,10 @@
       "--operator=${username}"
       "--ssh"
     ];
+  };
+
+  services.resolved = {
+    enable = true;
   };
 
   # systemd.packages = [pkgs.cloudflare-warp];

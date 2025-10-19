@@ -86,7 +86,7 @@
   services = {
     sunshine = {
       enable = false;
-      autoStart = true;
+      autoStart = false; # disabled if service is not enabled
       capSysAdmin = true; # only needed for Wayland -- omit this when using with Xorg
       openFirewall = true;
       package = pkgs.sunshine.override {

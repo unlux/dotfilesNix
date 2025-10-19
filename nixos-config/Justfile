@@ -15,6 +15,9 @@ default:
 history:
   nix profile history --profile /nix/var/nix/profiles/system
 
+home-switch:
+  home-manager switch --flake .#lux@leptup
+
 upp:
   nix flake update
 

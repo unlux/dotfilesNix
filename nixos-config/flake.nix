@@ -28,6 +28,8 @@
 
     nix-index-database.url = "github:nix-community/nix-index-database";
     nix-index-database.inputs.nixpkgs.follows = "nixpkgs";
+
+    claude-code.url = "github:sadjow/claude-code-nix";
     # flake-compat = {
     #   type = "github";
     #   owner = "edolstra";
@@ -52,7 +54,7 @@
     stylix,
     determinate,
     sops-nix,
-    auto-cpufreq,
+    # auto-cpufreq,
     ...
   }: let
     inherit (self) outputs;
@@ -73,7 +75,7 @@
         specialArgs = {
           hostname = "leptup";
           username = "lux";
-          inherit inputs outputs pkgs-stable system;
+          inherit inputs outputs pkgs pkgs-stable system;
         };
         modules = [
           ./hosts/leptup.nix # > Our main nixos configuration file
@@ -85,7 +87,7 @@
           stylix.nixosModules.stylix
           determinate.nixosModules.default
           sops-nix.nixosModules.sops
-          auto-cpufreq.nixosModules.default
+          # auto-cpufreq.nixosModules.default
         ];
       };
 
@@ -112,6 +114,9 @@
           inherit inputs outputs pkgs pkgs-stable system;
         };
         modules = [
+          {
+            nixpkgs.overlays = [inputs.claude-code.overlays.default];
+          }
           ./hosts/home.nix
           # stylix.homeManagerModules.stylix
         ];

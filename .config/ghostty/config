@@ -1,7 +1,8 @@
-#theme = tokyonight-storm
+# theme = tokyonight-storm
+theme = Catppuccin Mocha
 # theme = rose-pine
 # theme = Oxocarbon
-theme = Builtin Solarized Dark
+# theme = Builtin Solarized Dark
 mouse-hide-while-typing = true
 macos-option-as-alt = true
 background-opacity = 0.95
@@ -23,3 +24,4 @@ desktop-notifications = true
 #   /home/lux/.config/ghostty/config
 # Run `ghostty +show-config --default --docs` to view a list of
 # all available config options and their default values.
+keybind = shift+enter=text:\x1b\r

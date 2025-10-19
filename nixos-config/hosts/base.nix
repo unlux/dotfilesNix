@@ -83,7 +83,7 @@
   services.openssh = {
     enable = true;
     settings = {
-      X11Forwarding = true;
+      X11Forwarding = false; # Disabled for Wayland-first system; X11 forwarding doesn't work well with Wayland
       PermitRootLogin = "no"; # disable root login
       PasswordAuthentication = true; # disable (i enabled it) password login
     };

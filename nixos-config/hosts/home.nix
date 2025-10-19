@@ -132,6 +132,7 @@
     vscode
     code-cursor
     windsurf
+    claude-code
     # bruno
     # lunarvim
 
@@ -147,7 +148,7 @@
     # timeshift
 
     # Media
-    # obs-studio
+    obs-studio
     vlc
     # youtube-music
     # spotify
@@ -157,7 +158,7 @@
     syncthingtray
     # termius
     qbittorrent
-    # zoom-us
+    zoom-us
     lazygit
     qdirstat
     atuin
@@ -179,9 +180,13 @@
     # noisetorch
     # space-cadet-pinball
     easyeffects
-
+    just
     libnotify
+
     # kiro-fhs
+    cypress
+    cachix
+    localsend
   ];
 
   # Nicely reload system units when changing configs

@@ -1,4 +1,4 @@
-{config, ...}: {
+{config, pkgs, ...}: {
   sops.secrets.restic_password = {
     sopsFile = ../../hosts/secrets/secrets.yaml;
     owner = "lux";
@@ -12,6 +12,8 @@
     mode = "0400";
     path = "/etc/restic-repository-path";
   };
+
+  environment.systemPackages = [pkgs.libnotify];
 
   services.restic.backups = {
     zen = {
@@ -27,9 +29,9 @@
         Persistent = true;
       };
       pruneOpts = [
-        "--keep-daily 7"
-        "--keep-weekly 5"
-        "--keep-monthly 5"
+        "--keep-daily 1"
+        "--keep-weekly 2"
+        "--keep-monthly 2"
       ];
       # Optionally, add environmentFile or extraEnv if you need more secrets
     };

@@ -7,9 +7,16 @@
       rootless = {
         enable = true;
         setSocketVariable = true;
-        daemon.settings.features.cdi = true;
+        daemon.settings = {
+          features.cdi = true;
+          network = "pasta";
+        };
       };
       storageDriver = "btrfs";
+      daemon.settings = {
+        dns = ["8.8.8.8" "8.8.4.4"];
+        log-driver = "json-file";
+      };
     };
   };
 

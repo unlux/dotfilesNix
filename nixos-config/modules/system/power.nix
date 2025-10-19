@@ -34,7 +34,7 @@ _: {
         USB_EXCLUDE_PHONE = 1;
         # RUNTIME_PM_BLACKLIST = "46d:c07e";
         # PCIE_ASPM_ON_BAT = "default";
-        # RUNTIME_PM_ON_BAT = "on";
+        RUNTIME_PM_ON_BAT = "auto"; # Enable runtime PM on battery for faster sleep/wake
       };
 
       # extraConfig = ''
@@ -43,17 +43,17 @@ _: {
       # upower.enable = true;
     };
   };
-  programs.auto-cpufreq = {
-    enable = false;
-    settings = {
-      battery = {
-        governor = "powersave";
-        turbo = "never";
-      };
-      charger = {
-        governor = "performance";
-        turbo = "auto";
-      };
-    };
-  };
+  # programs.auto-cpufreq = {
+  #   enable = false;
+  #   settings = {
+  #     battery = {
+  #       governor = "powersave";
+  #       turbo = "never";
+  #     };
+  #     charger = {
+  #       governor = "performance";
+  #       turbo = "auto";
+  #     };
+  #   };
+  # };
 }
