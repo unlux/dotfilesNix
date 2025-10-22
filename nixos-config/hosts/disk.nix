@@ -17,20 +17,18 @@
               content = {
                 type = "filesystem";
                 format = "vfat";
-                label = "NIXOS_BOOT";
                 mountpoint = "/boot";
-                mountOptions = [ "defaults" ];
+                mountOptions = ["defaults"];
               };
             };
 
             # Main root partition with Btrfs subvolumes
             # Size: all space except last 150GB (reserved for Windows)
             root = {
-              size = "-150G";
+              size = "242G";
               content = {
                 type = "btrfs";
-                label = "nixos";
-                extraArgs = [ "-f" ]; # Override existing partition
+                extraArgs = ["-f"]; # Override existing partition
                 subvolumes = {
                   # Main root subvolume (@) - contains /etc, /usr, /opt, /srv, /root
                   "@" = {
