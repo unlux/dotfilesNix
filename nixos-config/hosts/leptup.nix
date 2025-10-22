@@ -164,6 +164,7 @@
       btop
       iotop
       cargo
+      sops
       # nvtopPackages.full
     ]);
 
