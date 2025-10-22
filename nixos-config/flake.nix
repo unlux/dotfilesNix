@@ -9,8 +9,8 @@
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
     hardware.url = "github:nixos/nixos-hardware";
 
-    # disko.url = "github:nix-community/disko";
-    # disko.inputs.nixpkgs.follows = "nixpkgs";
+    disko.url = "github:nix-community/disko";
+    disko.inputs.nixpkgs.follows = "nixpkgs";
 
     # https://github.com/thiagokokada/nix-alien
     # nix-alien.url = "github:thiagokokada/nix-alien";
@@ -50,7 +50,7 @@
     nixpkgs,
     nixpkgs-stable,
     home-manager,
-    # disko,
+    disko,
     stylix,
     determinate,
     sops-nix,
@@ -79,11 +79,11 @@
         };
         modules = [
           ./hosts/leptup.nix # > Our main nixos configuration file
-          #disko.nixosModules.disko
-          #./hosts/disk.nix # disko config file
-          # {
-          #   _module.args.disks = ["/dev/nvme0n1"];
-          # }
+          disko.nixosModules.disko
+          ./hosts/disk.nix # disko config file
+          {
+            _module.args.disks = ["/dev/nvme0n1"];
+          }
           stylix.nixosModules.stylix
           determinate.nixosModules.default
           sops-nix.nixosModules.sops
