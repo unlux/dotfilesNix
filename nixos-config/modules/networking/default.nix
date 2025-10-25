@@ -44,7 +44,8 @@
       ];
       checkReversePath = "loose";
       trustedInterfaces =
-        ["tailscale0"];
+        ["tailscale0"]
+        ++ (lib.optional config.services.tailscale.enable "tailscale0");
     };
     hosts = {
       # "127.0.0.1:8384" = [ "syncthing" ];
