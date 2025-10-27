@@ -58,7 +58,7 @@
 
   sops.defaultSopsFile = ../secrets/secrets.yaml;
   sops.defaultSopsFormat = "yaml";
-  sops.age.keyFile = "/home/lux/.ssh/keys.txt";
+  sops.age.keyFile = "/etc/sops/age/keys.txt";
 
   home-manager = {
     extraSpecialArgs = {

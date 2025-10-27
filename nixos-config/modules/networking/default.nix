@@ -6,6 +6,12 @@
   config,
   ...
 }: {
+  sops.secrets.tailscale_authkey = {
+    sopsFile = ../../hosts/secrets/secrets.yaml;
+    owner = "root";
+    mode = "0400";
+  };
+
   networking = {
     hostName = hostname;
     nat = {
@@ -66,6 +72,7 @@
 
   services.tailscale = {
     enable = true;
+    authKeyFile = config.sops.secrets.tailscale_authkey.path;
     extraUpFlags = [
       "--shields-up"
       "--operator=${username}"
