@@ -69,8 +69,6 @@ source $HOME/.aliases
 # adding file for 's keybinds
 source $HOME/.keybinds
 
-# zoxide stuff
-eval "$(zoxide init --cmd cd zsh)"
 
 # atuin stuff
 eval "$(atuin init zsh)"
@@ -102,3 +100,10 @@ bindkey -e
 
 eval "$(pay-respects zsh)"
 eval "$(starship init zsh)"
+
+# zoxide stuff
+# eval "$(zoxide init --cmd cd zsh)"
+# Initialize zoxide with 'cd' command (disable doctor warnings)
+export _ZO_DOCTOR=0
+eval "$(zoxide init --cmd cd zsh | sed -E 's/(^|[^_])__([a-zA-Z_])/\1\2/g')"
+
