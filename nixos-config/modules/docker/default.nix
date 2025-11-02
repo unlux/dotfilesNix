@@ -1,4 +1,8 @@
-{pkgs-stable, ...}: {
+{
+  pkgs-stable,
+  pkgs,
+  ...
+}: {
   virtualisation = {
     oci-containers.backend = "docker";
     docker = {
@@ -9,7 +13,7 @@
         setSocketVariable = true;
         daemon.settings = {
           features.cdi = true;
-          network = "pasta";
+          dns = ["8.8.8.8" "8.8.4.4"];
         };
       };
       storageDriver = "btrfs";
@@ -24,6 +28,7 @@
 
   environment.systemPackages = [
     pkgs-stable.docker-compose
+    pkgs.slirp4netns # Required for rootless Docker networking
     # devenv
   ];
 }
