@@ -85,11 +85,11 @@
 
   services = {
     sunshine = {
-      enable = false;
-      autoStart = false; # disabled if service is not enabled
+      enable = true;
+      autoStart = true; # disabled if service is not enabled
       capSysAdmin = true; # only needed for Wayland -- omit this when using with Xorg
       openFirewall = true;
-      package = pkgs.sunshine.override {
+      package = pkgs-stable.sunshine.override {
         cudaSupport = true;
       };
     };

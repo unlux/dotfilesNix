@@ -21,6 +21,9 @@ home-switch:
 upp:
   nix flake update
 
+upp-claude:
+  nix flake lock --update-input claude-code
+
 repl:
   nix repl -f flake:nixpkgs
 
