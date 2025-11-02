@@ -30,7 +30,7 @@
   };
 
   environment.systemPackages = with pkgs; [
-    protonup
+    protonup-ng
     mangohud
     # heroic
     lutris

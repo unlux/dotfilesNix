@@ -49,9 +49,11 @@
 
     git = {
       enable = true;
-      userName = "lakshay choudhary";
-      userEmail = "lakshaychoudhary77712@gmail.com";
-      extraConfig = {
+      settings = {
+        user = {
+          name = "Lakshay Choudhary";
+          email = "lakshaychoudhary77712@gmail.com";
+        };
         init.defaultBranch = "main";
         help.autocorrect = "1";
         diff.algorithm = "histogram";
@@ -187,6 +189,7 @@
     cypress
     cachix
     localsend
+    pokeget-rs
   ];
 
   # Nicely reload system units when changing configs
