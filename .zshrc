@@ -1,10 +1,3 @@
-# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
-# Initialization code that may require console input (password prompts, [y/n]
-# confirmations, etc.) must go above this block; everything else may go below.
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-fi
-
 ### Added by Zinit's installer
 if [[ ! -f $HOME/.local/share/zinit/zinit.git/zinit.zsh ]]; then
     print -P "%F{33} %F{220}Installing %F{33}ZDHARMA-CONTINUUM%F{220} Initiative Plugin Manager (%F{33}zdharma-continuum/zinit%F{220})…%f"
@@ -28,19 +21,13 @@ zinit light-mode for \
 
 ### End of Zinit's installer chunk
 
-zinit ice depth=1; zinit light romkatv/powerlevel10k
-
-zinit light zsh-users/zsh-syntax-highlighting 
+zinit light zsh-users/zsh-syntax-highlighting
 zinit light zsh-users/zsh-completions
 zinit light zsh-users/zsh-autosuggestions
-zinit snippet OMZ::plugins/git/git.plugin.zsh
-# zinit snippet OMZ::plugins/adb/_adb
-zinit snippet OMZ::plugins/sudo/sudo.plugin.zsh
+zinit snippet OMZP::git
+zinit snippet OMZP::sudo
 
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-
-HISTSIZE=5000
+HISTSIZE=50000
 HISTFILE=~/.zhistory
 SAVEHIST=$HISTSIZE
 HISTDUP=erase
@@ -52,18 +39,6 @@ setopt hist_save_no_dups
 setopt hist_ignore_dups
 setopt hist_find_no_dups
 
-
-# # pnpm
-# export PNPM_HOME="/home/lux/.local/share/pnpm"
-# case ":$PATH:" in
-#   *":$PNPM_HOME:"*) ;;
-#   *) export PATH="$PNPM_HOME:$PATH" ;;
-# esac
-# # pnpm end
-
-# # Turso
-# export PATH="/home/lux/.turso:$PATH"
-
 # adding file for lux's aliases
 source $HOME/.aliases
 # adding file for 's keybinds
@@ -74,8 +49,24 @@ source $HOME/.keybinds
 eval "$(atuin init zsh)"
 
 export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+# Lazy load nvm for faster shell startup
+nvm() {
+  unset -f nvm
+  [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+  nvm "$@"
+}
+
+node() {
+  unset -f node
+  [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+  node "$@"
+}
+
+npm() {
+  unset -f npm
+  [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+  npm "$@"
+}
 
 export PATH="$PATH:/home/lux/.local/bin"
 
@@ -88,7 +79,11 @@ export PATH=$PATH:$ANDROID_HOME/emulator
 export PATH=$PATH:$ANDROID_HOME/platform-tools
 
 #default editor 
-export EDITOR="/run/current-system/sw/bin/nvim"
+export EDITOR="nvim"
+
+# Load completions
+autoload -Uz compinit
+compinit -C  # Skip security check for faster loading
 
 # carapace stuff
 export LS_COLORS=$(vivid generate dracula)
