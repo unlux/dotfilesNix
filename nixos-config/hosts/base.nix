@@ -31,11 +31,7 @@
   nix.settings.experimental-features = ["nix-command" "flakes"];
   # auto-optimise-store = true;
 
-  nixpkgs.config = {
-    allowUnfree = true;
-    # Workaround for https://github.com/nix-community/home-manager/issues/2942
-    allowUnfreePredicate = _: true;
-  };
+  # nixpkgs config (allowUnfree, overlays) is now centralized in flake.nix
 
   users = {
     defaultUserShell = pkgs.zsh;

@@ -7,29 +7,34 @@
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
-    hardware.url = "github:nixos/nixos-hardware";
 
     disko.url = "github:nix-community/disko";
     disko.inputs.nixpkgs.follows = "nixpkgs";
 
     # https://github.com/thiagokokada/nix-alien
     # nix-alien.url = "github:thiagokokada/nix-alien";
+
     stylix.url = "github:danth/stylix";
+    stylix.inputs.nixpkgs.follows = "nixpkgs";
+
     sops-nix.url = "github:Mic92/sops-nix";
+    sops-nix.inputs.nixpkgs.follows = "nixpkgs";
 
     determinate.url = "https://flakehub.com/f/DeterminateSystems/determinate/0.1";
 
     zen-browser.url = "github:0xc000022070/zen-browser-flake";
+    zen-browser.inputs.nixpkgs.follows = "nixpkgs";
+
     nix-flatpak.url = "github:gmodena/nix-flatpak";
-    auto-cpufreq = {
-      url = "github:AdnanHodzic/auto-cpufreq";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+
+    auto-cpufreq.url = "github:AdnanHodzic/auto-cpufreq";
+    auto-cpufreq.inputs.nixpkgs.follows = "nixpkgs";
 
     nix-index-database.url = "github:nix-community/nix-index-database";
     nix-index-database.inputs.nixpkgs.follows = "nixpkgs";
 
     claude-code.url = "github:sadjow/claude-code-nix";
+    claude-code.inputs.nixpkgs.follows = "nixpkgs";
     # flake-compat = {
     #   type = "github";
     #   owner = "edolstra";
@@ -60,14 +65,31 @@
     inherit (self) outputs;
     system = "x86_64-linux";
     username = "lux";
+
+    # Centralized pkgs instantiation for both NixOS and home-manager
     pkgs = import nixpkgs {
       inherit system;
-      config.allowUnfree = true;
+      config = {
+        allowUnfree = true;
+        # Workaround for https://github.com/nix-community/home-manager/issues/2942
+        allowUnfreePredicate = _: true;
+      };
+      overlays = [
+        # Workaround for broken qgnomeplatform in unstable (issue #449595)
+        (final: prev: {
+          qgnomeplatform-qt6 = prev.emptyDirectory;
+        })
+      ];
     };
+
     pkgs-stable = import nixpkgs-stable {
       inherit system;
-      config.allowUnfree = true;
+      config = {
+        allowUnfree = true;
+        allowUnfreePredicate = _: true;
+      };
     };
+
     inherit (nixpkgs) lib;
   in {
     nixosConfigurations = {
@@ -83,6 +105,7 @@
           ./hosts/disk.nix # disko config file
           {
             _module.args.disks = ["/dev/nvme0n1"];
+            nixpkgs.hostPlatform = system;
           }
           stylix.nixosModules.stylix
           determinate.nixosModules.default
@@ -114,9 +137,6 @@
           inherit inputs outputs pkgs pkgs-stable system;
         };
         modules = [
-          {
-            nixpkgs.overlays = [inputs.claude-code.overlays.default];
-          }
           ./hosts/home.nix
           # stylix.homeManagerModules.stylix
         ];
