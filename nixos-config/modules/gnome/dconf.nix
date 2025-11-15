@@ -81,7 +81,7 @@
       };
 
       "org/gnome/mutter" = {
-        workspaces-only-on-primary = true;
+        workspaces-only-on-primary = false;
       };
 
       "org/gnome/nautilus/list-view" = {
@@ -283,18 +283,6 @@
         show-all-slider = false;
         show-value-label = true;
         step-change-keyboard = 2.0;
-      };
-
-      "org/gnome/shell/extensions/gsconnect" = {
-        devices = [];
-        discoverable = false;
-        enabled = true;
-        id = "392dd798-c242-46e5-a856-b5f3fc31b295";
-        name = "leptup";
-      };
-
-      "org/gnome/shell/extensions/gsconnect/preferences" = {
-        window-maximized = false;
       };
 
       "org/gnome/shell/extensions/lockscreen-extension" = {

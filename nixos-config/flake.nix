@@ -65,39 +65,25 @@
     inherit (self) outputs;
     system = "x86_64-linux";
     username = "lux";
-
-    # Centralized pkgs instantiation for both NixOS and home-manager
-    pkgs = import nixpkgs {
-      inherit system;
-      config = {
-        allowUnfree = true;
-        # Workaround for https://github.com/nix-community/home-manager/issues/2942
-        allowUnfreePredicate = _: true;
-      };
-      overlays = [
-        # Workaround for broken qgnomeplatform in unstable (issue #449595)
-        (final: prev: {
-          qgnomeplatform-qt6 = prev.emptyDirectory;
-        })
-      ];
-    };
-
-    pkgs-stable = import nixpkgs-stable {
-      inherit system;
-      config = {
-        allowUnfree = true;
-        allowUnfreePredicate = _: true;
-      };
-    };
-
     inherit (nixpkgs) lib;
+
+    # Helper to create configured pkgs-stable lazily
+    # Only evaluates when pkgs-stable is actually accessed in modules
+    mkPkgsStable = system: import nixpkgs-stable {
+      inherit system;
+      config = {
+        allowUnfree = true;
+        allowUnfreePredicate = _: true;
+      };
+    };
   in {
     nixosConfigurations = {
       leptup = nixpkgs.lib.nixosSystem {
         specialArgs = {
           hostname = "leptup";
           username = "lux";
-          inherit inputs outputs pkgs pkgs-stable system;
+          inherit inputs outputs system;
+          pkgs-stable = mkPkgsStable system;
         };
         modules = [
           ./hosts/leptup.nix # > Our main nixos configuration file
@@ -132,11 +118,18 @@
     # Standalone home-manager configuration entrypoint
     homeConfigurations = {
       "lux@leptup" = home-manager.lib.homeManagerConfiguration {
-        pkgs = pkgs;
+        # Use lazy evaluation - only instantiated when building this config
+        pkgs = nixpkgs.legacyPackages.${system};
         extraSpecialArgs = {
-          inherit inputs outputs pkgs pkgs-stable system;
+          inherit inputs outputs system;
+          pkgs-stable = mkPkgsStable system;
         };
         modules = [
+          # Set allowUnfree for home-manager
+          {
+            nixpkgs.config.allowUnfree = true;
+            nixpkgs.config.allowUnfreePredicate = _: true;
+          }
           ./hosts/home.nix
           # stylix.homeManagerModules.stylix
         ];

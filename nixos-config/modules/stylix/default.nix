@@ -7,26 +7,26 @@
   stylix = {
     enable = true;
     autoEnable = true;
-    # targets = {
-    #   gnome.enable = true;
-    #   gtk.enable = true;
-    #   console.enable = true;
-    #   # btop.enable = true;
-    #   # bat.enable = true;
-    #   # exa.enable = true;
-    #   # fd.enable = true;
-    #   # ripgrep.enable = true;
-    #   # zoxide.enable = true;
-    #   # zsh.enable = true;
-    #   # neovim.enable = true;
-    #   # ghostty.enable = true;
-    #   # mangohud.enable = true;
-    #   # nixos.enable = true;
-    #   # nushell.enable = true;
-    #   plymouth.enable = true;
-    #   plymouth.logoAnimated = true;
-    #   # tmux.enable = true;
-    # };
+    targets = {
+      gnome.enable = true;
+      gtk.enable = true;
+      console.enable = true;
+      # btop.enable = true;
+      # bat.enable = true;
+      # exa.enable = true;
+      # fd.enable = true;
+      # ripgrep.enable = true;
+      # zoxide.enable = true;
+      # zsh.enable = true;
+      # neovim.enable = true;
+      # ghostty.enable = true;  # Not available in current Stylix version
+      # mangohud.enable = true;
+      # nixos.enable = true;
+      # nushell.enable = true;
+      plymouth.enable = true;
+      plymouth.logoAnimated = false;
+      # tmux.enable = true;
+    };
 
     base16Scheme = "${pkgs.base16-schemes}/share/themes/catppuccin-mocha.yaml";
 
@@ -109,6 +109,12 @@
     };
 
     polarity = "dark";
+
+    # cursor = {
+    #   package = pkgs.adwaita-icon-theme;
+    #   name = "Adwaita";
+    #   size = 24;
+    # };
 
     homeManagerIntegration = {
       autoImport = true;

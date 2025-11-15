@@ -31,7 +31,18 @@
   nix.settings.experimental-features = ["nix-command" "flakes"];
   # auto-optimise-store = true;
 
-  # nixpkgs config (allowUnfree, overlays) is now centralized in flake.nix
+  nixpkgs.config = {
+    allowUnfree = true;
+    # Workaround for https://github.com/nix-community/home-manager/issues/2942
+    allowUnfreePredicate = _: true;
+  };
+
+  # Workaround for broken qgnomeplatform in unstable (issue #449595)
+  nixpkgs.overlays = [
+    (final: prev: {
+      qgnomeplatform-qt6 = prev.emptyDirectory;
+    })
+  ];
 
   users = {
     defaultUserShell = pkgs.zsh;

@@ -6,15 +6,16 @@
   boot = {
     plymouth = {
       enable = true;
-      theme = lib.mkDefault "nixos-bgrt";
-      themePackages = with pkgs; [
-        # By default we would install all themes
-        # (adi1090x-plymouth-themes.override {
-        #   selected_themes = ["rings"];
-        # })
-        # catppuccin-plymouth
-        nixos-bgrt-plymouth
-      ];
+      # Theme now managed by Stylix (see modules/stylix/default.nix)
+      # theme = lib.mkDefault "nixos-bgrt";
+      # themePackages = with pkgs; [
+      #   # By default we would install all themes
+      #   # (adi1090x-plymouth-themes.override {
+      #   #   selected_themes = ["rings"];
+      #   # })
+      #   # catppuccin-plymouth
+      #   nixos-bgrt-plymouth
+      # ];
     };
 
     # Enable "Silent Boot"

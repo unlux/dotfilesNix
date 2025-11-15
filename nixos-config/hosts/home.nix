@@ -6,6 +6,7 @@
   imports = [
     # ../modules/fonts/default.nix
     inputs.zen-browser.homeModules.beta
+    # inputs.stylix.homeModules.stylix  # No longer needed - autoImport handles this
   ];
 
   home = {
@@ -16,6 +17,17 @@
 
   # targets.genericLinux.enable = true; # enable this on non-nixos
   # NOTE: nixpkgs settings are managed at the system level (see hosts/base.nix)
+
+  stylix.targets = {
+    vscode.enable = true;
+    neovim.enable = true;
+    bat.enable = true;
+    btop.enable = true;
+    lazygit.enable = true;
+    fzf.enable = true;
+    firefox.enable = true;
+    # chromium.enable = true;  # Not available in current Stylix version
+  };
 
   programs = {
     home-manager = {
@@ -190,6 +202,9 @@
     cachix
     localsend
     pokeget-rs
+    jq
+    google-chrome
+    chromedriver
   ];
 
   # Nicely reload system units when changing configs
