@@ -42,6 +42,7 @@
     starship = {
       enable = true;
       settings = {
+        add_newline = false;
         username = {
           style_user = "blue bold";
           style_root = "red bold";
@@ -55,6 +56,14 @@
           format = "on [$hostname](bold red) ";
           trim_at = ".local";
           disabled = false;
+        };
+        nix_shell = {
+          format = "[$symbol$state( ($name))]($style) ";
+          disabled = false;
+          impure_msg = "[impure](bold red)";
+          pure_msg = "[pure](bold green)";
+          style = "bold blue";
+          symbol = " ";
         };
       };
     };
@@ -139,14 +148,15 @@
     telegram-desktop
 
     # Development
-    nodejs_22
-    corepack_22
+    # nodejs_22
+    nodejs_24
+    # corepack_22
+    corepack_24
     jdk
     bun
     vscode
     code-cursor
     windsurf
-    claude-code
     # bruno
     # lunarvim
 
@@ -176,6 +186,7 @@
     lazygit
     qdirstat
     atuin
+    gcc
     # looking-glass-client
     piper
     # awscli2
@@ -183,7 +194,6 @@
     restic
     ente-auth
     # supabase-cli
-    # Optional/Commented
     # teamviewer
     # turso-cli
     # webcord
@@ -192,7 +202,7 @@
     # flameshot
     # ulauncher
     # noisetorch
-    # space-cadet-pinball
+    space-cadet-pinball
     easyeffects
     just
     libnotify
@@ -203,8 +213,15 @@
     localsend
     pokeget-rs
     jq
+
+    # for selenium
     google-chrome
     chromedriver
+
+    # for claude code sandboxing
+    claude-code
+    socat
+    bubblewrap
   ];
 
   # Nicely reload system units when changing configs

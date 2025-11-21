@@ -165,6 +165,7 @@
       iotop
       cargo
       sops
+      lsof
       # nvtopPackages.full
     ]);
 
