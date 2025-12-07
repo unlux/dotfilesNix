@@ -18,7 +18,7 @@ window-padding-y = 7
 font-size = 12
 link-url = true
 desktop-notifications = true
-command = TERM=xterm-256color /run/current-system/sw/bin/zsh
+shell-integration-features = ssh-terminfo,ssh-env
 
 # font-family = "CommitMonoNerdFontMono"
 #   /home/lux/.config/ghostty/config
