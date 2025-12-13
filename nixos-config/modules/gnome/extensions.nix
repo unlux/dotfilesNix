@@ -15,7 +15,7 @@
     # gnomeExtensions.gtile
     # gnomeExtensions.rounded-window-corners
     gnomeExtensions.tailscale-status
-    gnomeExtensions.tray-icons-reloaded
+    # gnomeExtensions.tray-icons-reloaded # conflicts with dash-to-panel
     gnomeExtensions.user-themes
     gnomeExtensions.vitals
     # gnomeExtensions.cloudflare-warp-toggle

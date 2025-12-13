@@ -92,6 +92,11 @@
       package = pkgs-stable.sunshine.override {
         cudaSupport = true;
       };
+      settings = {
+        adapter_name = "amdgpu";
+        encoder = "vaapi";
+        # No output_name - Sunshine will show all monitors and you pick in Moonlight
+      };
     };
 
     earlyoom = {
@@ -118,6 +123,7 @@
 
     udev.extraRules = ''
       SUBSYSTEM=="bluetooth", ATTR{address}=="A8:6E:84:20:D8:B7", ATTR{powered}="0"
+      KERNEL=="card1", SUBSYSTEM=="drm", DRIVERS=="amdgpu", ATTR{device/power_dpm_force_performance_level}="high"
     '';
     hardware.openrgb.enable = true; # openrgb udev rules
     ratbagd.enable = true; # piper
@@ -173,6 +179,14 @@
     NIXOS_OZONE_WL = 1;
     TERMINAL = "ghostty";
     MOZ_ENABLE_WAYLAND = 1;
+  };
+
+  # Force Sunshine to use Mesa EGL (AMD) instead of NVIDIA EGL for screen capture
+  systemd.user.services.sunshine.environment = {
+    # Use AMD render device for VAAPI encoding
+    LIBVA_DRIVER_NAME = "radeonsi";
+    # Force Mesa's EGL implementation
+    __EGL_VENDOR_LIBRARY_FILENAMES = "${pkgs.mesa.drivers}/share/glvnd/egl_vendor.d/50_mesa.json";
   };
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion

@@ -28,7 +28,11 @@
     };
   };
 
-  nix.settings.experimental-features = ["nix-command" "flakes"];
+  nix.settings = {
+    experimental-features = ["nix-command" "flakes"];
+    extra-substituters = ["https://claude-code.cachix.org"];
+    extra-trusted-public-keys = ["claude-code.cachix.org-1:YeXf2aNu7UTX8Vwrze0za1WEDS+4DuI2kVeWEE4fsRk="];
+  };
   # auto-optimise-store = true;
 
   nixpkgs.config = {
@@ -140,7 +144,14 @@
   };
 
   # services.qemuGuest.enable=true;
-  boot.kernel.sysctl."kernel.sysrq" = 1; #press alt+sysreq+f to trigger oom killer
+  boot.kernel.sysctl = {
+    "kernel.sysrq" = 1; # press alt+sysreq+f to trigger oom killer
+    # Desktop responsiveness tweaks
+    "vm.dirty_ratio" = 5; # Start forced writeback at 5% dirty pages (smoother I/O)
+    "vm.dirty_background_ratio" = 3; # Start background writeback at 3%
+    "vm.dirty_writeback_centisecs" = 1500; # Writeback interval 15s (spread out writes)
+    "kernel.sched_autogroup_enabled" = 1; # Group processes by TTY for desktop responsiveness
+  };
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
   system.stateVersion = "23.11";

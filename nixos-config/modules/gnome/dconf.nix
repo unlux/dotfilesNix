@@ -82,6 +82,7 @@
 
       "org/gnome/mutter" = {
         workspaces-only-on-primary = false;
+        experimental-features = ["variable-refresh-rate"];
       };
 
       "org/gnome/nautilus/list-view" = {
@@ -150,7 +151,7 @@
       };
 
       "org/gnome/shell" = {
-        favorite-apps = ["zen-beta.desktop" "code.desktop" "legcord.desktop"];
+        favorite-apps = ["zen-twilight.desktop" "code.desktop" "legcord.desktop"];
         last-selected-power-profile = "performance";
         welcome-dialog-last-shown-version = "46.2";
       };
