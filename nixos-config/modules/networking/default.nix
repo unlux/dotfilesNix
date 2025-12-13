@@ -60,6 +60,7 @@
   };
 
   environment.systemPackages = with pkgs; [
+    wireguard-tools
     tcpdump
     inetutils
     rclone
