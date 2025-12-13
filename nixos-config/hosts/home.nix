@@ -5,7 +5,7 @@
 }: {
   imports = [
     # ../modules/fonts/default.nix
-    inputs.zen-browser.homeModules.beta
+    inputs.zen-browser.homeModules.twilight
     # inputs.stylix.homeModules.stylix  # No longer needed - autoImport handles this
   ];
 
@@ -42,7 +42,7 @@
     starship = {
       enable = true;
       settings = {
-        add_newline = false;
+        add_newline = true;
         username = {
           style_user = "blue bold";
           style_root = "red bold";
@@ -219,9 +219,12 @@
     chromedriver
 
     # for claude code sandboxing
-    claude-code
+    inputs.claude-code.packages.${pkgs.system}.default
     socat
     bubblewrap
+
+    thunderbird
+    gh
   ];
 
   # Nicely reload system units when changing configs
