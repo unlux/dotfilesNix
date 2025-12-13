@@ -1,6 +1,7 @@
 {
   pkgs-stable,
   pkgs,
+  lib,
   ...
 }: {
   virtualisation = {
@@ -21,6 +22,15 @@
         dns = ["8.8.8.8" "8.8.4.4"];
         log-driver = "json-file";
       };
+    };
+  };
+
+  # Delay rootless Docker startup to avoid race conditions
+  systemd.user.services.docker = {
+    serviceConfig = {
+      ExecStartPre = "${pkgs.coreutils}/bin/sleep 3";
+      Restart = lib.mkForce "on-failure";
+      RestartSec = lib.mkForce "3s";
     };
   };
 
