@@ -41,8 +41,6 @@
     ./leptup-hardware.nix
   ];
 
-  nix.settings.experimental-features = ["nix-command" "flakes"];
-
   easyNvidia = {
     enable = true;
     withIntegratedGPU = true;
@@ -64,7 +62,7 @@
 
   home-manager = {
     extraSpecialArgs = {
-      inherit inputs;
+      inherit inputs pkgs-stable;
     };
     users = {
       lux = import ./home.nix;
@@ -144,7 +142,6 @@
       vivid
       virt-manager
       lua
-      python3
       lshw
       pciutils
       usbutils
@@ -164,7 +161,6 @@
       tmux
       wget
       yadm
-      git
       ntfs3g
       file
       gawk

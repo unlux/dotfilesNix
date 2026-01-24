@@ -1,5 +1,6 @@
 {
   pkgs,
+  pkgs-stable,
   inputs,
   ...
 }: {
@@ -137,101 +138,104 @@
     };
   };
 
-  home.packages = with pkgs; [
-    # inputs.zen-browser.packages."${system}".default
-    # Browsers
-    brave
-    ungoogled-chromium
-    # Communication
-    # discord
-    # discord-ptb
-    # vesktop
-    # signal-desktop
-    legcord
-    telegram-desktop
+  home.packages = with pkgs;
+    [
+      # inputs.zen-browser.packages."${system}".default
+      # Browsers
+      brave
+      ungoogled-chromium
+      # Communication
+      # discord
+      # discord-ptb
+      # vesktop
+      # signal-desktop
+      legcord
+      telegram-desktop
 
-    # Development
-    # nodejs_22
-    nodejs_24
-    # corepack_22
-    corepack_24
-    jdk
-    bun
-    vscode
-    code-cursor
-    windsurf
-    # bruno
-    # lunarvim
+      # Development
+      # nodejs_22
+      nodejs_24
+      # corepack_22
+      corepack_24
+      jdk
+      bun
+      # bruno
+      # lunarvim
 
-    # Databases & Tools
-    mongodb-compass
-    # sqlite
+      # Databases & Tools
+      mongodb-compass
+      # sqlite
 
-    # Productivity
-    libreoffice-fresh
-    # notion-app-enhanced
-    # obsidian # electron ded on wayland, use flatpak instaead
-    # postman
-    # timeshift
+      # Productivity
+      libreoffice-fresh
+      # notion-app-enhanced
+      # obsidian # electron ded on wayland, use flatpak instaead
+      # postman
+      # timeshift
 
-    # Media
-    obs-studio
-    vlc
-    # youtube-music
-    # spotify
+      # Media
+      obs-studio
+      vlc
+      # youtube-music
+      # spotify
 
-    # Utilities
-    delta
-    syncthingtray
-    # termius
-    qbittorrent
-    zoom-us
-    lazygit
-    qdirstat
-    atuin
-    gcc
-    # looking-glass-client
-    piper
-    # awscli2
-    yt-dlp
-    restic
-    ente-auth
-    # supabase-cli
-    # teamviewer
-    # turso-cli
-    # webcord
-    # warp-terminal
-    # authy
-    # flameshot
-    # ulauncher
-    # noisetorch
-    space-cadet-pinball
-    easyeffects
-    just
-    libnotify
+      # Utilities
+      delta
+      syncthingtray
+      # termius
+      qbittorrent
+      zoom-us
+      lazygit
+      qdirstat
+      atuin
+      gcc
+      # looking-glass-client
+      piper
+      # awscli2
+      yt-dlp
+      restic
+      ente-auth
+      # supabase-cli
+      # teamviewer
+      # turso-cli
+      # webcord
+      # warp-terminal
+      # authy
+      # flameshot
+      # ulauncher
+      # noisetorch
+      space-cadet-pinball
+      easyeffects
+      just
+      libnotify
 
-    # kiro-fhs
-    cypress
-    cachix
-    localsend
-    pokeget-rs
-    jq
+      # kiro-fhs
+      cypress
+      cachix
+      localsend
+      pokeget-rs
+      jq
 
-    # for selenium
-    google-chrome
-    chromedriver
+      # for selenium
+      google-chrome
+      chromedriver
 
-    # for claude code sandboxing
-    inputs.claude-code.packages.${pkgs.stdenv.hostPlatform.system}.default
-    inputs.serena.packages.${pkgs.stdenv.hostPlatform.system}.serena
-    socat
-    bubblewrap
+      # for claude code sandboxing
+      inputs.claude-code.packages.${pkgs.stdenv.hostPlatform.system}.default
+      inputs.serena.packages.${pkgs.stdenv.hostPlatform.system}.serena
+      socat
+      bubblewrap
 
-    thunderbird
-    gh
-    doppler
-    antigravity
-  ];
+      thunderbird
+      gh
+      doppler
+      antigravity
+    ]
+    ++ (with pkgs-stable; [
+      vscode
+      code-cursor
+      windsurf
+    ]);
 
   # Nicely reload system units when changing configs
   systemd.user.startServices = "sd-switch";
