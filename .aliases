@@ -60,3 +60,11 @@ alias "k?"="echo \"alias k=kubectl\" | wl-copy && exit"
 # alias gp="git push"
 # alias 
 alias dc="docker compose"
+alias lg="lazygit"
+alias claude="claude --dangerously-skip-permissions"
+
+# Sync current branch to all push remotes (skillionvision + unlux)
+alias gitsync='git pull origin "$(git branch --show-current)" && git push origin "$(git branch --show-current)"'
+
+# Physio workers logs
+alias physio="zellij --layout physio"

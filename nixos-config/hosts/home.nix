@@ -222,7 +222,7 @@
     chromedriver
 
     # for claude code sandboxing
-    (inputs.claude-code.packages.${pkgs.stdenv.hostPlatform.system}.claude-code-bun.override { bunBinName = "claude"; })
+    inputs.claude-code.packages.${pkgs.stdenv.hostPlatform.system}.default
     inputs.serena.packages.${pkgs.stdenv.hostPlatform.system}.serena
     socat
     bubblewrap

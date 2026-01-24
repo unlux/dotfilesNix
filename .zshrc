@@ -103,3 +103,4 @@ export _ZO_DOCTOR=0
 eval "$(zoxide init --cmd cd zsh | sed -E 's/(^|[^_])__([a-zA-Z_])/\1\2/g')"
 
 eval "$(direnv hook zsh)"
+pokeget random --hide-name
