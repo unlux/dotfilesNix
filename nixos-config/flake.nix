@@ -35,6 +35,9 @@
 
     claude-code.url = "github:sadjow/claude-code-nix";
     claude-code.inputs.nixpkgs.follows = "nixpkgs";
+
+    serena.url = "github:oraios/serena";
+    serena.inputs.nixpkgs.follows = "nixpkgs";
     # flake-compat = {
     #   type = "github";
     #   owner = "edolstra";
@@ -131,7 +134,7 @@
             nixpkgs.config.allowUnfreePredicate = _: true;
           }
           ./hosts/home.nix
-          # stylix.homeManagerModules.stylix
+          stylix.homeManagerModules.stylix
         ];
       };
     };

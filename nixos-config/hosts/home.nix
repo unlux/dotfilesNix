@@ -7,6 +7,7 @@
     # ../modules/fonts/default.nix
     inputs.zen-browser.homeModules.twilight
     # inputs.stylix.homeModules.stylix  # No longer needed - autoImport handles this
+    ../modules/custom/claude-update-checker.nix
   ];
 
   home = {
@@ -26,6 +27,8 @@
     lazygit.enable = true;
     fzf.enable = true;
     firefox.enable = true;
+    # zen-browser.profileNames = ["Default Profile"]; # WARNING: nukes profiles
+    qt.enable = false; # GNOME handles Qt theming via adwaita
     # chromium.enable = true;  # Not available in current Stylix version
   };
 
@@ -219,12 +222,15 @@
     chromedriver
 
     # for claude code sandboxing
-    inputs.claude-code.packages.${pkgs.system}.default
+    (inputs.claude-code.packages.${pkgs.stdenv.hostPlatform.system}.claude-code-bun.override { bunBinName = "claude"; })
+    inputs.serena.packages.${pkgs.stdenv.hostPlatform.system}.serena
     socat
     bubblewrap
 
     thunderbird
     gh
+    doppler
+    antigravity
   ];
 
   # Nicely reload system units when changing configs

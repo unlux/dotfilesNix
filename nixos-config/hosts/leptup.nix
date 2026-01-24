@@ -27,6 +27,7 @@
     ../modules/android/default.nix
     ../modules/custom/zen-autobackup.nix
     ../modules/python/default.nix
+    ../modules/custom/ydotool.nix
     # ../modules/custom/mpris-proxy.nix
     # ../modules/adblock/blocky.nix
 
@@ -45,6 +46,7 @@
   easyNvidia = {
     enable = true;
     withIntegratedGPU = true;
+    vaapi.enable = true; # Use NVIDIA for video decode (smoother, has AV1)
     vaapi.firefox.av1Support = true;
     desktopEnvironment = "gnome";
   };
@@ -172,6 +174,7 @@
       cargo
       sops
       lsof
+      ripgrep
       # nvtopPackages.full
     ]);
 
@@ -179,6 +182,7 @@
     NIXOS_OZONE_WL = 1;
     TERMINAL = "ghostty";
     MOZ_ENABLE_WAYLAND = 1;
+    YDOTOOL_SOCKET = "/run/user/1000/.ydotool_socket";
   };
 
   # Force Sunshine to use Mesa EGL (AMD) instead of NVIDIA EGL for screen capture
@@ -186,7 +190,7 @@
     # Use AMD render device for VAAPI encoding
     LIBVA_DRIVER_NAME = "radeonsi";
     # Force Mesa's EGL implementation
-    __EGL_VENDOR_LIBRARY_FILENAMES = "${pkgs.mesa.drivers}/share/glvnd/egl_vendor.d/50_mesa.json";
+    __EGL_VENDOR_LIBRARY_FILENAMES = "${pkgs.mesa}/share/glvnd/egl_vendor.d/50_mesa.json";
   };
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion

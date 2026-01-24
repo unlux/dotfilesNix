@@ -23,13 +23,12 @@ in {
   systemd.services."autovt@tty1".enable = false;
 
   services.gnome = {
-    evolution-data-server.enable = true;
     gnome-keyring.enable = true;
   };
 
   environment.systemPackages = with pkgs; [
     gnome-tweaks
-    gnome-software
+    # gnome-software  # Disabled - using Nix/Flatpak CLI instead
     dconf-editor
     # kdeconnect
     wl-clipboard

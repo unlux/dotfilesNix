@@ -7,20 +7,15 @@
   virtualisation = {
     oci-containers.backend = "docker";
     docker = {
-      enable = true;
-      enableOnBoot = true;
+      enable = false; # Disabled root daemon, using rootless only
       rootless = {
         enable = true;
         setSocketVariable = true;
         daemon.settings = {
           features.cdi = true;
           dns = ["8.8.8.8" "8.8.4.4"];
+          log-driver = "json-file";
         };
-      };
-      storageDriver = "btrfs";
-      daemon.settings = {
-        dns = ["8.8.8.8" "8.8.4.4"];
-        log-driver = "json-file";
       };
     };
   };

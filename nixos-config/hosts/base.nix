@@ -84,8 +84,8 @@
     defaultEditor = true;
     viAlias = true;
     vimAlias = true;
-    withNodeJs = true;
-    withPython3 = true;
+    withNodeJs = false;  # Not needed for LazyVim (Lua-native)
+    withPython3 = false; # Not needed for LazyVim (Lua-native)
   };
   # programs.nix-index.enableZshIntegration = true;
   # programs.carapace.enableZshIntegration = true;
@@ -104,6 +104,8 @@
     enable = true;
     packages = [
       "com.github.tchx84.Flatseal"
+      "net.mkiol.SpeechNote"
+      "net.mkiol.SpeechNote.Addon.nvidia"
       # "io.github.everestapi.Olympus"
     ];
     overrides = {
