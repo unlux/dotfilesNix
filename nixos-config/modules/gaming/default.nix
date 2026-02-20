@@ -24,7 +24,7 @@
     gamemode.enable = true;
   };
 
-  hardware.xone.enable = true; # support for the xbox controller USB dongle
+  # hardware.xone.enable = true; # replaces kernel xpad with xpad_noone — breaks FF on 360 clones
   environment.sessionVariables = {
     STEAM_EXTRA_COMPAT_TOOLS_PATHS = "\${HOME}/.steam/root/compatibilitytools.d";
   };

@@ -1,0 +1,17 @@
+--- a/xpad.c
++++ b/xpad.c
+@@ -2065,6 +2065,14 @@ static int xpad_start_input(struct usb_xpad *xpad)
+ 				 error);
+ 	}
+
++	/*
++	 * Reset OUT endpoint data toggle for controllers that mode-cycle
++	 * during enumeration (e.g. ShanWan clones). The mode cycling can
++	 * leave the interrupt OUT toggle desynchronized, causing rumble
++	 * packets to be silently dropped by the device.
++	 */
++	if (xpad->xtype == XTYPE_XBOX360 && xpad->irq_out)
++		usb_clear_halt(xpad->udev, xpad->irq_out->pipe);
+ 	return 0;
+ }
+

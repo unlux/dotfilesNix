@@ -63,6 +63,7 @@
           "kvm"
           "adbusers"
           "video"
+          "input"
         ];
       };
     };

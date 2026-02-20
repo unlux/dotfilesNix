@@ -26,6 +26,7 @@
     ../modules/custom/download-sorter.nix
     ../modules/android/default.nix
     ../modules/custom/zen-autobackup.nix
+    ../modules/custom/shanwan-controller.nix
     ../modules/python/default.nix
     ../modules/custom/ydotool.nix
     # ../modules/custom/mpris-proxy.nix
