@@ -222,6 +222,7 @@
 
       # for claude code sandboxing
       inputs.claude-code.packages.${pkgs.stdenv.hostPlatform.system}.default
+      inputs.codex-cli.packages.${pkgs.stdenv.hostPlatform.system}.default
       inputs.serena.packages.${pkgs.stdenv.hostPlatform.system}.serena
       socat
       bubblewrap
@@ -239,4 +240,11 @@
 
   # Nicely reload system units when changing configs
   systemd.user.startServices = "sd-switch";
+
+  home.pointerCursor = {
+    name = "Adwaita";
+    package = pkgs.adwaita-icon-theme;
+    size = 24;
+    gtk.enable = true;
+  };
 }

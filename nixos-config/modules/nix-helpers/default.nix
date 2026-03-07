@@ -34,14 +34,37 @@
   programs.nix-ld.libraries = with pkgs; [
     gcc
     stdenv.cc.cc
+    stdenv.cc.cc.lib
     zlib
     fuse3
     icu
     nss
+    nspr
     openssl
     curl
     expat
     libunwind
-    # ...
+
+    # GUI libs (Playwright Firefox, Electron, etc.)
+    gtk3
+    glib
+    pango
+    cairo
+    gdk-pixbuf
+    atk
+    dbus
+    fontconfig
+    freetype
+    xorg.libX11
+    xorg.libXcomposite
+    xorg.libXcursor
+    xorg.libXdamage
+    xorg.libXext
+    xorg.libXfixes
+    xorg.libXi
+    xorg.libXrandr
+    xorg.libXrender
+    xorg.libxcb
+    alsa-lib
   ];
 }

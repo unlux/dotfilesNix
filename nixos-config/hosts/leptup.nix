@@ -1,5 +1,6 @@
 {
   inputs,
+  lib,
   pkgs,
   pkgs-stable,
   system,
@@ -55,6 +56,8 @@
     nvidiaBusId = "PCI:1:0:0";
   };
 
+  hardware.nvidia.powerManagement.finegrained = lib.mkForce false;
+
   # xdg.portal.wlr.enable = true;
 
   sops.defaultSopsFile = ../secrets/secrets.yaml;
@@ -79,6 +82,12 @@
 
   boot.blacklistedKernelModules = ["btmtk"]; # MediaTek Bluetooth driver
 
+  services.logind.settings.Login = {
+    HandleLidSwitch = "ignore";
+    HandleLidSwitchExternalPower = "ignore";
+    HandleLidSwitchDocked = "ignore";
+  };
+
   security.sudo-rs.enable = true;
 
   programs.appimage.enable = true;
@@ -102,8 +111,8 @@
 
     earlyoom = {
       enable = true;
-      freeSwapThreshold = 2; # in percent
-      freeMemThreshold = 2; # in percent
+      freeSwapThreshold = 5; # in percent
+      freeMemThreshold = 5; # in percent
       enableNotifications = true;
       extraArgs = [
         # "-g"
@@ -180,6 +189,7 @@
     TERMINAL = "ghostty";
     MOZ_ENABLE_WAYLAND = 1;
     YDOTOOL_SOCKET = "/run/user/1000/.ydotool_socket";
+    GSK_RENDERER = "gl";
   };
 
   # Force Sunshine to use Mesa EGL (AMD) instead of NVIDIA EGL for screen capture

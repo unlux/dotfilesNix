@@ -36,8 +36,12 @@
     claude-code.url = "github:sadjow/claude-code-nix";
     claude-code.inputs.nixpkgs.follows = "nixpkgs";
 
+    codex-cli.url = "github:sadjow/codex-cli-nix";
+    codex-cli.inputs.nixpkgs.follows = "nixpkgs";
+
     serena.url = "github:oraios/serena";
     serena.inputs.nixpkgs.follows = "nixpkgs";
+
     # flake-compat = {
     #   type = "github";
     #   owner = "edolstra";

@@ -154,6 +154,10 @@
     "vm.dirty_background_ratio" = 3; # Start background writeback at 3%
     "vm.dirty_writeback_centisecs" = 1500; # Writeback interval 15s (spread out writes)
     "kernel.sched_autogroup_enabled" = 1; # Group processes by TTY for desktop responsiveness
+    # ZRAM-aware memory management
+    "vm.swappiness" = 180; # Aggressively use ZRAM swap (it's just compressed RAM, very fast)
+    "vm.watermark_boost_factor" = 0; # Prevent kswapd from over-reclaiming
+    "vm.watermark_scale_factor" = 125; # Wake kswapd earlier so it works gradually
   };
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion

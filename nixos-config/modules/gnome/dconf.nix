@@ -82,7 +82,7 @@
 
       "org/gnome/mutter" = {
         workspaces-only-on-primary = false;
-        experimental-features = ["variable-refresh-rate"];
+        experimental-features = ["scale-monitor-framebuffer"];
       };
 
       "org/gnome/nautilus/list-view" = {
@@ -113,7 +113,7 @@
       };
 
       "org/gnome/settings-daemon/plugins/media-keys" = {
-        custom-keybindings = ["/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/" "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/" "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom4/" "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom5/" "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom6/"];
+        custom-keybindings = ["/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/" "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/" "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom4/" "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom5/" "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom6/" "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom7/"];
       };
 
       "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0" = {
@@ -129,17 +129,29 @@
       };
 
       "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom4" = {
-        binding = "<Control><Alt><Super>equal";
-        command = "ddcutil setvcp 0x10 + 10";
-        name = "Monitor Brightness UP";
+        binding = "<Control><Alt><Super>9";
+        command = "ddcutil setvcp 0x10 + 5 --bus 5";
+        name = "HDMI Monitor (Bus 5) Brightness UP";
       };
 
       "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom5" = {
-        binding = "<Control><Alt><Super>minus";
-        command = "ddcutil setvcp 0x10 - 10";
-        name = "Monitor Brightness Down";
+        binding = "<Control><Alt><Super>0";
+        command = "ddcutil setvcp 0x10 - 5 --bus 5";
+        name = "HDMI Monitor (Bus 5) Brightness DOWN";
       };
+
       "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom6" = {
+        binding = "<Control><Alt><Super>equal";
+        command = "ddcutil setvcp 0x10 + 5 --bus 8";
+        name = "DP Monitor (Bus 8) Brightness UP";
+      };
+
+      "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom7" = {
+        binding = "<Control><Alt><Super>minus";
+        command = "ddcutil setvcp 0x10 - 5 --bus 8";
+        name = "DP Monitor (Bus 8) Brightness DOWN";
+      };
+      "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom8" = {
         binding = "<Super>1";
         command = "nvidia-offload zen";
         name = "NVIDIA Offload Zen";
@@ -244,7 +256,7 @@
         leftbox-padding = -1;
         multi-monitors = false;
         panel-anchors = ''
-          {"AUO-0x00000000":"MIDDLE","ACR-4429030723W01":"MIDDLE"}
+          {"AUO-0x00000000":"MIDDLE","ACR-4429030723W01":"MIDDLE","ACR-15391B03E4201":"MIDDLE"}
         '';
         panel-element-positions = ''
           {"AUO-0x00000000":[{"element":"showAppsButton","visible":true,"position":"stackedTL"},{"element":"activitiesButton","visible":false,"position":"stackedTL"},{"element":"leftBox","visible":true,"position":"stackedTL"},{"element":"taskbar","visible":true,"position":"stackedTL"},{"element":"dateMenu","visible":true,"position":"centered"},{"element":"centerBox","visible":true,"position":"centered"},{"element":"rightBox","visible":true,"position":"stackedBR"},{"element":"systemMenu","visible":true,"position":"stackedBR"},{"element":"desktopButton","visible":true,"position":"stackedBR"}],"ACR-4429030723W01":[{"element":"showAppsButton","visible":true,"position":"stackedTL"},{"element":"activitiesButton","visible":false,"position":"stackedTL"},{"element":"leftBox","visible":true,"position":"stackedTL"},{"element":"taskbar","visible":true,"position":"stackedTL"},{"element":"dateMenu","visible":true,"position":"centered"},{"element":"centerBox","visible":true,"position":"centered"},{"element":"rightBox","visible":true,"position":"stackedBR"},{"element":"systemMenu","visible":true,"position":"stackedBR"},{"element":"desktopButton","visible":true,"position":"stackedBR"}]}
@@ -254,7 +266,7 @@
           {"AUO-0x00000000":100}
         '';
         panel-positions = ''
-          {"AUO-0x00000000":"TOP","ACR-4429030723W01":"TOP"}
+          {"AUO-0x00000000":"TOP","ACR-4429030723W01":"TOP","ACR-15391B03E4201":"TOP"}
         '';
         panel-sizes = ''
           {"AUO-0x00000000":25,"ACR-4429030723W01":25}

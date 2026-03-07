@@ -22,11 +22,12 @@
   boot.kernelParams = [
     "amdgpu.freesync_video=1"
     "amdgpu.dcdebugmask=0x10" # Force FreeSync on eDP panels with broken EDID
+    "nvidia.NVreg_EnableGpuFirmware=0" # Disable GSP firmware (only effective with open=false)
   ];
   boot.extraModulePackages = [
     # config.boot.kernelPackages.asus-wmi-sensors
     pkgs.bluez
-    config.boot.kernelPackages.rtl8821au
+    # config.boot.kernelPackages.rtl8821au TODO: ENALE LATER
   ];
   hardware.enableAllFirmware = true;
 
