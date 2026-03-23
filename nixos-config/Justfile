@@ -24,6 +24,9 @@ upp:
 upp-claude:
   nix flake update claude-code
 
+upp-codex:
+  nix flake update codex-cli
+
 repl:
   nix repl -f flake:nixpkgs
 
