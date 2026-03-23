@@ -9,6 +9,7 @@
     inputs.zen-browser.homeModules.twilight
     # inputs.stylix.homeModules.stylix  # No longer needed - autoImport handles this
     ../modules/custom/claude-update-checker.nix
+    ../modules/custom/codex-update-checker.nix
   ];
 
   home = {
@@ -16,6 +17,23 @@
     homeDirectory = "/home/lux";
     stateVersion = "23.11";
   };
+
+  # Prevent KDE Powerdevil from suspending on lid close (Tailscale needs WiFi alive)
+  xdg.configFile."powerdevilrc".text = ''
+    [AC][Display]
+    DimDisplayIdleTimeoutSec=-1
+    DimDisplayWhenIdle=false
+
+    [AC][SuspendAndShutdown]
+    AutoSuspendAction=0
+    LidAction=0
+
+    [Battery][SuspendAndShutdown]
+    LidAction=0
+
+    [LowBattery][SuspendAndShutdown]
+    LidAction=0
+  '';
 
   # targets.genericLinux.enable = true; # enable this on non-nixos
   # NOTE: nixpkgs settings are managed at the system level (see hosts/base.nix)
@@ -29,7 +47,7 @@
     fzf.enable = true;
     firefox.enable = true;
     # zen-browser.profileNames = ["Default Profile"]; # WARNING: nukes profiles
-    qt.enable = false; # GNOME handles Qt theming via adwaita
+    qt.enable = true; # KDE handles Qt natively
     # chromium.enable = true;  # Not available in current Stylix version
   };
 
@@ -242,8 +260,8 @@
   systemd.user.startServices = "sd-switch";
 
   home.pointerCursor = {
-    name = "Adwaita";
-    package = pkgs.adwaita-icon-theme;
+    name = "breeze_cursors";
+    package = pkgs.kdePackages.breeze;
     size = 24;
     gtk.enable = true;
   };

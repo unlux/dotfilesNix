@@ -8,7 +8,7 @@
     enable = true;
     autoEnable = true;
     targets = {
-      gnome.enable = true;
+      gnome.enable = false;
       gtk.enable = true;
       console.enable = true;
       # btop.enable = true;

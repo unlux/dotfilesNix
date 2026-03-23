@@ -9,7 +9,8 @@
     ../modules/system/xserver.nix
     ../modules/system/zram.nix
     ../modules/networking/default.nix
-    ../modules/gnome/default.nix
+    # ../modules/gnome/default.nix
+    ../modules/kde/default.nix
     ../modules/nix-helpers/default.nix
     ../modules/docker/default.nix
     inputs.nix-flatpak.nixosModules.nix-flatpak

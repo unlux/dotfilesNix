@@ -30,7 +30,7 @@ in {
     hardware.nvidia = {
       prime.offload.enable = true;
       prime.offload.enableOffloadCmd = true;
-      powerManagement.finegrained = true;
+      powerManagement.finegrained = false;
     };
 
     # Set up a udev rule to create named symlinks for the pci paths.

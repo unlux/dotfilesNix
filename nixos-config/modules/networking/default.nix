@@ -21,6 +21,7 @@
     networkmanager = {
       enable = true;
       wifi.backend = lib.mkDefault "iwd";
+      wifi.powersave = false;
     };
     firewall = {
       enable = true;

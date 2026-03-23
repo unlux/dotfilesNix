@@ -1,4 +1,5 @@
 {
+  config,
   inputs,
   lib,
   pkgs,
@@ -16,7 +17,7 @@
     # ../modules/nvidia/gpuPassthrough.nix
     ../modules/gaming/default.nix
     # ../modules/prisma/default.nix
-    # ../modules/kubernetes/default.nix
+    ../modules/kubernetes/default.nix
     # ../modules/iphone/default.nix
     # ../modules/ollama/default.nix
     # ../modules/printing/default.nix
@@ -48,7 +49,7 @@
     withIntegratedGPU = true;
     vaapi.enable = true; # Use NVIDIA for video decode (smoother, has AV1)
     vaapi.firefox.av1Support = true;
-    desktopEnvironment = "gnome";
+    desktopEnvironment = "plasma";
   };
 
   hardware.nvidia.prime = {
@@ -57,6 +58,10 @@
   };
 
   hardware.nvidia.powerManagement.finegrained = lib.mkForce false;
+  hardware.nvidia.open = lib.mkForce false; # Proprietary driver so NVreg_EnableGpuFirmware=0 actually works
+
+  # NVIDIA composites the desktop (smoother overview/animations), AMD stays available
+  environment.variables.KWIN_DRM_DEVICES = lib.mkIf config.easyNvidia.enable (lib.mkForce "/dev/dri/dgpu1:/dev/dri/igpu1");
 
   # xdg.portal.wlr.enable = true;
 
@@ -103,9 +108,9 @@
         cudaSupport = true;
       };
       settings = {
-        adapter_name = "amdgpu";
-        encoder = "vaapi";
-        # No output_name - Sunshine will show all monitors and you pick in Moonlight
+        adapter_name = "/dev/dri/card2";  # NVIDIA GPU that owns DP-1
+        encoder = "nvenc";
+        output_name = "DP-1";
       };
     };
 
@@ -189,16 +194,10 @@
     TERMINAL = "ghostty";
     MOZ_ENABLE_WAYLAND = 1;
     YDOTOOL_SOCKET = "/run/user/1000/.ydotool_socket";
-    GSK_RENDERER = "gl";
+    # GSK_RENDERER = "gl"; # GNOME/GTK4 NVIDIA workaround, not needed on KDE
   };
 
-  # Force Sunshine to use Mesa EGL (AMD) instead of NVIDIA EGL for screen capture
-  systemd.user.services.sunshine.environment = {
-    # Use AMD render device for VAAPI encoding
-    LIBVA_DRIVER_NAME = "radeonsi";
-    # Force Mesa's EGL implementation
-    __EGL_VENDOR_LIBRARY_FILENAMES = "${pkgs.mesa}/share/glvnd/egl_vendor.d/50_mesa.json";
-  };
+  # Sunshine environment overrides removed — NVENC uses NVIDIA EGL natively
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
   system.stateVersion = "23.11";

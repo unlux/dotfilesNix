@@ -109,7 +109,7 @@ in {
       powerManagement.enable = true;
       # The open driver is recommended by nvidia now, see
       # https://download.nvidia.com/XFree86/Linux-x86_64/565.57.01/README/kernel_open.html
-      open = true;
+      open = false;
 
       dynamicBoost.enable = cfg.enable && cfg.withIntegratedGPU;
     };

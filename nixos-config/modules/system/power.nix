@@ -42,6 +42,10 @@ _: {
         USB_EXCLUDE_BTUSB = 1;
         USB_EXCLUDE_PHONE = 1;
 
+        # WiFi power save off - prevent disconnects on lid close (Tailscale)
+        WIFI_PWR_ON_AC = "off";
+        WIFI_PWR_ON_BAT = "off";
+
         # PCIe runtime PM - keep devices awake to avoid wake-up latency
         RUNTIME_PM_ON_AC = "on"; # Devices stay on
         RUNTIME_PM_ON_BAT = "on"; # was: auto (causes wake-up stutters)
