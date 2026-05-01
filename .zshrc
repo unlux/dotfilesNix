@@ -1,3 +1,9 @@
+# Homebrew (Apple Silicon) — must come first so brew-installed binaries
+# are on PATH for everything below (starship, atuin, carapace, etc.)
+if [[ -x /opt/homebrew/bin/brew ]]; then
+  eval "$(/opt/homebrew/bin/brew shellenv)"
+fi
+
 ### Added by Zinit's installer
 if [[ ! -f $HOME/.local/share/zinit/zinit.git/zinit.zsh ]]; then
     print -P "%F{33} %F{220}Installing %F{33}ZDHARMA-CONTINUUM%F{220} Initiative Plugin Manager (%F{33}zdharma-continuum/zinit%F{220})…%f"
@@ -21,86 +27,134 @@ zinit light-mode for \
 
 ### End of Zinit's installer chunk
 
-zinit light zsh-users/zsh-syntax-highlighting
-zinit light zsh-users/zsh-completions
-zinit light zsh-users/zsh-autosuggestions
-zinit snippet OMZP::git
-zinit snippet OMZP::sudo
+# Synchronous compinit so external completion sources (carapace, zoxide,
+# atuin, pay-respects) can call `compdef` at source time. The zinit turbo
+# block below also runs `zicompinit` to pick up plugin-added fpath entries —
+# both passes use -C (skip security check) to keep the cost low.
+ZINIT[COMPINIT_OPTS]=-C
+autoload -Uz compinit
+compinit -C
 
+# Turbo plugin block — deferred ~5ms after first prompt (lucid = silent).
+# Order is meaningful:
+#   1. zsh-completions   — blockf prevents fpath pollution; creinstall registers
+#   2. autosuggestions   — atload triggers its precmd hook (! escapes quoting)
+#   3. fast-syntax-highlighting — MUST be last; atinit runs zicompinit + zicdreplay
+#                                 so plugin completions get registered after the
+#                                 sync compinit above.
+# Pattern from official wiki:
+#   https://zdharma-continuum.github.io/zinit/wiki/Example-Minimal-Setup/
+zinit wait lucid light-mode for \
+    blockf atpull'zinit creinstall -q .' \
+        zsh-users/zsh-completions \
+    atload"!_zsh_autosuggest_start" \
+        zsh-users/zsh-autosuggestions \
+    atinit"zicompinit; zicdreplay" \
+        zdharma-continuum/fast-syntax-highlighting
+
+# OMZ snippets (also turbo)
+zinit wait lucid for \
+    OMZP::git \
+    OMZP::sudo
+
+# History — atuin handles search via Ctrl-R; this only governs the
+# native zsh history file that atuin can fall back on.
 HISTSIZE=50000
 HISTFILE=~/.zhistory
 SAVEHIST=$HISTSIZE
 HISTDUP=erase
-setopt appendhistory
-setopt sharehistory
+setopt sharehistory          # also implies append behavior
 setopt hist_ignore_space
-setopt hist_ignore_all_dups
+setopt hist_ignore_all_dups  # subsumes hist_ignore_dups
 setopt hist_save_no_dups
-setopt hist_ignore_dups
 setopt hist_find_no_dups
 
-# adding file for lux's aliases
-source $HOME/.aliases
-# adding file for 's keybinds
-source $HOME/.keybinds
+# Aliases and custom keybinds
+source "$HOME/.aliases"
+source "$HOME/.keybinds"
 
+# Private env vars (API keys, tokens). chmod 600 ~/.secrets
+[[ -f "$HOME/.secrets" ]] && source "$HOME/.secrets"
 
-# atuin stuff
+# atuin — replaces Ctrl-R with magical history search
 eval "$(atuin init zsh)"
 
-export NVM_DIR="$HOME/.nvm"
-# Lazy load nvm for faster shell startup
-nvm() {
-  unset -f nvm
-  [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-  nvm "$@"
-}
+# Bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
 
-node() {
-  unset -f node
-  [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-  node "$@"
-}
-
-npm() {
-  unset -f npm
-  [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-  npm "$@"
-}
-
-export PATH="$PATH:/home/lux/.local/bin"
-
-# bunjs stuff
-export PATH="/home/lux/.bun/bin:$PATH"
-
-# android stewwdio
-export ANDROID_HOME="/home/lux/Android/Sdk"
-export PATH=$PATH:$ANDROID_HOME/emulator
-export PATH=$PATH:$ANDROID_HOME/platform-tools
-
-#default editor 
+# Default editor
 export EDITOR="nvim"
 
-# Load completions
-autoload -Uz compinit
-compinit -C  # Skip security check for faster loading
+# LS_COLORS — vivid output is static for a given theme, cache to file.
+# To regenerate: rm ~/.cache/lscolors
+mkdir -p "$HOME/.cache"
+if [[ ! -f "$HOME/.cache/lscolors" ]]; then
+  vivid generate dracula > "$HOME/.cache/lscolors"
+fi
+export LS_COLORS=$(<"$HOME/.cache/lscolors")
 
-# carapace stuff
-export LS_COLORS=$(vivid generate dracula)
-export CARAPACE_BRIDGES='zsh,fish,bash,inshellisense' # optional
+# Carapace — completion bridge. Cached to avoid forking a subshell every shell.
+# To regenerate: rm ~/.cache/carapace.zsh
+export CARAPACE_BRIDGES='zsh,fish,bash,inshellisense'
 zstyle ':completion:*:git:*' group-order 'main commands' 'alias commands' 'external commands'
-source <(carapace _carapace)
+if [[ ! -f "$HOME/.cache/carapace.zsh" ]]; then
+  carapace _carapace > "$HOME/.cache/carapace.zsh"
+fi
+source "$HOME/.cache/carapace.zsh"
+# compdef is available because compinit -C ran above the turbo block.
 
 bindkey -e
 
 eval "$(pay-respects zsh)"
 eval "$(starship init zsh)"
 
-# zoxide stuff
-# eval "$(zoxide init --cmd cd zsh)"
-# Initialize zoxide with 'cd' command (disable doctor warnings)
-export _ZO_DOCTOR=0
-eval "$(zoxide init --cmd cd zsh | sed -E 's/(^|[^_])__([a-zA-Z_])/\1\2/g')"
+# Transient prompt — same UX as p10k transient_prompt.
+#
+# When you submit a command, the just-shown prompt collapses to bare `❯`
+# (rendered by starship's [character] module so it follows the palette
+# and success/error state). The next prompt is repainted in full.
+#
+# IMPORTANT: starship sets $PROMPT *once* at init to a literal $(...)
+# substitution; its precmd only updates internal state, not PROMPT. So we
+# must explicitly snapshot the full PROMPT/RPROMPT here and restore them
+# in our own precmd hook — otherwise the transient form sticks forever.
+autoload -Uz add-zle-hook-widget add-zsh-hook
+typeset -g _STARSHIP_FULL_PROMPT="$PROMPT"
+typeset -g _STARSHIP_FULL_RPROMPT="$RPROMPT"
 
+function _transient_prompt() {
+    PROMPT='$(starship module character)'
+    RPROMPT=''
+    zle .reset-prompt
+}
+zle -N _transient_prompt
+add-zle-hook-widget zle-line-finish _transient_prompt
+
+function _restore_starship_prompt() {
+    PROMPT="$_STARSHIP_FULL_PROMPT"
+    RPROMPT="$_STARSHIP_FULL_RPROMPT"
+}
+add-zsh-hook precmd _restore_starship_prompt
+
+# zoxide — must be initialised AFTER compinit (above)
+export _ZO_DOCTOR=0
+eval "$(zoxide init --cmd cd zsh)"
+
+# direnv — must be initialised AFTER prompt-modifying tools (starship)
 eval "$(direnv hook zsh)"
-pokeget random --hide-name
+
+# Pokémon greeting on login shells only (skips every new tab/pane)
+[[ -o login ]] && pokeget random --hide-name
+
+# Bun completions
+[ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
+
+# Node + npm come from Homebrew (`brew install node`). nvm was removed —
+# fewer external deps, fewer compromise vectors. To delete leftovers:
+#   rm -rf ~/.nvm
+
+# User local bin (last so it wins over brew)
+export PATH="$HOME/.local/bin:$PATH"
+
+
