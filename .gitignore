@@ -187,3 +187,40 @@ sketch
 
 # End of https://www.toptal.com/developers/gitignore/api/nextjs,react,node
 
+### Lux's additions — global excludes for yadm + every git repo on this box ###
+
+# yadm — auto-generated caches and plugin dirs that should never be committed
+.local/share/zinit/
+.local/state/
+
+# Marscode / IDE telemetry
+.marscode/
+
+# macOS
+.AppleDouble
+.LSOverride
+Icon?
+
+# Editor swap / cache
+*.swp
+*.swo
+*~
+.idea/
+.vscode/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+venv/
+.mypy_cache/
+.ruff_cache/
+.pytest_cache/
+
+# Rust / Go
+target/
+
+# Direnv
+.direnv/
+
