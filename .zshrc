@@ -69,6 +69,16 @@ setopt hist_ignore_all_dups  # subsumes hist_ignore_dups
 setopt hist_save_no_dups
 setopt hist_find_no_dups
 
+# Shell ergonomics
+setopt extended_glob          # enables ^ ~ # in glob patterns (e.g. ls ^*.tmp)
+setopt interactive_comments   # allow `# foo` comments in interactive shells
+unsetopt beep                 # stop the terminal bell on every error
+
+# Word boundaries — default WORDCHARS includes /,.- so Ctrl-W deletes the
+# whole path. Empty WORDCHARS makes word ops stop at non-alphanumerics,
+# so Ctrl-W deletes just the last path component.
+WORDCHARS=''
+
 # Aliases and custom keybinds
 source "$HOME/.aliases"
 source "$HOME/.keybinds"
