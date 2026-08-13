@@ -68,3 +68,9 @@ alias gitsync='git pull origin "$(git branch --show-current)" && git push origin
 
 # Physio workers logs
 alias physio="zellij --layout physio"
+
+alias dontdie="caffeinate -imdsu"
+
+alias enablesleep="sudo pmset disablesleep 0"
+alias disablesleep="sudo pmset disablesleep 1"
+
