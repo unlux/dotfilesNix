@@ -167,4 +167,5 @@ eval "$(direnv hook zsh)"
 # User local bin (last so it wins over brew)
 export PATH="$HOME/.local/bin:$PATH"
 
-
+# Machine-local secrets/overrides — untracked on purpose (this repo is public)
+[[ -f "$HOME/.zshrc.local" ]] && source "$HOME/.zshrc.local"
