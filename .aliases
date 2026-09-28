@@ -1,10 +1,15 @@
 alias codehere="code . && exit"
-# Replace ls with eza
-alias ls='eza --color=always --group-directories-first --icons' # preferred listing
-alias la='eza -a --color=always --group-directories-first --icons'  # all files and dirs
-alias ll='eza -l --color=always --group-directories-first --icons'  # long format
-alias lt='eza -aT --color=always --group-directories-first --icons' # tree listing
-alias l.='eza -ald --color=always --group-directories-first --icons .*' # show only dotfiles
+# Replace ls with eza, for people only. Claude Code copies these aliases into
+# its non-interactive agent shells, where a bare --icons swallowed the next
+# argument (`ls dir/` failed) and --color=always put escape codes into pipes.
+# Agents get plain ls; people get eza with auto colour and icons.
+if [[ -z "$CLAUDECODE$OPENCODE$CODEX_SANDBOX" ]]; then
+  alias ls='eza --color=auto --group-directories-first --icons=auto' # preferred listing
+  alias la='eza -a --color=auto --group-directories-first --icons=auto'  # all files and dirs
+  alias ll='eza -l --color=auto --group-directories-first --icons=auto'  # long format
+  alias lt='eza -aT --color=auto --group-directories-first --icons=auto' # tree listing
+  alias l.='eza -ald --color=auto --group-directories-first --icons=auto .*' # show only dotfiles
+fi
 
 alias wget='wget -c '
 alias psmem='ps auxf | sort -nr -k 4'
